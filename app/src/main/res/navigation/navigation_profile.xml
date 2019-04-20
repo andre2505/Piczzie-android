@@ -67,10 +67,8 @@
 
         <action android:id="@+id/action_childrenFragment_to_addChildFragment"
                 app:destination="@id/addChildFragment"
-                app:enterAnim="@anim/enter_from_right"
-                app:exitAnim="@anim/exit_to_left"
-                app:popEnterAnim="@anim/enter_from_left"
-                app:popExitAnim="@anim/exit_to_right"/>
+                app:enterAnim="@anim/slide_up"
+                app:popExitAnim="@anim/slide_down"/>
     </fragment>
 
     <fragment android:id="@+id/addChildFragment" android:name="com.ziggy.kdo.ui.fragment.children.AddChildFragment"
