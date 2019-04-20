@@ -27,8 +27,7 @@
                     android:id="@+id/add_gift_edittext_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_gift"
-                    android:hint="@string/add_gift_description"
+                    android:hint="@string/register_editext_firstname"
                     android:text="@={childViewModel.MChild.lastname}"
                     style="@style/EditextDescription"/>
 
@@ -38,8 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/add_gift_edittext_description"
-                    android:drawableStart="@drawable/ic_localization"
-                    android:hint="@string/add_gift_localization"
+                    android:hint="@string/register_editext_lastname"
                     android:text="@={childViewModel.MChild.firstname}"
                     style="@style/EditextDescription"/>
 
@@ -80,6 +78,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/add_gift_edittext_description"
                     android:drawableStart="@drawable/ic_event"
                     android:hint="@string/register_editext_birthday"
+                    android:focusable="false"
+                    android:inputType="none"
                     android:text="@={childViewModel.MChild.firstname}"
                     style="@style/EditextDescription"/>
         </LinearLayout>
