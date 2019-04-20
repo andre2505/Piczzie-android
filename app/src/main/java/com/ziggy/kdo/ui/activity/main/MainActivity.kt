@@ -71,9 +71,11 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
     private val NAVIGATION_MY_RESERVATION_DETAIL: String = "MyReservationDetailFragment"
 
-    private val NAVIGATION_MY_FRIENDS : String = "FriendsFragment"
+    private val NAVIGATION_MY_FRIENDS: String = "FriendsFragment"
 
-    private val NAVIGATION_CHILDREN : String = "ChildrenFragment"
+    private val NAVIGATION_CHILDREN: String = "ChildrenFragment"
+
+    private val NAVIGATION_ADD_CHILDREN: String = "AddChildFragment"
 
     private lateinit var mBottomNavigationView: BottomNavigationView
 
@@ -246,7 +248,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
             }
             NAVIGATION_MY_GIFT_DETAIL -> {
                 mToolbarTitle.visibility = View.GONE
-                supportActionBar?.title =getString(R.string.navigation_gift_detail)
+                supportActionBar?.title = getString(R.string.navigation_gift_detail)
                 supportActionBar?.setDisplayShowTitleEnabled(true)
             }
             NAVIGATION_MY_RESERVATION_DETAIL -> {
@@ -261,6 +263,11 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
             NAVIGATION_CHILDREN -> {
                 mToolbarTitle.visibility = View.GONE
                 supportActionBar?.title = getString(R.string.navigation_children_list)
+                supportActionBar?.setDisplayShowTitleEnabled(true)
+            }
+            NAVIGATION_ADD_CHILDREN -> {
+                mToolbarTitle.visibility = View.GONE
+                supportActionBar?.title = getString(R.string.navigation_add_children)
                 supportActionBar?.setDisplayShowTitleEnabled(true)
             }
         }

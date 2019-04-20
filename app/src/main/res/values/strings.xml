@@ -6,6 +6,7 @@
     <string name="navigation_reservation_detail">Reservation</string>
     <string name="navigation_friends_list">Friends</string>
     <string name="navigation_children_list">Children</string>
+    <string name="navigation_add_children">New child</string>
 
     <!-- Network -->
     <string name="network_error_return">An error has occurred</string>
@@ -119,7 +120,8 @@
     <string name="friend_content_no_friends_title">You have no friends</string>
     <string name="friend_content_no_friends_subtitle">Go to search to add friends</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Add Child -->
+    <string name="add_child_gender_boy">Boy</string>
+    <string name="add_child_gender_girl">Girl</string>
 
 </resources>

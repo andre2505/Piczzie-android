@@ -7,6 +7,7 @@
     <string name="navigation_reservation_detail">Réservation</string>
     <string name="navigation_friends_list">Amis</string>
     <string name="navigation_children_list">Enfants</string>
+    <string name="navigation_add_children">Nouvel enfant</string>
 
     <!-- Network -->
     <string name="network_error_return">Une erreur est survenue</string>
@@ -108,7 +109,8 @@
 
     <!-- edit reservation -->
     <string name="edit_reservation_title_description">Détails</string>
-    <string name="edit_reservation_dialog_confirm_delete_subtitle">Êtes-vous sûr de supprimer cette réservation ?</string>
+    <string name="edit_reservation_dialog_confirm_delete_subtitle">Êtes-vous sûr de supprimer cette réservation ?
+    </string>
 
     <!-- List Friends -->
     <string name="friends_button_delete">supprimer</string>
@@ -116,4 +118,8 @@
     <string name="friend_progress_deleting">Suppression ami en cours…</string>
     <string name="friend_content_no_friends_title">Vous n\'avez aucun ami</string>
     <string name="friend_content_no_friends_subtitle">Allez dans recherche pour ajouter des amis</string>
+
+    <!-- Add Child -->
+    <string name="add_child_gender_boy">Garçon</string>
+    <string name="add_child_gender_girl">Fille</string>
 </resources>
