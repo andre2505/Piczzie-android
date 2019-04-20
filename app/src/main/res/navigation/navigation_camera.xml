@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_camera"
+            app:startDestination="@id/cameraFragment">
+
+    <fragment android:id="@+id/cameraFragment"
+              android:name="com.ziggy.kdo.ui.fragment.camera.CameraFragment"
+              android:label="CameraFragment"
+              tools:layout="@layout/fragment_camera">
+        <action android:id="@+id/action_cameraFragment_to_addGiftFragment"
+                app:destination="@id/addGiftFragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/addGiftFragment" android:name="com.ziggy.kdo.ui.fragment.camera.AddGiftFragment"
+              android:label="fragment_add_gift" tools:layout="@layout/fragment_add_gift">
+        <argument
+                android:name="file_path" app:argType="string"/>
+    </fragment>
+
+</navigation>

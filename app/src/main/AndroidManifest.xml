@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.ziggy.kdo">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+            android:name=".base.application.BaseApplication"
+            android:allowBackup="true"
+            android:appComponentFactory="whateverString"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            android:usesCleartextTraffic="true"
+            tools:ignore="GoogleAppIndexingWarning"
+            tools:replace="android:appComponentFactory">
+        <activity android:name=".ui.activity.hub.HubActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".ui.activity.register.RegisterActivity"
+                android:parentActivityName=".ui.activity.login.LoginActivity"/>
+        <activity android:name=".ui.activity.login.LoginActivity"/>
+        <activity
+                android:name=".ui.activity.camera.CameraActivity"
+                android:configChanges="orientation|screenLayout"
+                android:screenOrientation="sensorPortrait"
+                tools:replace="android:screenOrientation"/>
+        <activity
+                android:name=".ui.activity.main.MainActivity"
+                android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
+                android:launchMode="singleTop"
+                android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.app.searchable"
+                    android:resource="@xml/searchable"/>
+        </activity>
+        <activity android:name=".ui.activity.gallery.GalleryActivity">
+        </activity>
+    </application>
+
+</manifest>

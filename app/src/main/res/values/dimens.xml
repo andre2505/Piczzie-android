@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_padding_general">20dp</dimen>
+    <dimen name="image_scroll">100dp</dimen>
+    <bool name="isTablet">false</bool>
+</resources>

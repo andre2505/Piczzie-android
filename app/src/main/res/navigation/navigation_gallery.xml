@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_gallery"
+            app:startDestination="@id/galleryFragment">
+
+    <fragment
+            android:id="@+id/galleryFragment"
+            android:name="com.ziggy.kdo.ui.fragment.gallery.GalleryFragment"
+            android:label="GalleryFragment"
+            tools:layout="@layout/fragment_gallery">
+        <action
+                android:id="@+id/action_galleryFragment_to_cropFragment"
+                app:destination="@id/cropFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/cropFragment"
+              android:name="com.ziggy.kdo.ui.fragment.gallery.CropFragment"
+              android:label="fragment_crop"
+              tools:layout="@layout/fragment_crop">
+        <argument
+                app:argType="string"
+                android:name="extra_img_crop"/>
+        <action
+                android:id="@+id/action_cropFragment_to_addGiftFragment2"
+                app:destination="@id/addGiftFragment2"/>
+    </fragment>
+
+    <fragment android:id="@+id/addGiftFragment2"
+              android:name="com.ziggy.kdo.ui.fragment.camera.AddGiftFragment"
+              android:label="AddGiftFragment"
+              tools:layout="@layout/fragment_add_gift">
+        <argument
+                android:name="file_path" app:argType="string"/>
+    </fragment>
+</navigation>

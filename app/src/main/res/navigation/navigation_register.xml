@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/navigation_login"
+            app:startDestination="@id/registerPartOneFragment">
+
+    <fragment android:id="@+id/registerPartOneFragment"
+              android:name="com.ziggy.kdo.ui.fragment.register.RegisterPartOneFragment"
+              android:label="fragment_register_part_one"
+              tools:layout="@layout/fragment_register_part_one">
+        <action android:id="@+id/to_register_part_two"
+                app:destination="@id/registerPartTwoFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/registerPartTwoFragment"
+              android:name="com.ziggy.kdo.ui.fragment.register.RegisterPartTwoFragment"
+              android:label="RegisterPartTwoFragment"/>
+</navigation>

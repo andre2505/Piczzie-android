@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/action_profile"
+            app:startDestination="@id/profile">
+
+    <fragment android:id="@+id/profile"
+              android:name="com.ziggy.kdo.ui.fragment.profile.base.ProfileFragment"
+              android:label="fragment_profile"
+              tools:layout="@layout/fragment_profile">
+
+        <action android:id="@+id/action_profile_to_myGiftDetailFragment"
+                app:destination="@id/myGiftDetailFragment"
+                app:popUpTo="@id/profile"
+                app:popUpToInclusive="false"/>
+
+        <action android:id="@+id/action_profile_to_myReservationDetailFragment"
+                app:destination="@id/myReservationDetailFragment"
+                app:popUpTo="@id/profile"
+                app:popUpToInclusive="false"/>
+
+        <action android:id="@+id/action_profile_to_friendsFragment"
+                app:destination="@id/friendsFragment"
+                app:popUpTo="@id/profile"
+                app:popUpToInclusive="false"
+                app:enterAnim="@anim/enter_from_right"
+                app:exitAnim="@anim/exit_to_left"
+                app:popEnterAnim="@anim/enter_from_left"
+                app:popExitAnim="@anim/exit_to_right"/>
+
+        <action android:id="@+id/action_profile_to_childrenFragment"
+                app:destination="@id/childrenFragment"
+                app:enterAnim="@anim/enter_from_right"
+                app:exitAnim="@anim/exit_to_left"
+                app:popEnterAnim="@anim/enter_from_left"
+                app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/myGiftDetailFragment"
+              android:name="com.ziggy.kdo.ui.fragment.profile.detail.MyGiftDetailFragment"
+              android:label="MyGiftDetailFragment"
+              tools:layout="@layout/fragment_my_gift_detail">
+        <argument
+                android:name="gift"
+                app:argType="com.ziggy.kdo.model.Gift"/>
+    </fragment>
+
+    <fragment android:id="@+id/myReservationDetailFragment"
+              android:name="com.ziggy.kdo.ui.fragment.profile.detail.MyReservationDetailFragment"
+              android:label="MyReservationDetailFragment"
+              tools:layout="@layout/fragment_my_reservation_detail">
+        <argument
+                android:name="gift"
+                app:argType="com.ziggy.kdo.model.Gift"/>
+    </fragment>
+    <fragment android:id="@+id/friendsFragment"
+              android:name="com.ziggy.kdo.ui.fragment.friends.FriendsFragment"
+              android:label="FriendsFragment"
+              tools:layout="@layout/fragment_friends"/>
+
+    <fragment android:id="@+id/childrenFragment"
+              android:name="com.ziggy.kdo.ui.fragment.children.ChildrenFragment"
+              android:label="ChildrenFragment"
+              tools:layout="@layout/fragment_children"
+    />
+
+
+</navigation>

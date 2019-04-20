@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <item android:id="@+id/action_edit_validate"
+          android:title="@null"
+          app:showAsAction="always"
+          android:icon="@drawable/ic_check_edit"
+    />
+
+    <item android:id="@+id/action_abandon"
+          android:title="@null"
+          app:showAsAction="always"
+          android:icon="@drawable/ic_close_edit"
+    />
+    <item
+            android:id="@+id/action_settings"
+            app:showAsAction="always"
+            android:icon="@drawable/ic_more_vertical"
+            android:orderInCategory="100"
+            android:title="">
+        <menu>
+            <item android:id="@+id/action_child"
+                  android:title="@string/edit_gift_add_child"
+                  android:icon="@drawable/ic_baby"
+                  android:orderInCategory="200"
+                  app:showAsAction="collapseActionView"/>
+            <item android:id="@+id/action_event"
+                  android:title="@string/edit_gift_add_event"
+                  android:icon="@drawable/ic_event"
+                  android:orderInCategory="200"
+                  app:showAsAction="collapseActionView"/>
+        </menu>
+    </item>
+</menu>

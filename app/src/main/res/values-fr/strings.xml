@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Piczzie</string>
+
+    <!-- title action bar -->
+    <string name="navigation_gift_detail">Cadeau</string>
+    <string name="navigation_reservation_detail">Réservation</string>
+    <string name="navigation_friends_list">Amis</string>
+    <string name="navigation_children_list">Enfants</string>
+
+    <!-- Network -->
+    <string name="network_error_return">Une erreur est survenue</string>
+    <string name="network_error_no_network">Une est erreur reséau est survenue</string>
+
+    <!-- Login -->
+    <string name="main_alert_dialog_text">Une erreur est survenue lors du transfert de la photo</string>
+
+    <!-- Login -->
+    <string name="login_edittext_mail">Email</string>
+    <string name="login_edittext_password">Mot de passe</string>
+    <string name="login_button_signin">Connexion</string>
+    <string name="login_textview_signup">S\'inscrire</string>
+    <string name="login_textview_lost_password">Mot de passe oublié ?</string>
+
+    <!-- Register -->
+    <string name="profile_title">Profil</string>
+    <string name="register_title_toolbar">Inscription</string>
+    <string name="register_button_part_one">Proceed</string>
+    <string name="register_editext_firstname">Prénom</string>
+    <string name="register_editext_lastname">Nom</string>
+    <string name="register_editext_gender_man">Homme</string>
+    <string name="register_editext_gender_women">Femme</string>
+    <string name="register_editext_birthday">Date de naissance</string>
+    <string name="register_textview_user_condition">En cliquant sur Inscription, Vous acceptez les
+        <b>
+            <a href="">Conditions d\'utilisation</a>
+        </b>
+        , la
+        <b>
+            <a href="">Politique de confitiendalité</a>
+        </b>
+        et la <a href="">Politique relative aux cookies</a> de Prizzie
+    </string>
+    <string name="register_button_validation">S\'inscrire</string>
+    <string name="register_toast_no_valid">Tous les champs sont obligatoires</string>
+    <string name="register_toast_error_password">Le mot de passe doit contenir : 1 lettre capitale,1 chiffre, 1
+        symbole
+    </string>
+    <string name="register_toast_error_email">Erreur adresse email</string>
+
+    <!-- alert dialog -->
+    <string name="dialog_alert_button">OK</string>
+    <string name="dialog_alert_success">C\'est parti !</string>
+    <string name="dialog_alert_retry">Ré-essayer</string>
+    <string name="dialog_alert_cancel">Annuler</string>
+    <string name="dialog_alert_title_error">Erreur</string>
+    <string name="dialog_alert_sub_title_error">L\'inscription n\'a pu aboutir</string>
+
+    <!-- Bottom navigation -->
+    <string name="navigation_home">Accueil</string>
+    <string name="navigation_search">Recherche</string>
+    <string name="navigation_camera">Camera</string>
+    <string name="navigation_notification">Notifications</string>
+    <string name="navigation_profile">Profil</string>
+
+    <!-- Add Gift -->
+    <string name="add_gift_description">Description* (ex : couleur, taille, etc…)</string>
+    <string name="add_gift_localization">Lieu</string>
+    <string name="add_gift_price">Prix</string>
+    <string name="add_gift_website">Site internet</string>
+    <string name="add_gift_child">Enfant</string>
+    <string name="add_gift_event">Evenement</string>
+    <string name="add_gift_button_add">Ajouter</string>
+    <string name="add_gift_toast_empty_description">La description est obligatoire</string>
+
+    <!-- Home -->
+    <string name="home_reservation_gift_loading">Réservation en cours…</string>
+    <string name="home_reservation_gift_is_reserved">Ce cadeau est déjà reservé</string>
+
+    <!-- Search -->
+    <string name="search_user_text">Rechercher</string>
+    <string name="search_user_progress">Recherche en cours…</string>
+
+    <!-- Gallery -->
+    <string name="gallery_button_text">Suivant</string>
+
+    <!-- Crop -->
+    <string name="crop_button_back">Retour</string>
+
+    <!--Profile-->
+    <string name="profile_number_no_friends">%d\nami</string>
+    <string name="profile_number_friends">%d\nami(s)</string>
+    <string name="profile_number_no_my_gifts">%d\ncadeau</string>
+    <string name="profile_number_my_gifts">%d\ncadeaux</string>
+    <string name="profile_number_no_children">%d\nenfant</string>
+    <string name="profile_number_children">%d\nenfants</string>
+
+    <!-- edit gift -->
+    <string name="edit_gift_add_child">Ajouter enfant</string>
+    <string name="edit_gift_add_event">Ajouter évenenement</string>
+    <string name="edit_gift_title_action_bar">Gift</string>
+    <string name="edit_gift_dialog_update">Mise à jour en cours…</string>
+    <string name="edit_gift_dialog_delete">Suppression en cours…</string>
+    <string name="edit_gift_dialog_confirm_delete_title">Suppression</string>
+    <string name="edit_gift_dialog_confirm_delete_subtitle">Êtes-vous sûr de supprimer ce cadeau ?</string>
+    <string name="edit_gift_dialog_yes_button">Oui</string>
+    <string name="edit_gift_dialog_no_button">Non</string>
+
+    <!-- edit reservation -->
+    <string name="edit_reservation_title_description">Détails</string>
+    <string name="edit_reservation_dialog_confirm_delete_subtitle">Êtes-vous sûr de supprimer cette réservation ?</string>
+
+    <!-- List Friends -->
+    <string name="friends_button_delete">supprimer</string>
+    <string name="friends_dialog_confirm_delete_subtitle">Êtes-vous sûr de supprimer cet ami de votre liste ?</string>
+    <string name="friend_progress_deleting">Suppression ami en cours…</string>
+    <string name="friend_content_no_friends_title">Vous n\'avez aucun ami</string>
+    <string name="friend_content_no_friends_subtitle">Allez dans recherche pour ajouter des amis</string>
+</resources>
