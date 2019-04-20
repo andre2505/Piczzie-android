@@ -20,6 +20,7 @@
             android:usesCleartextTraffic="true"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:appComponentFactory">
+
         <activity android:name=".ui.activity.hub.HubActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -27,15 +28,19 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
                 android:name=".ui.activity.register.RegisterActivity"
                 android:parentActivityName=".ui.activity.login.LoginActivity"/>
+
         <activity android:name=".ui.activity.login.LoginActivity"/>
+
         <activity
                 android:name=".ui.activity.camera.CameraActivity"
                 android:configChanges="orientation|screenLayout"
                 android:screenOrientation="sensorPortrait"
                 tools:replace="android:screenOrientation"/>
+
         <activity
                 android:name=".ui.activity.main.MainActivity"
                 android:configChanges="orientation|keyboardHidden|screenLayout|screenSize"
@@ -49,8 +54,9 @@
                     android:name="android.app.searchable"
                     android:resource="@xml/searchable"/>
         </activity>
-        <activity android:name=".ui.activity.gallery.GalleryActivity">
-        </activity>
+
+        <activity android:name=".ui.activity.gallery.GalleryActivity"/>
+
     </application>
 
 </manifest>
