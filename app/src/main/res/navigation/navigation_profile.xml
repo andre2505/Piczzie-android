@@ -54,6 +54,7 @@
                 android:name="gift"
                 app:argType="com.ziggy.kdo.model.Gift"/>
     </fragment>
+
     <fragment android:id="@+id/friendsFragment"
               android:name="com.ziggy.kdo.ui.fragment.friends.FriendsFragment"
               android:label="FriendsFragment"
@@ -62,8 +63,18 @@
     <fragment android:id="@+id/childrenFragment"
               android:name="com.ziggy.kdo.ui.fragment.children.ChildrenFragment"
               android:label="ChildrenFragment"
-              tools:layout="@layout/fragment_children"
-    />
+              tools:layout="@layout/fragment_children">
+
+        <action android:id="@+id/action_childrenFragment_to_addChildFragment"
+                app:destination="@id/addChildFragment"
+                app:enterAnim="@anim/enter_from_right"
+                app:exitAnim="@anim/exit_to_left"
+                app:popEnterAnim="@anim/enter_from_left"
+                app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+
+    <fragment android:id="@+id/addChildFragment" android:name="com.ziggy.kdo.ui.fragment.children.AddChildFragment"
+              android:label="AddChildFragment"/>
 
 
 </navigation>

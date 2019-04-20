@@ -24,7 +24,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //buildConfigField "String", "ENDPOINT", "\"http://10.0.2.2:8080/\""
             //buildConfigField "String", "ENDPOINT", "\"http://10.0.12.154:8080/\""
-            buildConfigField "String", "ENDPOINT", "\"http://192.168.1.8:8080/\""
+            //buildConfigField "String", "ENDPOINT", "\"http://192.168.1.8:8080/\""
+            buildConfigField "String", "ENDPOINT", "\"http://192.168.1.27:8080/\""
         }
         release {
             minifyEnabled false

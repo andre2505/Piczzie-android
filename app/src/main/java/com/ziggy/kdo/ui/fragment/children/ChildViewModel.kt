@@ -16,19 +16,21 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository) :
 
     val mChild = MutableLiveData<Child>()
 
+    val mChildrenList = MutableLiveData<MutableList<Child>>()
+
     init {
         mChild.value = Child()
     }
 
-    fun createChild(){
+    fun createChild() {
 
     }
 
-    fun updateChild(){
+    fun updateChild() {
 
     }
 
-    fun deleteChild(){
+    fun deleteChild() {
 
     }
 

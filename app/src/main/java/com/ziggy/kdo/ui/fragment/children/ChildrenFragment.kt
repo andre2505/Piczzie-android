@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,8 @@ import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickListener {
 
     private lateinit var mProfileViewModel: ProfileViewModel
+
+    private lateinit var mChildViewModel: ChildViewModel
 
     private lateinit var mRecyclerView: RecyclerView
 
@@ -55,6 +58,8 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
 
     private var mChildrenList: MutableList<Child> = mutableListOf()
 
+    private lateinit var mContentAddChildrenFragment: LinearLayout
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -67,6 +72,9 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
             mRecyclerView = mView!!.findViewById(R.id.children_recycler)
             mProgressBar = mView!!.findViewById(R.id.children_progressbar)
             mContentNoChildren = mView!!.findViewById(R.id.content_no_children)
+            mContentAddChildrenFragment = mView!!.findViewById(R.id.children_add_child)
+
+            mContentAddChildrenFragment.setOnClickListener(this@ChildrenFragment)
 
             mLinearLayoutManager = LinearLayoutManager(activity)
 
@@ -96,7 +104,11 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
 
                 mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
 
-                mProfileViewModel.mChildren.observe(activity, Observer { theChildren ->
+                mChildViewModel =  ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
+
+                mChildViewModel.mChildrenList.value = mProfileViewModel.mChildren.value
+
+                mChildViewModel.mChildrenList.observe(activity, Observer { theChildren ->
                     mChildrenList = theChildren
                     if (!::mChildrenAdapter.isInitialized) {
                         mProgressBar.visibility = View.GONE
@@ -122,6 +134,11 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
     }
 
     override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.children_add_child -> {
+                Navigation.findNavController(mView!!).navigate(R.id.action_childrenFragment_to_addChildFragment)
+            }
+        }
     }
 
 }
