@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -12,7 +13,10 @@ import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.ListItemChildrenBinding
 import com.ziggy.kdo.databinding.ListItemFriendsBinding
 import com.ziggy.kdo.listener.CustomOnItemClickListener
+import com.ziggy.kdo.listener.diffutil.ChildDiffCallback
+import com.ziggy.kdo.listener.diffutil.GiftDiffCallback
 import com.ziggy.kdo.model.Child
+import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 
 /**
@@ -72,11 +76,9 @@ class ChildrenAdapter (
     }
 
     fun updateChildList(childrenList: List<Child>) {
-        this.children?.clear()
-        notifyDataSetChanged()
-
-        this.children?.addAll(childrenList!!)
-        notifyDataSetChanged()
+        val diffCallback = ChildDiffCallback(this.children as List<Child>, childrenList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        diffResult.dispatchUpdatesTo(this)
     }
 
 }

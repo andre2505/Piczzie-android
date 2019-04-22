@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentAddChildBinding
@@ -16,6 +17,7 @@ import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.ui.base.BaseFragment
 import java.util.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -62,13 +64,13 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
                 mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
 
                 mChildViewModel.mValidationSuccess.observe(
-                    this@AddChildFragment,
-                    androidx.lifecycle.Observer { theSuccess ->
-                        when(theSuccess){
+                    this@AddChildFragment, Observer { theSuccess ->
+                        when (theSuccess) {
                             Error.NO_ERROR -> {
                                 mListChildren = mChildViewModel.mChildrenList.value
                                 mListChildren?.add(mChildViewModel.mChild.value!!)
                                 mChildViewModel.mChildrenList.value = mListChildren
+                                mChildViewModel.mValidationSuccess.value = null
                             }
                         }
                     })
