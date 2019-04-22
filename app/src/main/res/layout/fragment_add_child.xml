@@ -57,7 +57,8 @@
                         app:layout_constraintEnd_toStartOf="@+id/register_woman"
                         app:layout_constraintStart_toStartOf="parent"
                         android:hint="@string/add_child_gender_boy"
-                        style="@style/RadioButtonGrey"/><!--android:onClick="@{() -> registerViewModel.setGender(2)}"-->
+                        android:onClick="@{() -> childViewModel.setGender(1)}"
+                        style="@style/RadioButtonGrey"/>
 
                 <RadioButton
                         android:id="@+id/add_child_woman"
@@ -67,7 +68,8 @@
                         app:layout_constraintTop_toBottomOf="@+id/register_lastname"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:hint="@string/add_child_gender_girl"
-                        style="@style/RadioButtonGrey"/> <!--android:onClick="@{() -> registerViewModel.setGender(2)}"-->
+                        android:onClick="@{() -> childViewModel.setGender(2)}"
+                        style="@style/RadioButtonGrey"/>
             </RadioGroup>
 
             <EditText
@@ -97,6 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/add_gift_button_add"
+                    android:onClick="@{() -> childViewModel.createChild()}"
                     style="@style/ButtonRoundWhite"
                    />
         </LinearLayout>

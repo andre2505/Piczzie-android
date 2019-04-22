@@ -57,7 +57,7 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
 
     private var mUser: User? = null
 
-    private var mChildrenList: MutableList<Child> = mutableListOf()
+    private var mChildrenList: MutableList<Child>? = null
 
     private lateinit var mContentAddChildrenFragment: LinearLayout
 
@@ -69,9 +69,8 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
 
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
 
-            mChildViewModel.mChildrenList.observe(this@ChildrenFragment, Observer<MutableList<Child>> { theChildren ->
+            mChildViewModel.mChildrenList.observe(this@ChildrenFragment, Observer { theChildren ->
 
-                this.mChildrenList = theChildren
                 if (!::mChildrenAdapter.isInitialized) {
                     mProgressBar.visibility = View.GONE
                     mChildrenAdapter =
@@ -80,7 +79,8 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                     mRecyclerView.adapter = mViewAdapter
 
                 } else {
-
+                    mProfileViewModel.mChildren.value = theChildren
+                    mChildrenAdapter.updateChildList(theChildren)
                 }
                 if (theChildren.isEmpty()) {
                     mContentNoChildren.visibility = View.VISIBLE
@@ -124,7 +124,8 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                 mRecyclerView.addItemDecoration(dividerItemDecoration)
 
             }
-            mChildViewModel.mChildrenList.value = mProfileViewModel.mChildren.value
+            this.mChildrenList = mProfileViewModel.mChildren.value
+            mChildViewModel.mChildrenList.value = mChildrenList
         }
 
         return mView

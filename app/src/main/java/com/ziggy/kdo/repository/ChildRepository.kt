@@ -3,6 +3,7 @@ package com.ziggy.kdo.repository
 import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.network.configuration.Result
 import com.ziggy.kdo.network.store.ChildApi
+import okhttp3.ResponseBody
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -18,6 +19,11 @@ class ChildRepository @Inject constructor(retrofit: Retrofit) : BaseRepository()
 
     suspend fun getChildren(): Result<List<Child>> {
         val request = childApi.getChildren()
+        return getResponse(request)
+    }
+
+    suspend fun createChild(child: Child): Result<ResponseBody> {
+        val request = childApi.createChild(child)
         return getResponse(request)
     }
 }

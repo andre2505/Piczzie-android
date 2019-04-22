@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentAddChildBinding
+import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.ui.base.BaseFragment
 import java.util.*
@@ -39,6 +40,8 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
 
     private var mView: View? = null
 
+    private var mListChildren: MutableList<Child>? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,6 +60,18 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
 
             activity?.also { activity ->
                 mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
+
+                mChildViewModel.mValidationSuccess.observe(
+                    this@AddChildFragment,
+                    androidx.lifecycle.Observer { theSuccess ->
+                        when(theSuccess){
+                            Error.NO_ERROR -> {
+                                mListChildren = mChildViewModel.mChildrenList.value
+                                mListChildren?.add(mChildViewModel.mChild.value!!)
+                                mChildViewModel.mChildrenList.value = mListChildren
+                            }
+                        }
+                    })
 
                 mChildFragmentBinding.childViewModel = mChildViewModel
 

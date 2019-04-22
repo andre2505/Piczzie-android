@@ -64,6 +64,10 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mFragmentMyGiftFragment = MyGiftFragment()
+
+        mProfileViewModel =
+            ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
+
     }
 
     override fun onCreateView(
@@ -91,12 +95,10 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
             mButtonFriends.setOnClickListener(this@ProfileFragment)
             mButtonChild.setOnClickListener(this@ProfileFragment)
 
-            mProfileViewModel =
-                ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
             mProfileBinding.profileViewModel = mProfileViewModel
-            mProfileBinding.lifecycleOwner = activity
+            mProfileBinding.lifecycleOwner = this@ProfileFragment
 
-            mProfileViewModel.mUser.observe(this, Observer { theUser ->
+            mProfileViewModel.mUser.observe(this@ProfileFragment, Observer { theUser ->
 
                 val thumbnailGender: Int = if (theUser.gender == 1) {
                     R.drawable.ic_profile_man

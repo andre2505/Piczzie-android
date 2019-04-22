@@ -75,7 +75,7 @@ class ChildrenAdapter (
         this.children?.clear()
         notifyDataSetChanged()
 
-        this.children?.addAll(children!!)
+        this.children?.addAll(childrenList!!)
         notifyDataSetChanged()
     }
 

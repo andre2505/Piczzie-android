@@ -8,6 +8,10 @@ import java.util.*
 import javax.inject.Inject
 import android.text.method.TextKeyListener.clear
 import android.util.Log
+import com.ziggy.kdo.enums.Error
+import com.ziggy.kdo.network.configuration.Result
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 /**
@@ -22,12 +26,29 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository) :
 
     val mChildrenList = MutableLiveData<MutableList<Child>>()
 
+    val mValidationSuccess = MutableLiveData<Error>()
+
     init {
         mChild.value = Child()
     }
 
     fun createChild() {
+        GlobalScope.launch {
+            childRepository.createChild(mChild.value!!).apply {
+                when (this) {
+                    is Result.Success -> {
+                        mValidationSuccess.postValue(Error.NO_ERROR)
+                    }
+                    is Result.Error -> {
+                        mValidationSuccess.postValue(Error.ERROR_REQUEST)
+                    }
+                    is Result.ErrorNetwork -> {
+                        mValidationSuccess.postValue(Error.ERROR_REQUEST)
+                    }
+                }
+            }
 
+        }
     }
 
     fun updateChild() {
@@ -42,5 +63,11 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository) :
         mChild.value?.birthday = date
         mChild.value = mChild.value
     }
+
+    fun setGender(gender: Int) {
+        mChild.value?.gender = gender
+    }
+
+
 
 }
