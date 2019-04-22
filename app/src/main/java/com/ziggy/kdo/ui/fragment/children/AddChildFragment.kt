@@ -86,6 +86,13 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
                                     mChildViewModel.mChildrenList.value = mListChildren
                                     activity.supportFragmentManager.popBackStack()
                                 }
+                                Error.ERROR_IS_EMPTY -> {
+                                    Toast.makeText(
+                                        activity,
+                                        getString(R.string.add_child_empty_fields),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
                                 else -> {
                                     Toast.makeText(context, R.string.network_error_return, Toast.LENGTH_LONG).show()
                                 }
@@ -116,6 +123,7 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
             }
             R.id.add_child_button_validate -> {
                 getDialogAddChild()?.show()
+                mChildViewModel.isChildValid()
             }
         }
     }

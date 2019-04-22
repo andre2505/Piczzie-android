@@ -123,5 +123,6 @@
     <!-- Add Child -->
     <string name="add_child_gender_boy">Boy</string>
     <string name="add_child_gender_girl">Girl</string>
+    <string name="add_child_empty_fields">Fields are not filled</string>
 
 </resources>

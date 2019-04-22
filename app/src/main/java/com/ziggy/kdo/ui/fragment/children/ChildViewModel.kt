@@ -32,6 +32,14 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository) :
         mChild.value = Child()
     }
 
+    fun isChildValid(){
+        if(mChild.value?.lastname != null && mChild.value?.firstname != null && mChild.value?.birthday != null && mChild.value?.gender !=null ){
+            createChild()
+        } else {
+            mValidationSuccess.value = Error.ERROR_IS_EMPTY
+        }
+    }
+
     fun createChild() {
         GlobalScope.launch {
             childRepository.createChild(mChild.value!!).apply {
