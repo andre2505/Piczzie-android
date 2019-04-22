@@ -95,11 +95,10 @@
                 android:background="@drawable/drawable_shadow_top_more">
 
             <Button
-                    android:id="@+id/add_gift_button_validate"
+                    android:id="@+id/add_child_button_validate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/add_gift_button_add"
-                    android:onClick="@{() -> childViewModel.createChild()}"
                     style="@style/ButtonRoundWhite"
                    />
         </LinearLayout>

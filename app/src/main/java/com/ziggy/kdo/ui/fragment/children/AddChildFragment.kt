@@ -2,12 +2,17 @@ package com.ziggy.kdo.ui.fragment.children
 
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -40,9 +45,13 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
 
     private lateinit var mEditTextDate: EditText
 
+    private lateinit var mButtonAddChild: Button
+
     private var mView: View? = null
 
     private var mListChildren: MutableList<Child>? = null
+
+    private var mDialog: Dialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,19 +67,28 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
             mView = mChildFragmentBinding.root
 
             mEditTextDate = mView!!.findViewById(R.id.add_child_edittext_birthday)
+            mButtonAddChild = mView!!.findViewById(R.id.add_child_button_validate)
+
             mEditTextDate.setOnClickListener(this@AddChildFragment)
+            mButtonAddChild.setOnClickListener(this@AddChildFragment)
 
             activity?.also { activity ->
                 mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
 
                 mChildViewModel.mValidationSuccess.observe(
                     this@AddChildFragment, Observer { theSuccess ->
-                        when (theSuccess) {
-                            Error.NO_ERROR -> {
-                                mListChildren = mChildViewModel.mChildrenList.value
-                                mListChildren?.add(mChildViewModel.mChild.value!!)
-                                mChildViewModel.mChildrenList.value = mListChildren
-                                mChildViewModel.mValidationSuccess.value = null
+                        mDialog?.cancel()
+                        theSuccess?.also {
+                            when (theSuccess) {
+                                Error.NO_ERROR -> {
+                                    mListChildren = mChildViewModel.mChildrenList.value
+                                    mListChildren?.add(mChildViewModel.mChild.value!!)
+                                    mChildViewModel.mChildrenList.value = mListChildren
+                                    activity.supportFragmentManager.popBackStack()
+                                }
+                                else -> {
+                                    Toast.makeText(context, R.string.network_error_return, Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     })
@@ -96,6 +114,30 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
                     cal.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
+            R.id.add_child_button_validate -> {
+                getDialogAddChild()?.show()
+            }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mChildViewModel.mValidationSuccess.value = null
+        mChildViewModel.mChild.value = Child()
+    }
+
+    private fun getDialogAddChild(): Dialog? {
+        activity?.let { theActivity ->
+            mDialog = Dialog(theActivity)
+            mDialog?.let { theDialog ->
+                theDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                theDialog.setCancelable(false)
+                theDialog.setContentView(R.layout.view_dialog_reserved)
+                val textDelete: TextView = theDialog.findViewById(R.id.view_dialog_reserved_text)
+                textDelete.text = getString(R.string.friend_progress_deleting)
+                return theDialog
+            }
+        }
+        return null
     }
 }
