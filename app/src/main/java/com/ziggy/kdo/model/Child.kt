@@ -1,6 +1,7 @@
 package com.ziggy.kdo.model
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 /**
  * The class description here.
@@ -21,6 +22,9 @@ class Child {
 
     @SerializedName("gender")
     var gender: Int? = null
+
+    @SerializedName("birthday")
+    var birthday: Date? = null
 
     @SerializedName("parent")
     var parent: User? = null

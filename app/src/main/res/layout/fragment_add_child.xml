@@ -24,7 +24,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/add_gift_image">
 
             <EditText
-                    android:id="@+id/add_gift_edittext_description"
+                    android:id="@+id/add_child_edittext_lastname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/register_editext_firstname"
@@ -32,7 +32,7 @@
                     style="@style/EditextDescription"/>
 
             <EditText
-                    android:id="@+id/add_gift_edittext_place"
+                    android:id="@+id/add_child_edittext_firstname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -49,7 +49,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/register_lastname"
                     android:orientation="horizontal">
                 <RadioButton
-                        android:id="@+id/regiser_man"
+                        android:id="@+id/add_child_man"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -60,7 +60,7 @@
                         style="@style/RadioButtonGrey"/><!--android:onClick="@{() -> registerViewModel.setGender(2)}"-->
 
                 <RadioButton
-                        android:id="@+id/register_woman"
+                        android:id="@+id/add_child_woman"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -71,7 +71,7 @@
             </RadioGroup>
 
             <EditText
-                    android:id="@+id/add_gift_edittext_website"
+                    android:id="@+id/add_child_edittext_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -80,7 +80,7 @@
                     android:hint="@string/register_editext_birthday"
                     android:focusable="false"
                     android:inputType="none"
-                    android:text="@={childViewModel.MChild.firstname}"
+                    android:text="@={ConverterDate.DateToString(childViewModel.MChild.birthday)}"
                     style="@style/EditextDescription"/>
         </LinearLayout>
 

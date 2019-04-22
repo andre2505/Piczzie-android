@@ -3,6 +3,7 @@ package com.ziggy.kdo.ui.fragment.children
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,37 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
 
     private lateinit var mContentAddChildrenFragment: LinearLayout
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.also { activity ->
+
+            mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
+
+            mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
+
+            mChildViewModel.mChildrenList.observe(this@ChildrenFragment, Observer<MutableList<Child>> { theChildren ->
+
+                this.mChildrenList = theChildren
+                if (!::mChildrenAdapter.isInitialized) {
+                    mProgressBar.visibility = View.GONE
+                    mChildrenAdapter =
+                        ChildrenAdapter(theChildren as MutableList<Child>, activity, this@ChildrenFragment)
+                    mViewAdapter = mChildrenAdapter
+                    mRecyclerView.adapter = mViewAdapter
+
+                } else {
+
+                }
+                if (theChildren.isEmpty()) {
+                    mContentNoChildren.visibility = View.VISIBLE
+                } else {
+                    mContentNoChildren.visibility = View.GONE
+                }
+            })
+        }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,53 +124,20 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                 mRecyclerView.addItemDecoration(dividerItemDecoration)
 
             }
+            mChildViewModel.mChildrenList.value = mProfileViewModel.mChildren.value
         }
 
         return mView
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        mView?.also {
-            activity?.also { activity ->
-
-                mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
-
-                mChildViewModel =  ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
-
-                mChildViewModel.mChildrenList.value = mProfileViewModel.mChildren.value
-
-                mChildViewModel.mChildrenList.observe(activity, Observer { theChildren ->
-                    mChildrenList = theChildren
-                    if (!::mChildrenAdapter.isInitialized) {
-                        mProgressBar.visibility = View.GONE
-                        mChildrenAdapter =
-                            ChildrenAdapter(theChildren as MutableList<Child>, activity, this@ChildrenFragment)
-                        mViewAdapter = mChildrenAdapter
-                        mRecyclerView.adapter = mViewAdapter
-
-                    } else {
-
-                    }
-                    if (theChildren.isEmpty()) {
-                        mContentNoChildren.visibility = View.VISIBLE
-                    } else {
-                        mContentNoChildren.visibility = View.GONE
-                    }
-                })
-            }
-        }
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
+        when (v?.id) {
             R.id.children_add_child -> {
                 Navigation.findNavController(mView!!).navigate(R.id.action_childrenFragment_to_addChildFragment)
             }
         }
     }
-
 }
