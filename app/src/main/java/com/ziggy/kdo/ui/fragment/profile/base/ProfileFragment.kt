@@ -64,9 +64,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mFragmentMyGiftFragment = MyGiftFragment()
 
-        exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
+        mFragmentMyGiftFragment = MyGiftFragment()
 
         mProfileViewModel =
             ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
