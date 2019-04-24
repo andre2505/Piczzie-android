@@ -2,11 +2,13 @@ package com.ziggy.kdo.ui.fragment.children
 
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
@@ -26,6 +28,12 @@ import com.ziggy.kdo.model.User
 import com.ziggy.kdo.ui.adapter.ChildrenAdapter
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
+
+
+
 
 /**
  * A simple [Fragment] subclass.
@@ -131,6 +139,12 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
         return mView
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(mView?.windowToken, 0)
+    }
+
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
         mChildViewModel.mChild.value = varObject as Child
         Navigation.findNavController(mView!!).navigate(R.id.action_addChildFragment_to_childProfileFragment)
@@ -142,5 +156,10 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                 Navigation.findNavController(mView!!).navigate(R.id.action_childrenFragment_to_addChildFragment)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mChildViewModel.mChild.value = Child()
     }
 }
