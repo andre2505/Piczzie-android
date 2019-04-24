@@ -91,11 +91,6 @@ class MyReservationFragment : BaseFragment(), CustomOnItemClickListener {
         Navigation.findNavController(mView!!).navigate(action,transition.build())
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mRestoreList = mGridView.layoutManager?.onSaveInstanceState()
-    }
-
     private fun setupGridView() {
 
         mGridView.apply {

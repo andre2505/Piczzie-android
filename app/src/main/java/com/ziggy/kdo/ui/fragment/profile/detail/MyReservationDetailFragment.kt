@@ -75,7 +75,7 @@ class MyReservationDetailFragment : BaseFragment(), View.OnClickListener {
 
             mView = mMyReservationDetailBinding.root
 
-            mImageView = mView!!.findViewById(R.id.my_gift_image)
+            mImageView = mView!!.findViewById(R.id.my_reservation_image)
 
             mScrollView = mView!!.findViewById(R.id.reservation_scrollview)
 
