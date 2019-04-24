@@ -58,7 +58,9 @@ class ChildrenAdapter (
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val children = children!![position]
         if (holder is ChildrenViewHolder) {
-
+            holder.itemView.setOnClickListener {theView ->
+                customOnItemClick?.onItemClick(varObject = children)
+            }
             holder.childrenRecyclerViewBinding.childModel = children
         }
     }

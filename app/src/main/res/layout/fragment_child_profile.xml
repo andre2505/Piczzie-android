@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.ziggy.kdo.utils.ConverterDate"/>
+        <variable name="childViewModel"
+                  type="com.ziggy.kdo.ui.fragment.children.ChildViewModel"/>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.fragment.profile.base.ProfileFragment">
+
+        <ProgressBar
+                android:id="@+id/progress_bar_profile_beginning"
+                android:layout_width="wrap_content"
+                android:layout_height="39dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:visibility="@{(childViewModel.MIsLoading == true) ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:id="@+id/linearLayout2"
+                android:background="@color/colorGrey10"
+                android:visibility="@{(childViewModel.MIsLoading == false) ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="3dp"
+                    android:background="@drawable/drawable_circle_profile_white"
+                    android:elevation="2dp"
+                    android:src="@{(childViewModel.MChild.gender == 1) ? @drawable/ic_masculine : @drawable/ic_femenine}"/>
+
+            <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{childViewModel.MChild.lastname + ` ` +childViewModel.MChild.firstname}"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/profile_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@{ConverterDate.DateToString(childViewModel.MChild.birthday)}"
+                    android:drawableStart="@drawable/ic_cake"
+                    android:drawablePadding="10dp"/>
+
+        </LinearLayout>
+        <RelativeLayout
+                android:id="@+id/profile_container_recycler"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="@{(childViewModel.MIsLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

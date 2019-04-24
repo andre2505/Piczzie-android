@@ -30,6 +30,9 @@ interface GiftApi {
     @GET("api/gift/user/reservation")
     fun getGiftsUserReservation(@Query("offset") offset: Int): Deferred<Response<List<Gift>?>>
 
+    @GET("api/gift/child/{id}")
+    fun getGiftsChild(@Path("id") id: String): Deferred<Response<MutableList<Gift>?>>
+
     @PUT("api/gift/update/{id}")
     fun updateGiftFriends(@Path("id") giftId: String, @Body gift: Gift): Deferred<Response<Gift?>>
 

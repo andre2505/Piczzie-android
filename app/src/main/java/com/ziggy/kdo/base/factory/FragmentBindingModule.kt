@@ -2,6 +2,7 @@ package com.ziggy.kdo.base.factory
 
 import com.ziggy.kdo.repository.ChildRepository_Factory
 import com.ziggy.kdo.ui.fragment.children.AddChildFragment
+import com.ziggy.kdo.ui.fragment.children.ChildProfileFragment
 import com.ziggy.kdo.ui.fragment.children.ChildrenFragment
 import com.ziggy.kdo.ui.fragment.home.HomeFragment
 import com.ziggy.kdo.ui.fragment.profile.base.MyGiftFragment
@@ -52,4 +53,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector(modules = [ViewModelModule::class])
     abstract fun bindAddChildFragment(): AddChildFragment
+
+    @ContributesAndroidInjector(modules = [ViewModelModule::class])
+    abstract fun bindChildProfileFragment(): ChildProfileFragment
 }

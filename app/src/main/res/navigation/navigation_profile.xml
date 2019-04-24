@@ -65,6 +65,13 @@
               android:label="ChildrenFragment"
               tools:layout="@layout/fragment_children">
 
+        <action android:id="@+id/action_addChildFragment_to_childProfileFragment"
+                app:destination="@id/childProfileFragment"
+                app:enterAnim="@anim/enter_from_right"
+                app:exitAnim="@anim/exit_to_left"
+                app:popEnterAnim="@anim/enter_from_left"
+                app:popExitAnim="@anim/exit_to_right"/>
+
         <action android:id="@+id/action_childrenFragment_to_addChildFragment"
                 app:destination="@id/addChildFragment"
                 app:enterAnim="@anim/slide_up"
@@ -72,7 +79,11 @@
     </fragment>
 
     <fragment android:id="@+id/addChildFragment" android:name="com.ziggy.kdo.ui.fragment.children.AddChildFragment"
-              android:label="AddChildFragment"/>
-
-
+              android:label="AddChildFragment"
+              tools:layout="@layout/fragment_add_child">
+    </fragment>
+    <fragment android:id="@+id/childProfileFragment"
+              android:name="com.ziggy.kdo.ui.fragment.children.ChildProfileFragment"
+              android:label="ChildProfileFragment"
+              tools:layout="@layout/fragment_child_profile"/>
 </navigation>

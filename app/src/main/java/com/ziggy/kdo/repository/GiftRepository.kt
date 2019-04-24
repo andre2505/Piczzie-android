@@ -1,5 +1,6 @@
 package com.ziggy.kdo.repository
 
+import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.network.configuration.Result
 import com.ziggy.kdo.network.store.GiftApi
@@ -52,6 +53,11 @@ class GiftRepository @Inject constructor(private val retrofit: Retrofit) : BaseR
 
     suspend fun deleteGift(id: String):Result<ResponseBody>{
         val request = giftApi.deleteGift(id)
+        return getResponse(request)
+    }
+
+    suspend fun getGiftChild(id: String): Result<MutableList<Gift>>{
+        val request = giftApi.getGiftsChild(id)
         return getResponse(request)
     }
 }
