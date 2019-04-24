@@ -174,6 +174,9 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     }
 
     override fun onClick(v: View?) {
+
+        exitTransition = null
+
         when(v?.id){
             R.id.profile_number_friends -> {
                 Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_friendsFragment)
