@@ -81,6 +81,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:visibility="@{(childViewModel.MIsLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/child_profile_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

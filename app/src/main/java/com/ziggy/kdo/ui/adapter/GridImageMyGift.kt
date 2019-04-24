@@ -155,11 +155,13 @@ class GridImageMyGift(
     }
 
     fun removeLoading() {
-        val oldGift = this.gifts
-        gifts?.removeAt(gifts!!.size - 1)
-        val diffCallback = GiftDiffCallback(oldGift as MutableList<Gift>, this.gifts as MutableList<Gift>)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        diffResult.dispatchUpdatesTo(this)
+        if(this.gifts!!.isNotEmpty() ) {
+            val oldGift = this.gifts
+            gifts?.removeAt(gifts!!.size - 1)
+            val diffCallback = GiftDiffCallback(oldGift as MutableList<Gift>, this.gifts as MutableList<Gift>)
+            val diffResult = DiffUtil.calculateDiff(diffCallback)
+            diffResult.dispatchUpdatesTo(this)
+        }
     }
 
     fun addListOnRestore() {
