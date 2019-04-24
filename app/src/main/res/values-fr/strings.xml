@@ -8,6 +8,8 @@
     <string name="navigation_friends_list">Amis</string>
     <string name="navigation_children_list">Enfants</string>
     <string name="navigation_add_children">Nouvel enfant</string>
+    <string name="navigation_children_profile">Profil</string>
+
 
     <!-- Network -->
     <string name="network_error_return">Une erreur est survenue</string>
