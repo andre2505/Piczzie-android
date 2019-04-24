@@ -12,13 +12,11 @@
 
         <action android:id="@+id/action_profile_to_myGiftDetailFragment"
                 app:destination="@id/myGiftDetailFragment"
-                app:popUpTo="@id/profile"
-                app:popUpToInclusive="false"/>
+                app:popUpTo="@id/profile"/>
 
         <action android:id="@+id/action_profile_to_myReservationDetailFragment"
                 app:destination="@id/myReservationDetailFragment"
-                app:popUpTo="@id/profile"
-                app:popUpToInclusive="false"/>
+                app:popUpTo="@id/profile"/>
 
         <action android:id="@+id/action_profile_to_friendsFragment"
                 app:destination="@id/friendsFragment"
@@ -85,5 +83,8 @@
     <fragment android:id="@+id/childProfileFragment"
               android:name="com.ziggy.kdo.ui.fragment.children.ChildProfileFragment"
               android:label="ChildProfileFragment"
-              tools:layout="@layout/fragment_child_profile"/>
+              tools:layout="@layout/fragment_child_profile">
+        <action android:id="@+id/action_childProfileFragment_to_myGiftDetailFragment"
+                app:destination="@id/myGiftDetailFragment"/>
+    </fragment>
 </navigation>

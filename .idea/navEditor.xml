@@ -174,18 +174,9 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="711" />
-                            <option name="y" value="-456" />
+                            <option name="x" value="477" />
+                            <option name="y" value="-838" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_addChildFragment_to_childProfileFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -195,9 +186,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1217" />
-                            <option name="y" value="-434" />
+                            <option name="x" value="494" />
+                            <option name="y" value="-409" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_childProfileFragment_to_myGiftDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -213,6 +213,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_addChildFragment_to_childProfileFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_childrenFragment_to_addChildFragment">
                               <value>
                                 <LayoutPositions />
@@ -240,8 +245,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="169" />
-                            <option name="y" value="661" />
+                            <option name="x" value="141" />
+                            <option name="y" value="686" />
                           </Point>
                         </option>
                       </LayoutPositions>

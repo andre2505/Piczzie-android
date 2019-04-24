@@ -21,6 +21,7 @@ import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.ui.adapter.GridImageMyGift
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
+import com.ziggy.kdo.ui.fragment.profile.base.ProfileFragmentDirections
 import com.ziggy.kdo.utils.SpacesItemDecoration
 
 /**
@@ -195,7 +196,8 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
-        mChildViewModel.mChild.value = varObject as Child
-        Navigation.findNavController(mView!!).navigate(R.id.action_addChildFragment_to_childProfileFragment)
+        val action: ChildProfileFragmentDirections.ActionChildProfileFragmentToMyGiftDetailFragment =
+            ChildProfileFragmentDirections.actionChildProfileFragmentToMyGiftDetailFragment(varObject as Gift)
+        Navigation.findNavController(mView!!).navigate(action)
     }
 }
