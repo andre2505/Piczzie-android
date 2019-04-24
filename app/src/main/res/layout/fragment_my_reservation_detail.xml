@@ -25,6 +25,7 @@
                     android:id="@+id/my_gift_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:transitionName="image_cadeau"
                     android:background="@android:color/black"
                     android:adjustViewBounds="true"/>
 

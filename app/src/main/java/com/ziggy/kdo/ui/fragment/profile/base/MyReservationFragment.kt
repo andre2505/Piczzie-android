@@ -3,6 +3,7 @@ package com.ziggy.kdo.ui.fragment.profile.base
 
 import android.os.Bundle
 import android.os.Parcelable
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -76,9 +78,17 @@ class MyReservationFragment : BaseFragment(), CustomOnItemClickListener {
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
+
+        parentFragment?.exitTransition =
+            TransitionInflater.from(parentFragment?.context).inflateTransition(android.R.transition.fade)
+
+        val transition = FragmentNavigator.Extras.Builder()
+        transition.addSharedElement(view!!, "image_cadeau")
+
+
         val action: ProfileFragmentDirections.ActionProfileToMyReservationDetailFragment =
             ProfileFragmentDirections.actionProfileToMyReservationDetailFragment(varObject as Gift)
-        Navigation.findNavController(mView!!).navigate(action)
+        Navigation.findNavController(mView!!).navigate(action,transition.build())
     }
 
     override fun onDestroyView() {
