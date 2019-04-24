@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentChildProfileBinding
+import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.ui.base.BaseFragment
 
 /**
@@ -57,5 +58,9 @@ class ChildProfileFragment : BaseFragment() {
         return mView
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mChildViewModel.mChild.value = Child()
+    }
 
 }

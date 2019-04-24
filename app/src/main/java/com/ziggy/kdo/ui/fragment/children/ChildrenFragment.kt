@@ -142,7 +142,9 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(mView?.windowToken, 0)
+        if(imm.isActive) {
+            imm.hideSoftInputFromWindow(mView?.windowToken, 0)
+        }
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
@@ -156,10 +158,5 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                 Navigation.findNavController(mView!!).navigate(R.id.action_childrenFragment_to_addChildFragment)
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mChildViewModel.mChild.value = Child()
     }
 }
