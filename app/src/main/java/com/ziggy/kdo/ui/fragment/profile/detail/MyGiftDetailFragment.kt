@@ -48,7 +48,7 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
     }
 
     override fun onCreateView(

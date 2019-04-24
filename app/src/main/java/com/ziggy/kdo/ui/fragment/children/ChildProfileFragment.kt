@@ -72,7 +72,7 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
         super.onCreate(savedInstanceState)
 
         setHasOptionsMenu(true)
-
+        exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
         }
