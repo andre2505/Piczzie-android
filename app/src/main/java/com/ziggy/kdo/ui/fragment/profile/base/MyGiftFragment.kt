@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ziggy.kdo.R
@@ -96,9 +97,13 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
+
+        val transition = FragmentNavigator.Extras.Builder()
+        transition.addSharedElement(view!!, "image_cadeau")
+
         val action: ProfileFragmentDirections.ActionProfileToMyGiftDetailFragment =
             ProfileFragmentDirections.actionProfileToMyGiftDetailFragment(varObject as Gift)
-        Navigation.findNavController(mView!!).navigate(action)
+        Navigation.findNavController(mView!!).navigate(action, transition.build())
     }
 
     private fun setupGridView() {
