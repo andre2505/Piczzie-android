@@ -12,11 +12,13 @@
 
         <action android:id="@+id/action_profile_to_myGiftDetailFragment"
                 app:destination="@id/myGiftDetailFragment"
-                app:popUpTo="@id/profile"/>
+                app:popUpTo="@id/profile"
+        />
 
         <action android:id="@+id/action_profile_to_myReservationDetailFragment"
                 app:destination="@id/myReservationDetailFragment"
-                app:popUpTo="@id/profile"/>
+                app:popUpTo="@id/profile"
+                app:exitAnim="@anim/fade_out"/>
 
         <action android:id="@+id/action_profile_to_friendsFragment"
                 app:destination="@id/friendsFragment"
