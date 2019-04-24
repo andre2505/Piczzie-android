@@ -3,6 +3,7 @@ package com.ziggy.kdo.ui.fragment.profile.detail
 
 import android.app.Dialog
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -55,6 +56,9 @@ class MyReservationDetailFragment : BaseFragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
     }
 
     override fun onCreateView(
