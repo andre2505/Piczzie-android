@@ -69,7 +69,6 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
         mProfileViewModel =
             ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
-
     }
 
     override fun onCreateView(
