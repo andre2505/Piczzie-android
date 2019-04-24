@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -64,6 +65,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mFragmentMyGiftFragment = MyGiftFragment()
+
+        exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
 
         mProfileViewModel =
             ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
