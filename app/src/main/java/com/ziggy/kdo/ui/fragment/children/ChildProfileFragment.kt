@@ -2,17 +2,23 @@ package com.ziggy.kdo.ui.fragment.children
 
 
 import android.os.Bundle
+import android.transition.Transition
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.Navigator
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.navigation.NavigationView
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentChildProfileBinding
 import com.ziggy.kdo.listener.CustomOnItemClickListener
@@ -196,8 +202,14 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
-        val action: ChildProfileFragmentDirections.ActionChildProfileFragmentToMyGiftDetailFragment =
+
+         val ok = FragmentNavigator.Extras.Builder()
+        ok.addSharedElement(view!!, "image_cadeau")
+
+        val lol = Bundle()
+        lol.putSerializable("gift", varObject as Gift)
+       val action: ChildProfileFragmentDirections.ActionChildProfileFragmentToMyGiftDetailFragment =
             ChildProfileFragmentDirections.actionChildProfileFragmentToMyGiftDetailFragment(varObject as Gift)
-        Navigation.findNavController(mView!!).navigate(action)
+        Navigation.findNavController(mView!!).navigate(R.id.action_childProfileFragment_to_myGiftDetailFragment, lol, null, ok.build())
     }
 }

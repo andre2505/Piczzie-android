@@ -24,6 +24,7 @@
                 android:background="@android:color/black"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                android:transitionName="image_cadeau"
                 tools:ignore="MissingConstraints"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout

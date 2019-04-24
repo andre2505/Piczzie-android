@@ -2,6 +2,7 @@ package com.ziggy.kdo.ui.fragment.profile.detail
 
 import android.app.Dialog
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -46,6 +47,8 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
     }
 
     override fun onCreateView(
@@ -70,6 +73,7 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
                 .with(this@MyGiftDetailFragment)
                 .load(BuildConfig.ENDPOINT + mInitGift?.image)
                 .into(mImageView)
+
         }
         return mView
     }

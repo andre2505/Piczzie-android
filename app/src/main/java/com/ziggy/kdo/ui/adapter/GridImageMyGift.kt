@@ -94,9 +94,11 @@ class GridImageMyGift(
                         .into(holder.image)
                 }
 
+                //holder.image.transitionName = "transition$position"
+
                 holder.image.setOnClickListener {
                     theGifts[position].image?.let { theImage ->
-                        customOnItemClick?.onItemClick<Any>(varObject = gifts!![position])
+                        customOnItemClick?.onItemClick<Any>(view = holder.image ,varObject = gifts!![position])
                     }
 
                 }
