@@ -32,7 +32,6 @@ class ChildProfileFragment : BaseFragment() {
 
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
-            mChildViewModel.getGiftChild(mChildViewModel.mChild.value?.id!!)
         }
 
     }
@@ -51,6 +50,8 @@ class ChildProfileFragment : BaseFragment() {
 
             mChildProfileBinding.childViewModel = mChildViewModel
             mChildProfileBinding.lifecycleOwner = this@ChildProfileFragment
+
+            mChildViewModel.getGiftChild(mChildViewModel.mChild.value?.id!!)
 
         }
         return mView

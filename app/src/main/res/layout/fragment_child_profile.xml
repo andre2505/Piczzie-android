@@ -45,7 +45,7 @@
                     android:id="@+id/profile_image"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:padding="3dp"
+                    android:padding="20dp"
                     android:background="@drawable/drawable_circle_profile_white"
                     android:elevation="2dp"
                     android:src="@{(childViewModel.MChild.gender == 1) ? @drawable/ic_masculine : @drawable/ic_femenine}"/>
