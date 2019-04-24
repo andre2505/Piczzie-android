@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.Navigator
 import androidx.navigation.fragment.FragmentNavigator
@@ -203,13 +204,12 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
 
-         val ok = FragmentNavigator.Extras.Builder()
-        ok.addSharedElement(view!!, "image_cadeau")
+        val transition = FragmentNavigator.Extras.Builder()
+        transition.addSharedElement(view!!, "image_cadeau")
 
-        val lol = Bundle()
-        lol.putSerializable("gift", varObject as Gift)
-       val action: ChildProfileFragmentDirections.ActionChildProfileFragmentToMyGiftDetailFragment =
+        val action: ChildProfileFragmentDirections.ActionChildProfileFragmentToMyGiftDetailFragment =
             ChildProfileFragmentDirections.actionChildProfileFragmentToMyGiftDetailFragment(varObject as Gift)
-        Navigation.findNavController(mView!!).navigate(R.id.action_childProfileFragment_to_myGiftDetailFragment, lol, null, ok.build())
+
+        Navigation.findNavController(mView!!).navigate(action, transition.build())
     }
 }
