@@ -1,6 +1,7 @@
 package com.ziggy.kdo.ui.fragment.children
 
 
+import android.content.Context
 import android.os.Bundle
 import android.transition.Transition
 import android.transition.TransitionInflater
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -224,6 +226,14 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
             })
 
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if(imm.isActive) {
+            imm.hideSoftInputFromWindow(mView?.windowToken, 0)
         }
     }
 
