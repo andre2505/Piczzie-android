@@ -92,6 +92,7 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
                 mDialog?.cancel()
                 when (theSuccess) {
                     Error.NO_ERROR -> {
+                        mProfilViewModel.mGift.value = mBaseGift
                         mProfilViewModel.mUpdateMyGiftSuccess.value = null
                     }
                     Error.ERROR_REQUEST -> {
