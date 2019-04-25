@@ -120,11 +120,6 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
                 }
             })
 
-            mProfileViewModel.mError.observe(this, Observer { theError ->
-                if (theError) {
-
-                }
-            })
             //configure first child
             mTab.addOnTabSelectedListener(this@ProfileFragment)
             mTab.getTabAt(0)?.icon?.setColorFilter(resources.getColor(R.color.colorAccent), PorterDuff.Mode.SRC_IN)

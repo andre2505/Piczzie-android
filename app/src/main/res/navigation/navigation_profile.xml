@@ -86,6 +86,7 @@
               android:label="ChildProfileFragment"
               tools:layout="@layout/fragment_child_profile">
         <action android:id="@+id/action_childProfileFragment_to_myGiftDetailFragment"
-                app:destination="@id/myGiftDetailFragment"/>
+                app:destination="@id/myGiftDetailFragment"
+                app:popUpTo="@id/childProfileFragment"/>
     </fragment>
 </navigation>

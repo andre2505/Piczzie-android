@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentChildProfileBinding
+import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.listener.CustomOnItemClickListener
 import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.model.Gift
@@ -76,6 +78,29 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
         exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
+
+            mProfileViewModel =
+                ViewModelProviders.of(activity, mViewModeFactory).get(ProfileViewModel::class.java)
+
+            //Observe update Gift()
+            mProfileViewModel.mUpdateMyGiftSuccess.observe(activity, Observer { theSuccess ->
+                when (theSuccess) {
+                    Error.NO_ERROR -> {
+                        mAdapter.updateGift(mProfileViewModel.mGift.value)
+                    }
+                    else -> {}
+                }
+            })
+
+            mProfileViewModel.mDeleteMyGiftSuccess.observe(activity, Observer { theSuccess ->
+                when (theSuccess) {
+                    Error.NO_ERROR -> {
+                        mAdapter.removeGiftList(mProfileViewModel.mGift.value)
+                    }
+                    else -> {}
+                }
+            })
+
         }
 
     }
