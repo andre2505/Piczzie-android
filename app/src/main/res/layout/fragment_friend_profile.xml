@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.ziggy.kdo.utils.ConverterDate"/>
+        <variable name="profileViewModel"
+                  type="com.ziggy.kdo.ui.fragment.profile.ProfileViewModel"/>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.fragment.profile.base.ProfileFragment">
+
+        <ProgressBar
+                android:id="@+id/progress_bar_profile_beginning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:visibility="@{(profileViewModel.MLoading == true) ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:paddingBottom="10dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:id="@+id/linearLayout2"
+                android:background="@color/colorGrey10"
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+
+            <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="3dp"
+                    android:background="@drawable/drawable_circle_profile_white"
+                    android:elevation="2dp"/>
+
+            <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{profileViewModel.MUser.lastname + ` ` +profileViewModel.MUser.firstname}"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:id="@+id/profile_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@{ConverterDate.DateToString(profileViewModel.MUser.birthday)}"
+                    android:drawableStart="@drawable/ic_cake"
+                    android:drawablePadding="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/profile_container_friends"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="@color/colorWhite"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+
+            <Button
+                    android:id="@+id/profile_number_friends"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@{(profileViewModel.MFriends.isEmpty() == false &amp;&amp; profileViewModel.MFriends.size() > 1) ? String.format(@string/profile_number_friends, profileViewModel.MFriends.size()) : String.format(@string/profile_number_no_friends, profileViewModel.MFriends.size())}"
+                    style="@style/ButtonProfile"/>
+            <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorGrey"/>
+
+            <Button
+                    android:id="@+id/profile_number_children"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{(profileViewModel.MChildren.isEmpty() == false &amp;&amp; profileViewModel.MChildren.size() > 1) ? String.format(@string/profile_number_children, profileViewModel.MChildren.size()) : String.format(@string/profile_number_no_children, profileViewModel.MChildren.size())}"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    style="@style/ButtonProfile"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+                android:id="@+id/profile_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/profile_container_friends"
+                app:tabIndicatorColor="@null"
+                app:tabIconTint="@color/colorGrayShadow"
+                app:tabIconTintMode="src_in"
+                android:background="@drawable/drawable_border_tab"
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+
+            <com.google.android.material.tabs.TabItem
+                    android:id="@+id/profile_my_gift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:icon="@drawable/ic_list_gift"/>
+
+            <com.google.android.material.tabs.TabItem
+                    android:id="@+id/profile_my_reservation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:icon="@drawable/ic_reserved"/>
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <RelativeLayout
+                android:id="@+id/profile_container_recycler"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/profile_tab"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="2dp"
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
