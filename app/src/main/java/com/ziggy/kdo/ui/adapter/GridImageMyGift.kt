@@ -94,7 +94,7 @@ class GridImageMyGift(
                         .into(holder.image)
                 }
 
-                //holder.image.transitionName = "transition$position"
+                holder.image.transitionName = theGifts[position].id
 
                 holder.image.setOnClickListener {
                     theGifts[position].image?.let { theImage ->

@@ -99,14 +99,18 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
 
+
+
         parentFragment?.exitTransition =
             TransitionInflater.from(parentFragment?.context).inflateTransition(android.R.transition.fade)
 
+        val gift = varObject as Gift
+
         val transition = FragmentNavigator.Extras.Builder()
-        transition.addSharedElement(view!!, "image_cadeau")
+        transition.addSharedElement(view!!, gift.id!!)
 
         val action: ProfileFragmentDirections.ActionProfileToMyGiftDetailFragment =
-            ProfileFragmentDirections.actionProfileToMyGiftDetailFragment(varObject as Gift)
+            ProfileFragmentDirections.actionProfileToMyGiftDetailFragment(gift)
         Navigation.findNavController(mView!!).navigate(action, transition.build())
     }
 

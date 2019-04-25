@@ -82,12 +82,14 @@ class MyReservationFragment : BaseFragment(), CustomOnItemClickListener {
         parentFragment?.exitTransition =
             TransitionInflater.from(parentFragment?.context).inflateTransition(android.R.transition.fade)
 
+        val gift = varObject as Gift
+
         val transition = FragmentNavigator.Extras.Builder()
-        transition.addSharedElement(view!!, "image_cadeau")
+        transition.addSharedElement(view!!, gift.id!!)
 
 
         val action: ProfileFragmentDirections.ActionProfileToMyReservationDetailFragment =
-            ProfileFragmentDirections.actionProfileToMyReservationDetailFragment(varObject as Gift)
+            ProfileFragmentDirections.actionProfileToMyReservationDetailFragment(gift)
         Navigation.findNavController(mView!!).navigate(action,transition.build())
     }
 

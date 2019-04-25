@@ -229,11 +229,13 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
 
+        val gift = varObject as Gift
+
         val transition = FragmentNavigator.Extras.Builder()
-        transition.addSharedElement(view!!, "image_cadeau")
+        transition.addSharedElement(view!!, gift.id!!)
 
         val action: ChildProfileFragmentDirections.ActionChildProfileFragmentToMyGiftDetailFragment =
-            ChildProfileFragmentDirections.actionChildProfileFragmentToMyGiftDetailFragment(varObject as Gift)
+            ChildProfileFragmentDirections.actionChildProfileFragmentToMyGiftDetailFragment(gift)
 
         Navigation.findNavController(mView!!).navigate(action, transition.build())
     }
