@@ -88,6 +88,7 @@ class GridImageMyGift(
                             RequestOptions()
                                 .override(theImgSize, theImgSize)
                                 .centerCrop()
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
                         )
                         .thumbnail(thumbnail)
                         .thumbnail(0.5F)

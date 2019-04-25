@@ -88,7 +88,7 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
             mProfilViewModel.mGift.value = mBaseGift
 
             //Observe update Gift()
-            mProfilViewModel.mUpdateMyGiftSuccess.observe(activity!!, Observer { theSuccess ->
+            mProfilViewModel.mUpdateMyGiftSuccess.observe(this@MyGiftDetailFragment, Observer { theSuccess ->
                 mDialog?.cancel()
                 when (theSuccess) {
                     Error.NO_ERROR -> {
@@ -103,12 +103,12 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
                 }
             })
 
-            mProfilViewModel.mDeleteMyGiftSuccess.observe(activity!!, Observer { theSuccess ->
+            mProfilViewModel.mDeleteMyGiftSuccess.observe(this@MyGiftDetailFragment, Observer { theSuccess ->
                 mDialog?.cancel()
                 when (theSuccess) {
                     Error.NO_ERROR -> {
-                        mProfilViewModel.mDeleteMyGiftSuccess.value = null
                         activity!!.supportFragmentManager.popBackStack()
+                        mProfilViewModel.mDeleteMyGiftSuccess.value = null
                     }
                     Error.ERROR_REQUEST -> {
                         Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()

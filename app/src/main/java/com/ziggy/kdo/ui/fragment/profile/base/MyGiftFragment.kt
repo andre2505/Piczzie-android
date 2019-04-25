@@ -100,7 +100,6 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
 
 
-
         parentFragment?.exitTransition =
             TransitionInflater.from(parentFragment?.context).inflateTransition(android.R.transition.fade)
 
