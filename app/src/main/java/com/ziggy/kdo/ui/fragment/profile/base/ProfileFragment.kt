@@ -155,14 +155,14 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         val ft = childFragmentManager.beginTransaction()
         when (p0?.position) {
             0 -> {
-                ft.hide(childFragmentManager.findFragmentByTag(TAG_MY_RESERVATION)!!)
-                ft.show(childFragmentManager.findFragmentByTag(TAG_MY_GIFT)!!)
+                ft.detach(childFragmentManager.findFragmentByTag(TAG_MY_RESERVATION)!!)
+                ft.attach(childFragmentManager.findFragmentByTag(TAG_MY_GIFT)!!)
                 ft.commit()
             }
             1 -> {
-                ft.hide(childFragmentManager.findFragmentByTag(TAG_MY_GIFT)!!)
+                ft.detach(childFragmentManager.findFragmentByTag(TAG_MY_GIFT)!!)
                 mFragmentMyReservationFragment?.let { theFragmentReservation ->
-                    ft.show(childFragmentManager.findFragmentByTag(TAG_MY_RESERVATION)!!)
+                    ft.attach(childFragmentManager.findFragmentByTag(TAG_MY_RESERVATION)!!)
                     ft.commit()
                 } ?: kotlin.run {
                     mFragmentMyReservationFragment = MyReservationFragment()
