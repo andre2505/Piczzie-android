@@ -89,9 +89,9 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
 
             //Observe update Gift()
             mProfilViewModel.mUpdateMyGiftSuccess.observe(activity!!, Observer { theSuccess ->
+                mDialog?.cancel()
                 when (theSuccess) {
                     Error.NO_ERROR -> {
-                        mDialog?.cancel()
                         mProfilViewModel.mUpdateMyGiftSuccess.value = null
                     }
                     Error.ERROR_REQUEST -> {
@@ -104,9 +104,9 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
             })
 
             mProfilViewModel.mDeleteMyGiftSuccess.observe(activity!!, Observer { theSuccess ->
+                mDialog?.cancel()
                 when (theSuccess) {
                     Error.NO_ERROR -> {
-                        mDialog?.cancel()
                         mProfilViewModel.mDeleteMyGiftSuccess.value = null
                         activity!!.supportFragmentManager.popBackStack()
                     }
