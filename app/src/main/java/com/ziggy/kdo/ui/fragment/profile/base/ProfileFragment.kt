@@ -1,21 +1,15 @@
 package com.ziggy.kdo.ui.fragment.profile.base
 
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.transition.TransitionInflater
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -25,11 +19,8 @@ import com.google.android.material.tabs.TabLayout
 import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentProfileBinding
-import com.ziggy.kdo.model.Child
-import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
-import com.ziggy.kdo.ui.fragment.profile.detail.MyGiftDetailFragment
 
 
 /**
@@ -155,7 +146,7 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
                 ft.commit()
             }
             1 -> {
-                ft.detach(childFragmentManager.findFragmentByTag(TAG_MY_GIFT)!!)
+                ft.hide(childFragmentManager.findFragmentByTag(TAG_MY_GIFT)!!)
                 mFragmentMyReservationFragment?.let { theFragmentReservation ->
                     ft.show(childFragmentManager.findFragmentByTag(TAG_MY_RESERVATION)!!)
                     ft.commit()
