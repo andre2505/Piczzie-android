@@ -19,10 +19,11 @@
         <ImageView
                 android:id="@+id/my_gift_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/black"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.5"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
+                android:background="@android:color/black"
                 android:transitionName="@{profileViewModel.MGift.id}"
                 tools:ignore="MissingConstraints"/>
 
