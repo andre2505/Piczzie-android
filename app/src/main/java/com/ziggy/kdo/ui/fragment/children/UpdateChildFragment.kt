@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentUpdateChildBinding
+import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.utils.CustomDialog
@@ -40,6 +42,25 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
 
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
+
+
+            mChildViewModel.mUpdateSuccess.observe(this@UpdateChildFragment, Observer { theSuccess ->
+                mDialog.cancel()
+                when (theSuccess) {
+                    Error.NO_ERROR -> {
+                        mChildViewModel.mUpdateSuccess.value = null
+                        activity.supportFragmentManager.popBackStack()
+                    }
+                    Error.ERROR_REQUEST -> {
+                        Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                    }
+                    Error.ERROR_NETWORK -> {
+                        Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                    }
+                    else -> {
+                    }
+                }
+            })
         }
     }
 

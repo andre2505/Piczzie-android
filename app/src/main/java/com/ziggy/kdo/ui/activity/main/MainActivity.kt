@@ -79,6 +79,8 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
     private val NAVIGATION_CHILD_PROFILE: String = "ChildProfileFragment"
 
+    private val NAVIGATION_CHILD_UPDATE: String = "UpdateChildFragment"
+
     private lateinit var mBottomNavigationView: BottomNavigationView
 
     private lateinit var mToolbar: Toolbar
@@ -276,6 +278,12 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
             NAVIGATION_CHILD_PROFILE -> {
                 mToolbarTitle.visibility = View.GONE
                 supportActionBar?.title = getString(R.string.navigation_children_profile)
+                supportActionBar?.setDisplayShowTitleEnabled(true)
+            }
+            NAVIGATION_CHILD_UPDATE -> {
+                mToolbarTitle.visibility = View.GONE
+                mToolbar.setNavigationIcon(R.drawable.ic_close_edit)
+                supportActionBar?.title = getString(R.string.navigation_add_children)
                 supportActionBar?.setDisplayShowTitleEnabled(true)
             }
         }

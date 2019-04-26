@@ -8,6 +8,7 @@
     <string name="navigation_children_list">Children</string>
     <string name="navigation_add_children">New child</string>
     <string name="navigation_children_profile">Profile</string>
+    <string name="navigation_children_update">Edit</string>
 
     <!-- Network -->
     <string name="network_error_return">An error has occurred</string>

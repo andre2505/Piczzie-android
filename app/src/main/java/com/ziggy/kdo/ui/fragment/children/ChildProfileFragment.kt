@@ -245,7 +245,7 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_gift_detail, menu)
+        inflater?.inflate(R.menu.menu_child, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
