@@ -126,7 +126,7 @@
     <string name="add_child_gender_girl">Girl</string>
     <string name="add_child_empty_fields">Fields are not filled</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Update Child -->
+    <string name="update_child_button">Update</string>
 
 </resources>

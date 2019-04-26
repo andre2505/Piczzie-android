@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
-            tools:context=".ui.fragment.children.AddChildFragment">
+            tools:context=".ui.fragment.children.UpdateChildFragment">
 
 
         <LinearLayout
@@ -126,7 +126,7 @@
                     android:id="@+id/add_child_button_validate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/add_gift_button_add"
+                    android:text="@string/update_child_button"
                     style="@style/ButtonRoundWhite"
             />
         </LinearLayout>

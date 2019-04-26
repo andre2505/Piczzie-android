@@ -89,5 +89,11 @@
                 app:destination="@id/myGiftDetailFragment"
                 app:popUpTo="@id/childProfileFragment"
                 app:popUpToInclusive="false"/>
+        <action android:id="@+id/action_childProfileFragment_to_updateChildFragment"
+                app:destination="@id/updateChildFragment"/>
     </fragment>
+    <fragment android:id="@+id/updateChildFragment"
+              android:name="com.ziggy.kdo.ui.fragment.children.UpdateChildFragment"
+              android:label="UpdateChildFragment"
+              tools:layout="@layout/fragment_update_child"/>
 </navigation>

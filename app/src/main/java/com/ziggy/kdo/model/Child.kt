@@ -9,23 +9,23 @@ import java.util.*
  * @author thomas
  * @since 2019.03.21
  */
-class Child {
+data class Child (
 
     @SerializedName("_id")
-    var id: String? = null
+    var id: String? = null,
 
     @SerializedName("firstname")
-    var firstname: String? = null
+    var firstname: String? = null,
 
     @SerializedName("lastname")
-    var lastname: String? = null
+    var lastname: String? = null,
 
     @SerializedName("gender")
-    var gender: Int? = null
+    var gender: Int? = null,
 
     @SerializedName("birthday")
-    var birthday: Date? = null
+    var birthday: Date? = null,
 
     @SerializedName("parent")
     var parent: User? = null
-}
+)

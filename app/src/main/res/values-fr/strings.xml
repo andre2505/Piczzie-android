@@ -125,4 +125,8 @@
     <string name="add_child_gender_boy">Garçon</string>
     <string name="add_child_gender_girl">Fille</string>
     <string name="add_child_empty_fields">Des champs ne sont pas remplis</string>
+
+    <!-- Update Child -->
+    <string name="update_child_button">Modifier</string>
+
 </resources>

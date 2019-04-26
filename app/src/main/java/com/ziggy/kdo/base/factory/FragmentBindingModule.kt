@@ -4,6 +4,7 @@ import com.ziggy.kdo.repository.ChildRepository_Factory
 import com.ziggy.kdo.ui.fragment.children.AddChildFragment
 import com.ziggy.kdo.ui.fragment.children.ChildProfileFragment
 import com.ziggy.kdo.ui.fragment.children.ChildrenFragment
+import com.ziggy.kdo.ui.fragment.children.UpdateChildFragment
 import com.ziggy.kdo.ui.fragment.home.HomeFragment
 import com.ziggy.kdo.ui.fragment.profile.base.MyGiftFragment
 import com.ziggy.kdo.ui.fragment.profile.base.MyReservationFragment
@@ -56,4 +57,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector(modules = [ViewModelModule::class])
     abstract fun bindChildProfileFragment(): ChildProfileFragment
+
+    @ContributesAndroidInjector(modules = [ViewModelModule::class])
+    abstract fun bindUpdateChildFragment(): UpdateChildFragment
 }
