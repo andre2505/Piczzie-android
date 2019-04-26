@@ -81,6 +81,7 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
         setHasOptionsMenu(true)
 
         exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
+
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
 
@@ -251,11 +252,11 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
         when (item?.itemId) {
             R.id.action_edit -> {
-                getDialogChoiceDeleteGift()?.show()
+                exitTransition = null
+                Navigation.findNavController(mView!!).navigate(R.id.action_childProfileFragment_to_updateChildFragment)
                 activity?.invalidateOptionsMenu()
             }
             R.id.action_edit_validate -> {
-
                 activity?.invalidateOptionsMenu()
             }
             R.id.action_abandon -> {
@@ -271,6 +272,7 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
+        exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
 
         val gift = varObject as Gift
 
