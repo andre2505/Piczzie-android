@@ -32,6 +32,8 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
 
     val mValidationSuccess = MutableLiveData<Error>()
 
+    val mUpdateSuccess = MutableLiveData<Error>()
+
     val mIsLoading = MutableLiveData<Boolean>()
 
     val mListGiftChild = MutableLiveData<MutableList<Gift>>()
@@ -72,7 +74,22 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
     }
 
     fun updateChild() {
+        GlobalScope.launch {
+            childRepository.updateChild(mChild.value!!).apply {
+                when (this) {
+                    is Result.Success -> {
+                        mChild.postValue(this.data)
+                    }
+                    is Result.Error -> {
+                        mUpdateSuccess.postValue(Error.ERROR_REQUEST)
+                    }
+                    is Result.ErrorNetwork -> {
+                        mUpdateSuccess.postValue(Error.ERROR_REQUEST)
+                    }
+                }
+            }
 
+        }
     }
 
     fun deleteChild() {
@@ -106,6 +123,7 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
 
     fun setGender(gender: Int) {
         mChild.value?.gender = gender
+        mChild.value = mChild.value
     }
 
 

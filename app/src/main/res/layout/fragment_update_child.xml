@@ -122,7 +122,7 @@
                 android:background="@drawable/drawable_shadow_top_more">
 
             <Button
-                    android:id="@+id/add_child_button_validate"
+                    android:id="@+id/update_child_button_validate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/update_child_button"

@@ -5,10 +5,7 @@ import com.ziggy.kdo.model.Gift
 import kotlinx.coroutines.Deferred
 import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * The class description here.
@@ -23,4 +20,7 @@ interface ChildApi {
 
     @POST("api/child")
     fun createChild(@Body child: Child): Deferred<Response<ResponseBody?>>
+
+    @PUT("api/child/{id}")
+    fun updateChild(@Path("id") id: String, @Body child: Child): Deferred<Response<Child?>>
 }
