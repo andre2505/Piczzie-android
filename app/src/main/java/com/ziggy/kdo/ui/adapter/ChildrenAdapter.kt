@@ -83,4 +83,16 @@ class ChildrenAdapter (
         diffResult.dispatchUpdatesTo(this)
     }
 
+    fun updateChild(child: Child?){
+        child?.also { theChild ->
+            loop@ for ((index, theGiftUpdate) in this.children!!.withIndex()) {
+                if (theGiftUpdate.id == theChild.id) {
+                    this.children!![index] = theChild
+                    notifyItemChanged(index)
+                    break@loop
+                }
+            }
+        }
+    }
+
 }

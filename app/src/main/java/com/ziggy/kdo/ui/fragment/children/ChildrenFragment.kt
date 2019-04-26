@@ -59,6 +59,8 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
 
     private lateinit var mContentNoChildren: LinearLayout
 
+    private lateinit var mContentAddChildrenFragment: LinearLayout
+
     private var mView: View? = null
 
     private var mDialog: Dialog? = null
@@ -67,7 +69,7 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
 
     private var mChildrenList: MutableList<Child>? = null
 
-    private lateinit var mContentAddChildrenFragment: LinearLayout
+    private var mChild: Child? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,6 +98,16 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                     mContentNoChildren.visibility = View.GONE
                 }
             })
+
+            mChildViewModel.mUpdateSuccess.observe(activity, Observer { theSuccess ->
+                when(theSuccess){
+                    Error.NO_ERROR -> {
+                        mChildrenAdapter.updateChild(mChildViewModel.mChild.value)
+                    }
+                    else-> {}
+                }
+            })
+
         }
 
     }
@@ -148,9 +160,11 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
-        val test = varObject as Child
-        mChildViewModel.mChild.value = test.copy()
-        Navigation.findNavController(mView!!).navigate(R.id.action_addChildFragment_to_childProfileFragment)
+        mChild = varObject as Child
+        mChildViewModel.mChild.value = mChild?.copy()
+        mChild?.also {
+            Navigation.findNavController(mView!!).navigate(R.id.action_addChildFragment_to_childProfileFragment)
+        }
     }
 
     override fun onClick(v: View?) {
