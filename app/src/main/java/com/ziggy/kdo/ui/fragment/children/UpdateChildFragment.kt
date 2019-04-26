@@ -28,19 +28,19 @@ import com.ziggy.kdo.utils.CustomDialog
  */
 class UpdateChildFragment : BaseFragment(), View.OnClickListener {
 
+    private val mDialog: Dialog by lazy {
+        CustomDialog.getDialogLoading(R.string.navigation_children_profile, context)
+    }
+
     private lateinit var mChildViewModel: ChildViewModel
 
     private lateinit var mUpdateChildBinding: FragmentUpdateChildBinding
 
     private lateinit var mUpdateButton: Button
 
-    private var mView: View? = null
-
-    private val mDialog: Dialog by lazy {
-        CustomDialog.getDialogLoading(R.string.navigation_children_profile, context)
-    }
-
     private lateinit var mChildCopy: Child
+
+    private var mView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +59,11 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
                     }
                     Error.ERROR_REQUEST -> {
                         Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mChildViewModel.mUpdateSuccess.value = null
                     }
                     Error.ERROR_NETWORK -> {
                         Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mChildViewModel.mUpdateSuccess.value = null
                     }
                     else -> {
                     }
@@ -87,8 +89,9 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
 
             mUpdateChildBinding.childViewModel = mChildViewModel
             mUpdateChildBinding.lifecycleOwner = this@UpdateChildFragment
-
             mChildCopy = mChildViewModel.mChild.value!!.copy()
+
+
 
         }
         return mView
@@ -107,7 +110,7 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
     override fun onDestroy() {
         super.onDestroy()
         if( mUpdateChildBinding.childViewModel?.mChild?.value != mChildCopy){
-            mUpdateChildBinding.childViewModel?.mChild?.value = mChildCopy
+            mChildViewModel.mChild.value = mChildCopy
         }
     }
 

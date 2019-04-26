@@ -148,7 +148,8 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
-        mChildViewModel.mChild.value = varObject as Child
+        val test = varObject as Child
+        mChildViewModel.mChild.value = test.copy()
         Navigation.findNavController(mView!!).navigate(R.id.action_addChildFragment_to_childProfileFragment)
     }
 
