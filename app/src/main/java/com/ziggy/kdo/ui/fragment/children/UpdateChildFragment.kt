@@ -5,12 +5,15 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentUpdateChildBinding
@@ -28,6 +31,8 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
     private lateinit var mChildViewModel: ChildViewModel
 
     private lateinit var mUpdateChildBinding: FragmentUpdateChildBinding
+
+    private lateinit var mUpdateButton: Button
 
     private var mView: View? = null
 
@@ -48,8 +53,9 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
                 mDialog.cancel()
                 when (theSuccess) {
                     Error.NO_ERROR -> {
-                        mChildViewModel.mUpdateSuccess.value = null
+                        mChildCopy = mChildViewModel.mChild.value!!
                         activity.supportFragmentManager.popBackStack()
+                        mChildViewModel.mUpdateSuccess.value = null
                     }
                     Error.ERROR_REQUEST -> {
                         Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
@@ -75,13 +81,15 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
                 DataBindingUtil.inflate(inflater, R.layout.fragment_update_child, container, false)
             mView = mUpdateChildBinding.root
 
+            mUpdateButton = mView!!.findViewById(R.id.update_child_button_validate)
+
+            mUpdateButton.setOnClickListener(this@UpdateChildFragment)
 
             mUpdateChildBinding.childViewModel = mChildViewModel
             mUpdateChildBinding.lifecycleOwner = this@UpdateChildFragment
 
             mChildCopy = mChildViewModel.mChild.value!!.copy()
 
-            mChildViewModel.mChild.value = mChildCopy
         }
         return mView
     }
@@ -94,6 +102,13 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
             }
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if( mUpdateChildBinding.childViewModel?.mChild?.value != mChildCopy){
+            mUpdateChildBinding.childViewModel?.mChild?.value = mChildCopy
+        }
     }
 
 }

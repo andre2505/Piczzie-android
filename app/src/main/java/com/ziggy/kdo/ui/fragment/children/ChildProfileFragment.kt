@@ -259,10 +259,6 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
             R.id.action_edit_validate -> {
                 activity?.invalidateOptionsMenu()
             }
-            R.id.action_abandon -> {
-
-                activity?.invalidateOptionsMenu()
-            }
             R.id.action_delete -> {
                 getDialogChoiceDeleteGift()?.show()
             }

@@ -128,5 +128,7 @@
 
     <!-- Update Child -->
     <string name="update_child_button">Modifier</string>
+    <string name="update_child_menu_edit">Modifier</string>
+    <string name="update_child_menu_delete">Supprimer</string>
 
 </resources>

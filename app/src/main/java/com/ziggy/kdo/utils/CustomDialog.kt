@@ -16,7 +16,7 @@ object CustomDialog {
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.view_dialog_reserved)
 
-        val textDelete: TextView = dialog.findViewById(id)
+        val textDelete: TextView = dialog.findViewById(R.id.view_dialog_reserved_text)
 
         textDelete.text = activity.getString(id)
 

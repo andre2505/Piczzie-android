@@ -283,7 +283,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
             NAVIGATION_CHILD_UPDATE -> {
                 mToolbarTitle.visibility = View.GONE
                 mToolbar.setNavigationIcon(R.drawable.ic_close_edit)
-                supportActionBar?.title = getString(R.string.navigation_add_children)
+                supportActionBar?.title = getString(R.string.navigation_children_update)
                 supportActionBar?.setDisplayShowTitleEnabled(true)
             }
         }
