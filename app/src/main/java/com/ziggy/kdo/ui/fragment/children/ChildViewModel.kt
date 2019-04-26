@@ -85,7 +85,7 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
                         mUpdateSuccess.postValue(Error.ERROR_REQUEST)
                     }
                     is Result.ErrorNetwork -> {
-                        mUpdateSuccess.postValue(Error.ERROR_REQUEST)
+                        mUpdateSuccess.postValue(Error.ERROR_NETWORK)
                     }
                 }
             }

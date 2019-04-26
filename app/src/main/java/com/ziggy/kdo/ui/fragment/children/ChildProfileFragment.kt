@@ -256,11 +256,8 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
                 Navigation.findNavController(mView!!).navigate(R.id.action_childProfileFragment_to_updateChildFragment)
                 activity?.invalidateOptionsMenu()
             }
-            R.id.action_edit_validate -> {
-                activity?.invalidateOptionsMenu()
-            }
             R.id.action_delete -> {
-                getDialogChoiceDeleteGift()?.show()
+
             }
         }
         return super.onOptionsItemSelected(item)
@@ -279,25 +276,5 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
             ChildProfileFragmentDirections.actionChildProfileFragmentToMyGiftDetailFragment(gift)
 
         Navigation.findNavController(mView!!).navigate(action, transition.build())
-    }
-
-    private fun getDialogChoiceDeleteGift(): Dialog? {
-        activity?.let { theActivity ->
-            mDialog = Dialog(theActivity)
-            mDialog?.let { theDialog ->
-                theDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                theDialog.setCancelable(false)
-                theDialog.setContentView(R.layout.fragment_add_child)
-
-                /*val confirmButton: Button = theDialog.findViewById(R.id.btn_dialog_yes)
-                val cancelButton: Button = theDialog.findViewById(R.id.btn_dialog_no)
-
-                confirmButton.setOnClickListener(this)
-                cancelButton.setOnClickListener(this)*/
-
-                return theDialog
-            }
-        }
-        return null
     }
 }

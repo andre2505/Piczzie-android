@@ -91,8 +91,6 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
             mUpdateChildBinding.lifecycleOwner = this@UpdateChildFragment
             mChildCopy = mChildViewModel.mChild.value!!.copy()
 
-
-
         }
         return mView
     }
