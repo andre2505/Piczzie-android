@@ -50,6 +50,8 @@ class UpdateChildFragment : BaseFragment() {
 
             mUpdateChildBinding.childViewModel = mChildViewModel
             mUpdateChildBinding.lifecycleOwner = this@UpdateChildFragment
+
+
         }
         return mView
     }

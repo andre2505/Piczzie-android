@@ -23,7 +23,7 @@
                 android:paddingBottom="30dp"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:id="@+id/linearLayout2"
+                android:id="@+id/linear_layout"
                 android:background="@color/colorGrey10"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -41,15 +41,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/colorGrey"
-                android:visibility="@{(childViewModel.MIsLoading == false) ? View.VISIBLE : View.INVISIBLE}"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2"/>
+                app:layout_constraintTop_toBottomOf="@+id/linear_layout"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding_general"
                 android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                app:layout_constraintTop_toBottomOf="@+id/linear_layout">
 
             <EditText
                     android:id="@+id/add_child_edittext_lastname"
