@@ -36,9 +36,12 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
 
     val mListGiftChild = MutableLiveData<MutableList<Gift>>()
 
+    val mIsUpdateChild = MutableLiveData<Boolean>()
+
     init {
         mChild.value = Child()
         mIsLoading.value = true
+        mIsUpdateChild.value = false
     }
 
     fun isChildValid() {

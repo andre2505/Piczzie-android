@@ -1,16 +1,16 @@
 package com.ziggy.kdo.ui.fragment.children
 
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.transition.Transition
 import android.transition.TransitionInflater
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.AbsListView
+import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentTransaction
@@ -73,10 +73,13 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
     private var mView: View? = null
 
+    private var mDialog: Dialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setHasOptionsMenu(true)
+
         exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.fade)
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
@@ -90,7 +93,8 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
                     Error.NO_ERROR -> {
                         mAdapter.updateGift(mProfileViewModel.mGift.value)
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             })
 
@@ -99,7 +103,8 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
                     Error.NO_ERROR -> {
                         mAdapter.removeGiftList(mProfileViewModel.mGift.value)
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             })
 
@@ -229,13 +234,41 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if(imm.isActive) {
+        if (imm.isActive) {
             imm.hideSoftInputFromWindow(mView?.windowToken, 0)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_gift_detail, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when (item?.itemId) {
+            R.id.action_edit -> {
+                getDialogChoiceDeleteGift()?.show()
+                activity?.invalidateOptionsMenu()
+            }
+            R.id.action_edit_validate -> {
+
+                activity?.invalidateOptionsMenu()
+            }
+            R.id.action_abandon -> {
+
+                activity?.invalidateOptionsMenu()
+            }
+            R.id.action_delete -> {
+                getDialogChoiceDeleteGift()?.show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
 
@@ -248,5 +281,25 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
             ChildProfileFragmentDirections.actionChildProfileFragmentToMyGiftDetailFragment(gift)
 
         Navigation.findNavController(mView!!).navigate(action, transition.build())
+    }
+
+    private fun getDialogChoiceDeleteGift(): Dialog? {
+        activity?.let { theActivity ->
+            mDialog = Dialog(theActivity)
+            mDialog?.let { theDialog ->
+                theDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                theDialog.setCancelable(false)
+                theDialog.setContentView(R.layout.fragment_add_child)
+
+                /*val confirmButton: Button = theDialog.findViewById(R.id.btn_dialog_yes)
+                val cancelButton: Button = theDialog.findViewById(R.id.btn_dialog_no)
+
+                confirmButton.setOnClickListener(this)
+                cancelButton.setOnClickListener(this)*/
+
+                return theDialog
+            }
+        }
+        return null
     }
 }
