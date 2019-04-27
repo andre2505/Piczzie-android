@@ -54,9 +54,29 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
 
-            setupObserver()
 
-            mChildViewModel.mUpdateSuccess.observe(activity, mObserver)
+
+            mChildViewModel.mUpdateSuccess.observe(activity, Observer { theSuccess ->
+
+                mDialog.cancel()
+                when (theSuccess) {
+                    Error.NO_ERROR -> {
+                        mChildCopy = mChildViewModel.mChild.value!!
+                        activity?.supportFragmentManager?.popBackStack()
+                        mChildViewModel.mUpdateSuccess.value = Error.NOTHING
+                    }
+                    Error.ERROR_REQUEST -> {
+                        Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mChildViewModel.mUpdateSuccess.value = null
+                    }
+                    Error.ERROR_NETWORK -> {
+                        Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mChildViewModel.mUpdateSuccess.value = null
+                    }
+                    else -> {
+                    }
+                }
+            })
         }
     }
 
@@ -95,35 +115,11 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mChildViewModel.mUpdateSuccess.removeObserver(mObserver)
+
         mChildViewModel.mUpdateSuccess.removeObservers(activity!!)
+
         if (mChildViewModel.mChild.value != mChildCopy) {
             mChildViewModel.mChild.value = mChildCopy
-        }
-
-    }
-
-    private fun setupObserver() {
-        mObserver = Observer{ theSuccess ->
-
-            mDialog.cancel()
-            when (theSuccess) {
-                Error.NO_ERROR -> {
-                    mChildCopy = mChildViewModel.mChild.value!!
-                    activity?.supportFragmentManager?.popBackStack()
-                    mChildViewModel.mUpdateSuccess.value = Error.NOTHING
-                }
-                Error.ERROR_REQUEST -> {
-                    Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
-                    mChildViewModel.mUpdateSuccess.value = null
-                }
-                Error.ERROR_NETWORK -> {
-                    Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
-                    mChildViewModel.mUpdateSuccess.value = null
-                }
-                else -> {
-                }
-            }
         }
     }
 
