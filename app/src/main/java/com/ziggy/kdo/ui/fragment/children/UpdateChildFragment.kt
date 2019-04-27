@@ -46,15 +46,11 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
 
     private var mView: View? = null
 
-    private lateinit var mObserver: Observer<Error>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.also { activity ->
             mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
-
-
 
             mChildViewModel.mUpdateSuccess.observe(activity, Observer { theSuccess ->
 
