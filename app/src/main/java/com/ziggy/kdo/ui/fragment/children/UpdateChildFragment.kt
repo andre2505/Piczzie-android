@@ -1,6 +1,7 @@
 package com.ziggy.kdo.ui.fragment.children
 
 
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -25,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -32,9 +35,23 @@ import kotlinx.coroutines.withContext
  */
 class UpdateChildFragment : BaseFragment(), View.OnClickListener {
 
-    private val mDialog: Dialog by lazy {
-        CustomDialog.getDialogLoading(R.string.navigation_children_profile, context)
+    private val cal: Calendar by lazy {
+        Calendar.getInstance()
     }
+
+    private val mDialog: Dialog by lazy {
+        CustomDialog.getDialogLoading(R.string.update_child_progress, context)
+    }
+
+    private val dateSetListener: DatePickerDialog.OnDateSetListener by lazy {
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            mChildViewModel.updateDate(cal.time)
+        }
+    }
+
 
     private lateinit var mChildViewModel: ChildViewModel
 
@@ -43,6 +60,8 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
     private lateinit var mUpdateButton: Button
 
     private lateinit var mChildCopy: Child
+
+    private lateinit var mEditTextBirthday: EditText
 
     private var mView: View? = null
 
@@ -58,7 +77,7 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
                 when (theSuccess) {
                     Error.NO_ERROR -> {
                         mChildCopy = mChildViewModel.mChild.value!!
-                        activity?.supportFragmentManager?.popBackStack()
+                        activity.supportFragmentManager?.popBackStack()
                         mChildViewModel.mUpdateSuccess.value = Error.NOTHING
                     }
                     Error.ERROR_REQUEST -> {
@@ -88,8 +107,10 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
             mView = mUpdateChildBinding.root
 
             mUpdateButton = mView!!.findViewById(R.id.update_child_button_validate)
+            mEditTextBirthday = mView!!.findViewById(R.id.add_child_edittext_birthday)
 
             mUpdateButton.setOnClickListener(this@UpdateChildFragment)
+            mEditTextBirthday.setOnClickListener(this@UpdateChildFragment)
 
             mUpdateChildBinding.childViewModel = mChildViewModel
             mUpdateChildBinding.lifecycleOwner = this@UpdateChildFragment
@@ -104,6 +125,16 @@ class UpdateChildFragment : BaseFragment(), View.OnClickListener {
             R.id.update_child_button_validate -> {
                 mDialog.show()
                 mChildViewModel.updateChild()
+            }
+            R.id.add_child_edittext_birthday -> {
+                DatePickerDialog(
+                    activity!!,
+                    R.style.SpinnerDatePickerStyle,
+                    dateSetListener,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH)
+                ).show()
             }
         }
 
