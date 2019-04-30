@@ -11,6 +11,12 @@
     <string name="navigation_children_profile">Profil</string>
     <string name="navigation_children_update">Modifier</string>
 
+    <!-- title dialog loading -->
+    <string name="dialog_add">Ajout en cours…</string>
+    <string name="dialog_update">Mise à jour…</string>
+    <string name="dialog_delete">Supression en cours…</string>
+
+
     <!-- Network -->
     <string name="network_error_return">Une erreur est survenue</string>
     <string name="network_error_no_network">Une est erreur reséau est survenue</string>
@@ -125,6 +131,7 @@
     <string name="add_child_gender_boy">Garçon</string>
     <string name="add_child_gender_girl">Fille</string>
     <string name="add_child_empty_fields">Des champs ne sont pas remplis</string>
+    <string name="add_child_title">Ajouter un enfant</string>
 
     <!-- Update Child -->
     <string name="update_child_button">Modifier</string>

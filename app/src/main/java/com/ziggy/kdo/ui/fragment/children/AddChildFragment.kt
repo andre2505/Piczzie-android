@@ -142,7 +142,7 @@ class AddChildFragment : BaseFragment(), View.OnClickListener {
                 theDialog.setCancelable(false)
                 theDialog.setContentView(R.layout.view_dialog_reserved)
                 val textDelete: TextView = theDialog.findViewById(R.id.view_dialog_reserved_text)
-                textDelete.text = getString(R.string.friend_progress_deleting)
+                textDelete.text = getString(R.string.dialog_add)
                 return theDialog
             }
         }
