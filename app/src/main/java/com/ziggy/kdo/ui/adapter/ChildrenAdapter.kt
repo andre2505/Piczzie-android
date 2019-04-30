@@ -26,7 +26,7 @@ import com.ziggy.kdo.model.User
  * @since 2019.04.19
  */
 class ChildrenAdapter (
-    private var children: MutableList<Child>? = null,
+    var children: MutableList<Child>? = null,
     private val context: Context? = null,
     private val customOnItemClick: CustomOnItemClickListener? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

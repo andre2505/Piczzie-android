@@ -112,6 +112,7 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                 when (theSuccess) {
                     Error.NO_ERROR -> {
                         mChildrenAdapter.removeChildList(mChildViewModel.mChild.value?.id)
+                        mProfileViewModel.mChildren.value = mChildrenAdapter.children
                     }
                     else -> {
                     }
