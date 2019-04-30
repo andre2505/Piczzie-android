@@ -33,8 +33,6 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
 
 
-
-
 /**
  * A simple [Fragment] subclass.
  *
@@ -100,11 +98,12 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
             })
 
             mChildViewModel.mUpdateSuccess.observe(activity, Observer { theSuccess ->
-                when(theSuccess){
+                when (theSuccess) {
                     Error.NO_ERROR -> {
                         mChildrenAdapter.updateChild(mChildViewModel.mChild.value)
                     }
-                    else-> {}
+                    else -> {
+                    }
                 }
             })
 
@@ -112,7 +111,7 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
             mChildViewModel.mDeleteSuccess.observe(activity, Observer { theSuccess ->
                 when (theSuccess) {
                     Error.NO_ERROR -> {
-                       mChildrenAdapter.removeChildList(mChildViewModel.mChild.value?.id)
+                        mChildrenAdapter.removeChildList(mChildViewModel.mChild.value?.id)
                     }
                     else -> {
                     }
@@ -165,7 +164,7 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if(imm.isActive) {
+        if (imm.isActive) {
             imm.hideSoftInputFromWindow(mView?.windowToken, 0)
         }
     }
@@ -173,7 +172,9 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
     override fun onDestroy() {
         super.onDestroy()
         activity?.also { theActivity ->
-           // mChildViewModel.mUpdateSuccess.removeObservers(activity)
+            mChildViewModel.mDeleteSuccess.removeObservers(theActivity)
+            mChildViewModel.mUpdateSuccess.removeObservers(theActivity)
+            mChildViewModel.mChildrenList.removeObservers(this@ChildrenFragment)
         }
     }
 

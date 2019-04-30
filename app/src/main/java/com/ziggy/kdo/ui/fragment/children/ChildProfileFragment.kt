@@ -118,7 +118,7 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
                 when (theSuccess) {
                     Error.NO_ERROR -> {
                         activity.supportFragmentManager?.popBackStack()
-                        mChildViewModel.mUpdateSuccess.value = null
+                        mChildViewModel.mDeleteSuccess.value = null
                     }
                     Error.ERROR_REQUEST -> {
                         Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
@@ -163,9 +163,9 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
     override fun onDestroy() {
         super.onDestroy()
         activity?.also {activity ->
-            mChildViewModel.mDeleteSuccess.removeObservers(activity)
+            /*mChildViewModel.mDeleteSuccess.removeObservers(activity)
             mProfileViewModel.mUpdateMyGiftSuccess.removeObservers(activity)
-            mProfileViewModel.mDeleteMyGiftSuccess.removeObservers(activity)
+            mProfileViewModel.mDeleteMyGiftSuccess.removeObservers(activity)*/
         }
 
         mChildViewModel.mChild.value = Child()

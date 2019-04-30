@@ -22,7 +22,7 @@ class ChildRepository @Inject constructor(retrofit: Retrofit) : BaseRepository()
         return getResponse(request)
     }
 
-    suspend fun createChild(child: Child): Result<ResponseBody> {
+    suspend fun createChild(child: Child): Result<Child> {
         val request = childApi.createChild(child)
         return getResponse(request)
     }

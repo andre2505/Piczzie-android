@@ -19,7 +19,7 @@ interface ChildApi {
     fun getChildren(): Deferred<Response<List<Child>?>>
 
     @POST("api/child")
-    fun createChild(@Body child: Child): Deferred<Response<ResponseBody?>>
+    fun createChild(@Body child: Child): Deferred<Response<Child?>>
 
     @PUT("api/child/{id}")
     fun updateChild(@Path("id") id: String, @Body child: Child): Deferred<Response<Child?>>

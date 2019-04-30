@@ -61,6 +61,7 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
             childRepository.createChild(mChild.value!!).apply {
                 when (this) {
                     is Result.Success -> {
+                        mChild.postValue(this.data)
                         mValidationSuccess.postValue(Error.NO_ERROR)
                     }
                     is Result.Error -> {
