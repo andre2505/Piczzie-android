@@ -131,5 +131,6 @@
     <string name="update_child_menu_edit">Modifier</string>
     <string name="update_child_menu_delete">Supprimer</string>
     <string name="update_child_progress">Mise à jour en cours…</string>
+    <string name="delete_child_progress">Supression en cours…</string>
 
 </resources>

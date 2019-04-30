@@ -34,6 +34,8 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
 
     val mUpdateSuccess = MutableLiveData<Error>()
 
+    val mDeleteSuccess = MutableLiveData<Error>()
+
     val mIsLoading = MutableLiveData<Boolean>()
 
     val mListGiftChild = MutableLiveData<MutableList<Gift>>()
@@ -94,7 +96,22 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
     }
 
     fun deleteChild() {
+        GlobalScope.launch(Dispatchers.IO) {
+            childRepository.deleteChild(mChild.value!!).apply {
+                when (this) {
+                    is Result.Success -> {
+                        mDeleteSuccess.postValue(Error.NO_ERROR)
+                    }
+                    is Result.Error -> {
+                        mDeleteSuccess.postValue(Error.ERROR_REQUEST)
+                    }
+                    is Result.ErrorNetwork -> {
+                        mDeleteSuccess.postValue(Error.ERROR_NETWORK)
+                    }
+                }
+            }
 
+        }
     }
 
     fun getGiftChild(id: String) {

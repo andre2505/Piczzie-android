@@ -23,4 +23,7 @@ interface ChildApi {
 
     @PUT("api/child/{id}")
     fun updateChild(@Path("id") id: String, @Body child: Child): Deferred<Response<Child?>>
+
+    @DELETE("api/child/{id}")
+    fun deleteChild(@Path("id") id: String): Deferred<Response<ResponseBody?>>
 }

@@ -31,4 +31,9 @@ class ChildRepository @Inject constructor(retrofit: Retrofit) : BaseRepository()
         val request = childApi.updateChild(child.id!!, child)
         return getResponse(request)
     }
+
+    suspend fun deleteChild(child: Child): Result<ResponseBody> {
+        val request = childApi.deleteChild(child.id!!)
+        return getResponse(request)
+    }
 }

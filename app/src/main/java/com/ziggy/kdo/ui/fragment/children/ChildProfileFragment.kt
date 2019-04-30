@@ -33,6 +33,7 @@ import com.ziggy.kdo.ui.adapter.GridImageMyGift
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 import com.ziggy.kdo.ui.fragment.profile.base.ProfileFragmentDirections
+import com.ziggy.kdo.utils.CustomDialog
 import com.ziggy.kdo.utils.SpacesItemDecoration
 
 /**
@@ -40,6 +41,10 @@ import com.ziggy.kdo.utils.SpacesItemDecoration
  *
  */
 class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
+
+    private val mDialog: Dialog by lazy {
+        CustomDialog.getDialogLoading(R.string.delete_child_progress, context)
+    }
 
     private val NUM_GRID_COLUMNS = 3
 
@@ -72,8 +77,6 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
     private var mNoMoreLoad: Boolean = false
 
     private var mView: View? = null
-
-    private var mDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,8 +112,27 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
                 }
             })
 
-        }
+            mChildViewModel.mDeleteSuccess.observe(activity, Observer { theSuccess ->
 
+                mDialog.cancel()
+                when (theSuccess) {
+                    Error.NO_ERROR -> {
+                        activity.supportFragmentManager?.popBackStack()
+                        mChildViewModel.mUpdateSuccess.value = null
+                    }
+                    Error.ERROR_REQUEST -> {
+                        Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mChildViewModel.mUpdateSuccess.value = null
+                    }
+                    Error.ERROR_NETWORK -> {
+                        Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mChildViewModel.mUpdateSuccess.value = null
+                    }
+                    else -> {
+                    }
+                }
+            })
+        }
     }
 
     override fun onCreateView(
@@ -140,6 +162,12 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
+        activity?.also {activity ->
+            mChildViewModel.mDeleteSuccess.removeObservers(activity)
+            mProfileViewModel.mUpdateMyGiftSuccess.removeObservers(activity)
+            mProfileViewModel.mDeleteMyGiftSuccess.removeObservers(activity)
+        }
+
         mChildViewModel.mChild.value = Child()
         mChildViewModel.mListGiftChild.value = mutableListOf()
     }
@@ -257,7 +285,8 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
                 activity?.invalidateOptionsMenu()
             }
             R.id.action_delete -> {
-
+                mDialog.show()
+                mChildViewModel.deleteChild()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -277,4 +306,5 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
         Navigation.findNavController(mView!!).navigate(action, transition.build())
     }
+
 }

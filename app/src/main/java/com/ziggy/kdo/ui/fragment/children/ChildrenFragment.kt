@@ -108,6 +108,17 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                 }
             })
 
+
+            mChildViewModel.mDeleteSuccess.observe(activity, Observer { theSuccess ->
+                when (theSuccess) {
+                    Error.NO_ERROR -> {
+                       mChildrenAdapter.removeChildList(mChildViewModel.mChild.value?.id)
+                    }
+                    else -> {
+                    }
+                }
+            })
+
         }
 
     }
@@ -156,6 +167,13 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         if(imm.isActive) {
             imm.hideSoftInputFromWindow(mView?.windowToken, 0)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activity?.also { theActivity ->
+           // mChildViewModel.mUpdateSuccess.removeObservers(activity)
         }
     }
 
