@@ -155,12 +155,6 @@ class ChildProfileFragment : BaseFragment(), CustomOnItemClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        activity?.also {activity ->
-            /*mChildViewModel.mDeleteSuccess.removeObservers(activity)
-            mProfileViewModel.mUpdateMyGiftSuccess.removeObservers(activity)
-            mProfileViewModel.mDeleteMyGiftSuccess.removeObservers(activity)*/
-        }
-
         mChildViewModel.mChild.value = Child()
         mChildViewModel.mListGiftChild.value = mutableListOf()
     }
