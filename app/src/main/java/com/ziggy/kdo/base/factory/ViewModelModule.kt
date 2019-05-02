@@ -7,6 +7,7 @@ import com.ziggy.kdo.ui.activity.main.MainViewModel
 import com.ziggy.kdo.ui.activity.register.RegisterViewModel
 import com.ziggy.kdo.ui.fragment.FragmentViewModel
 import com.ziggy.kdo.ui.fragment.children.ChildViewModel
+import com.ziggy.kdo.ui.fragment.friends.FriendViewModel
 import com.ziggy.kdo.ui.fragment.home.HomeViewModel
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 import com.ziggy.kdo.ui.fragment.search.SearchViewModel
@@ -56,5 +57,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ChildViewModel::class)
     abstract fun bindChildViewModel(childViewModel: ChildViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FriendViewModel::class)
+    abstract fun bindFriendViewModel(friendViewModel: FriendViewModel): ViewModel
 
 }

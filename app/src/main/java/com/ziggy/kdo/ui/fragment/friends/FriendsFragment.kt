@@ -32,6 +32,8 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
     private lateinit var mProfileViewModel: ProfileViewModel
 
+    private lateinit var mFriendViewModel: FriendViewModel
+
     private lateinit var mRecyclerView: RecyclerView
 
     private lateinit var mViewAdapter: RecyclerView.Adapter<*>
@@ -58,6 +60,38 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
     private var mFriendsList: MutableList<User> = mutableListOf()
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.also {activity ->
+
+            mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
+
+            mFriendViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(FriendViewModel::class.java)
+
+           mFriendViewModel.mDeleteFriend.observe(activity, Observer { theSuccess ->
+                mDialog?.cancel()
+                when (theSuccess) {
+                    Error.NO_ERROR -> {
+                        mSearchFriendsAdapter.removeFriendList(mUser?.id)
+                        mIsOnDeleting = true
+                        mFriendsList.remove(mUser)
+                        mProfileViewModel.mFriends.value = mFriendsList
+                        mProfileViewModel.mDeleteFriend.value = null
+                    }
+                    Error.ERROR_REQUEST -> {
+                        Toast.makeText(activity, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mProfileViewModel.mDeleteFriend.value = null
+                    }
+                    Error.ERROR_NETWORK -> {
+                        Toast.makeText(activity, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
+                        mProfileViewModel.mDeleteFriend.value = null
+                    }
+                    else -> {}
+                }
+            })
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,20 +125,11 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
                 mRecyclerView.addItemDecoration(dividerItemDecoration)
 
             }
-        }
-        return mView
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        mView?.also {
             activity?.also { activity ->
 
-                mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
+                mFriendViewModel.getFriends()
 
-                mProfileViewModel.getFriends()
-
-                mProfileViewModel.mFriends.observe(activity, Observer { theFriends ->
+                mFriendViewModel.mFriends.observe(activity, Observer { theFriends ->
                     mFriendsList = theFriends
                     if (!mIsOnDeleting) {
                         if (!mRefreshLayout.isRefreshing) {
@@ -125,29 +150,9 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
                     }
                     mIsOnDeleting = false
                 })
-
-                mProfileViewModel.mDeleteFriend.observe(activity, Observer { theSuccess ->
-                    mDialog?.cancel()
-                    when (theSuccess) {
-                        Error.NO_ERROR -> {
-                            mSearchFriendsAdapter.removeFriendList(mUser?.id)
-                            mIsOnDeleting = true
-                            mFriendsList.remove(mUser)
-                            mProfileViewModel.mFriends.value = mFriendsList
-                            mProfileViewModel.mDeleteFriend.value = null
-                        }
-                        Error.ERROR_REQUEST -> {
-                            Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
-                            mProfileViewModel.mDeleteFriend.value = null
-                        }
-                        Error.ERROR_NETWORK -> {
-                            Toast.makeText(context, R.string.network_error_no_network, Toast.LENGTH_LONG).show()
-                            mProfileViewModel.mDeleteFriend.value = null
-                        }
-                    }
-                })
             }
         }
+        return mView
     }
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
