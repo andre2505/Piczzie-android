@@ -9,4 +9,7 @@ class Token {
 
     @SerializedName("refresh_token")
     var tokenRefresh: String? = null
+
+    @SerializedName("uid")
+    var uid: String? = null
 }

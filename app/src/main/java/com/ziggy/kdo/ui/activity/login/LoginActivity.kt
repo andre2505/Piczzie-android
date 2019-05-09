@@ -52,7 +52,7 @@ class LoginActivity : BaseActivity() {
                 val token = mLoginViewModel.mToken?.token
                 val refreshToken = mLoginViewModel.mToken?.tokenRefresh
 
-                UserSession.createUserToken(this@LoginActivity, token, refreshToken)
+                UserSession.createUserToken(this@LoginActivity, token, refreshToken, mLoginViewModel.mToken?.uid)
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             }

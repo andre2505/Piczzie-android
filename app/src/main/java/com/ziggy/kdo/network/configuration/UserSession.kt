@@ -14,6 +14,8 @@ object UserSession {
 
     private const val KEY_TOKEN_REFRESH = "key_token_refresh"
 
+    private const val KEY_UID = "key_uid"
+
     private fun getSharedPreference(context: Context):SharedPreferences{
         return context.getSharedPreferences(KEY_PREFERENCE, Context.MODE_PRIVATE)
     }
@@ -28,11 +30,17 @@ object UserSession {
         return editor.getString(KEY_TOKEN_REFRESH, "")!!
     }
 
+    fun getUid(context: Context):String? {
+        val editor = getSharedPreference(context)
+        return editor.getString(KEY_TOKEN_REFRESH, "")!!
+    }
+
     @SuppressLint("ApplySharedPref")
-    fun createUserToken(context: Context, token: String?, tokenRefresh: String?) {
+    fun createUserToken(context: Context, token: String?, tokenRefresh: String?, uid: String?) {
         val editor = getSharedPreference(context).edit()
         editor.putString(KEY_TOKEN, "bearer $token")
         editor.putString(KEY_TOKEN_REFRESH, tokenRefresh)
+        editor.putString(KEY_UID, uid)
         editor.commit()
     }
 
