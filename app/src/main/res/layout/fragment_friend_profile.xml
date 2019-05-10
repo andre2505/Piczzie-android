@@ -5,8 +5,8 @@
     <data>
         <import type="android.view.View"/>
         <import type="com.ziggy.kdo.utils.ConverterDate"/>
-        <variable name="friendViewModel"
-                  type="com.ziggy.kdo.ui.fragment.friends.FriendViewModel"/>
+        <variable name="profileViewModel"
+                  type="com.ziggy.kdo.ui.fragment.profile.ProfileViewModel"/>
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:visibility="@{(friendViewModel.MLoading == true) ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{(profileViewModel.MLoading == true) ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
                 android:gravity="center"
                 android:id="@+id/linearLayout2"
                 android:background="@color/colorGrey10"
-                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
             <ImageView
                     android:id="@+id/profile_image"
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@{friendViewModel.MUser.lastname + ` ` +friendViewModel.MUser.firstname}"
+                    android:text="@{profileViewModel.MUser.lastname + ` ` +profileViewModel.MUser.firstname}"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="@{ConverterDate.DateToString(friendViewModel.MUser.birthday)}"
+                    android:text="@{ConverterDate.DateToString(profileViewModel.MUser.birthday)}"
                     android:drawableStart="@drawable/ic_cake"
                     android:drawablePadding="10dp"/>
 
@@ -74,7 +74,7 @@
                 android:orientation="horizontal"
                 android:background="@color/colorWhite"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
             <Button
                     android:id="@+id/profile_number_friends"
@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="@{(friendViewModel.MFriends.isEmpty() == false &amp;&amp; friendViewModel.MFriends.size() > 1) ? String.format(@string/profile_number_friends, friendViewModel.MFriends.size()) : String.format(@string/profile_number_no_friends, friendViewModel.MFriends.size())}"
+                    android:text="@{(profileViewModel.MFriends.isEmpty() == false &amp;&amp; profileViewModel.MFriends.size() > 1) ? String.format(@string/profile_number_friends, profileViewModel.MFriends.size()) : String.format(@string/profile_number_no_friends, profileViewModel.MFriends.size())}"
                     style="@style/ButtonProfile"/>
             <View
                     android:layout_width="1dp"
@@ -95,7 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@{(friendViewModel.MChildren.isEmpty() == false &amp;&amp; friendViewModel.MChildren.size() > 1) ? String.format(@string/profile_number_children, friendViewModel.MChildren.size()) : String.format(@string/profile_number_no_children, friendViewModel.MChildren.size())}"
+                    android:text="@{(profileViewModel.MChildren.isEmpty() == false &amp;&amp; profileViewModel.MChildren.size() > 1) ? String.format(@string/profile_number_children, profileViewModel.MChildren.size()) : String.format(@string/profile_number_no_children, profileViewModel.MChildren.size())}"
                     android:gravity="center"
                     android:layout_gravity="center"
                     style="@style/ButtonProfile"/>
@@ -111,7 +111,7 @@
                 app:tabIconTint="@color/colorGrayShadow"
                 app:tabIconTintMode="src_in"
                 android:background="@drawable/drawable_border_tab"
-                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
             <com.google.android.material.tabs.TabItem
                     android:id="@+id/profile_my_gift"
@@ -136,7 +136,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="2dp"
-                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
         </RelativeLayout>
 

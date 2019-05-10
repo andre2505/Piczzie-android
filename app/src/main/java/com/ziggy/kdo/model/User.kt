@@ -1,10 +1,11 @@
 package com.ziggy.kdo.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
-class User {
+class User: Serializable {
 
     @SerializedName("_id")
     var id: String? = null

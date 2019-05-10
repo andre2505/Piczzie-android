@@ -72,6 +72,11 @@ class FriendsAdapter(
             holder.searchRecyclerViewBinding.listItemFriendsSuppress.setOnClickListener { theButton ->
                 customOnItemClick!!.onItemClick(view = theButton, varObject = user)
             }
+
+            holder.itemView.setOnClickListener {
+                customOnItemClick!!.onItemClick(varObject = user)
+            }
+
             holder.searchRecyclerViewBinding.userModel = user
         }
     }

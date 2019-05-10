@@ -19,6 +19,8 @@ import com.google.android.material.tabs.TabLayout
 import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentProfileBinding
+import com.ziggy.kdo.model.Gift
+import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
@@ -33,6 +35,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     private val TAG_MY_GIFT = MyGiftFragment::class.java.simpleName
 
     private val TAG_MY_RESERVATION = MyReservationFragment::class.java.simpleName
+
+    private val ARGS_USER = "user"
 
     private lateinit var mProfileViewModel: ProfileViewModel
 
@@ -54,14 +58,22 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     private var mView: View? = null
 
+    private var mUser: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mFragmentMyGiftFragment = MyGiftFragment()
 
-        mProfileViewModel =
-            ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
+        mUser = arguments?.getSerializable(ARGS_USER) as? User
 
+        mUser?.let {
+            mProfileViewModel =
+                ViewModelProviders.of(this@ProfileFragment, mViewModeFactory).get(ProfileViewModel::class.java)
+        }?:kotlin.run {
+            mProfileViewModel =
+                ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
+        }
         mProfileViewModel.getGiftsUser(0, UserSession.getUid(context!!)!!)
     }
 

@@ -34,6 +34,12 @@
                 app:exitAnim="@anim/exit_to_left"
                 app:popEnterAnim="@anim/enter_from_left"
                 app:popExitAnim="@anim/exit_to_right"/>
+
+        <argument
+                android:name="user"
+                app:argType="com.ziggy.kdo.model.User"
+                android:defaultValue="@null"
+                app:nullable="true"/>
     </fragment>
 
     <fragment android:id="@+id/myGiftDetailFragment"
@@ -57,7 +63,9 @@
     <fragment android:id="@+id/friendsFragment"
               android:name="com.ziggy.kdo.ui.fragment.friends.FriendsFragment"
               android:label="FriendsFragment"
-              tools:layout="@layout/fragment_friends"/>
+              tools:layout="@layout/fragment_friends">
+        <action android:id="@+id/action_friendsFragment_to_profile2" app:destination="@id/profile"/>
+    </fragment>
 
     <fragment android:id="@+id/childrenFragment"
               android:name="com.ziggy.kdo.ui.fragment.children.ChildrenFragment"
