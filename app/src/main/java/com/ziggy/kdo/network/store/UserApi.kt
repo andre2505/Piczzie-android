@@ -26,8 +26,8 @@ interface UserApi {
     @GET("api/user/users")
     fun getSearchUser(@Query("user") search: String): Deferred<Response<List<User>?>>
 
-    @GET("api/user")
-    fun getUser(): Deferred<Response<User?>>
+    @GET("api/user/{id}")
+    fun getUser(@Path("id") id: String): Deferred<Response<User?>>
 
     @GET("api/user/friends")
     fun getFriends(): Deferred<Response<List<User>?>>

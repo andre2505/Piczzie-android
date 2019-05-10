@@ -19,6 +19,7 @@ import com.google.android.material.tabs.TabLayout
 import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentProfileBinding
+import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 
@@ -60,6 +61,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
         mProfileViewModel =
             ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
+
+        mProfileViewModel.getGiftsUser(0, UserSession.getUid(context!!)!!)
     }
 
     override fun onCreateView(

@@ -7,6 +7,7 @@ import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.Result
+import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.repository.ChildRepository
 import com.ziggy.kdo.repository.GiftRepository
 import com.ziggy.kdo.repository.UserRepository
@@ -59,10 +60,9 @@ class ProfileViewModel @Inject constructor(
         mLoadingReserved.value = false
         mError.value = false
         mGift.value = Gift()
-        getGiftsUser(0)
     }
 
-    fun getGiftsUser(offset: Int) {
+    fun getGiftsUser(offset: Int, userId: String) {
 
         mCoroutine = GlobalScope.launch(Dispatchers.IO) {
 
@@ -98,7 +98,7 @@ class ProfileViewModel @Inject constructor(
                 }
             }
 
-            userRepository.getUser().apply {
+            userRepository.getUser(userId).apply {
                 when (this) {
                     is Result.Success -> {
                         mUser.postValue(this.data)

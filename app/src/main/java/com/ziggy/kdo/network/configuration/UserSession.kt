@@ -32,7 +32,7 @@ object UserSession {
 
     fun getUid(context: Context):String? {
         val editor = getSharedPreference(context)
-        return editor.getString(KEY_TOKEN_REFRESH, "")!!
+        return editor.getString(KEY_UID, "")!!
     }
 
     @SuppressLint("ApplySharedPref")

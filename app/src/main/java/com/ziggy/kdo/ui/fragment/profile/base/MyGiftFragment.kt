@@ -18,6 +18,7 @@ import com.ziggy.kdo.R
 import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.listener.CustomOnItemClickListener
 import com.ziggy.kdo.model.Gift
+import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.adapter.GridImageMyGift
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
@@ -194,7 +195,7 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
                     if (!mNoMoreLoad && isScrolling && mTotalItemCount <= (mFirstVisibleItem + mVisibleItemCount)) {
                         isScrolling = false
                         mAdapter.addLoading()
-                        mProfileViewModel.getGiftsUser(mTotalItemCount)
+                        mProfileViewModel.getGiftsUser(mTotalItemCount, UserSession.getUid(context)!!)
                     }
                 }
 

@@ -32,8 +32,8 @@ class UserRepository @Inject constructor(retrofit: Retrofit) : BaseRepository() 
         return getResponse(userApi.getSearchUser(search))
     }
 
-    suspend fun getUser(): Result<User> {
-        return getResponse(userApi.getUser())
+    suspend fun getUser(id: String): Result<User> {
+        return getResponse(userApi.getUser(id))
     }
 
     suspend fun getFriends(): Result<List<User>> {
