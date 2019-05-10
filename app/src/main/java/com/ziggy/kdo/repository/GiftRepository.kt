@@ -41,8 +41,8 @@ class GiftRepository @Inject constructor(private val retrofit: Retrofit) : BaseR
         return getResponse(request)
     }
 
-    suspend fun getGiftsUser(offset: Int):Result<List<Gift>>{
-        val request = giftApi.getGiftsUser(offset)
+    suspend fun getGiftsUser(offset: Int, id:String):Result<List<Gift>>{
+        val request = giftApi.getGiftsUser(id, offset)
         return getResponse(request)
     }
 

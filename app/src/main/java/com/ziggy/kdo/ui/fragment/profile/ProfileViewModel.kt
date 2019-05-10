@@ -66,7 +66,7 @@ class ProfileViewModel @Inject constructor(
 
         mCoroutine = GlobalScope.launch(Dispatchers.IO) {
 
-            giftRepository.getGiftsUser(offset).apply {
+            giftRepository.getGiftsUser(offset, userId).apply {
                 when (this) {
                     is Result.Success -> {
                         mListGift.postValue(this.data as MutableList<Gift>)
