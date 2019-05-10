@@ -27,7 +27,7 @@ interface GiftApi {
     @GET("api/gift/user/{id}")
     fun getGiftsUser(@Path("id") id: String, @Query("offset") offset: Int): Deferred<Response<List<Gift>?>>
 
-    @GET("api/gift/user/reservation")
+    @GET("api/gift/reservation")
     fun getGiftsUserReservation(@Query("offset") offset: Int): Deferred<Response<List<Gift>?>>
 
     @GET("api/gift/child/{id}")
