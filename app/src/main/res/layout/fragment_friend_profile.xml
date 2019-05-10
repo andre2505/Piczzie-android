@@ -83,7 +83,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:text="@{(profileViewModel.MFriends.isEmpty() == false &amp;&amp; profileViewModel.MFriends.size() > 1) ? String.format(@string/profile_number_friends, profileViewModel.MFriends.size()) : String.format(@string/profile_number_no_friends, profileViewModel.MFriends.size())}"
+                    android:text="@{(friendViewModel.MFriends.isEmpty() == false &amp;&amp; friendViewModel.MFriends.size() > 1) ? String.format(@string/profile_number_friends, friendViewModel.MFriends.size()) : String.format(@string/profile_number_no_friends, friendViewModel.MFriends.size())}"
                     style="@style/ButtonProfile"/>
             <View
                     android:layout_width="1dp"
@@ -95,7 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@{(profileViewModel.MChildren.isEmpty() == false &amp;&amp; profileViewModel.MChildren.size() > 1) ? String.format(@string/profile_number_children, profileViewModel.MChildren.size()) : String.format(@string/profile_number_no_children, profileViewModel.MChildren.size())}"
+                    android:text="@{(friendViewModel.MChildren.isEmpty() == false &amp;&amp; friendViewModel.MChildren.size() > 1) ? String.format(@string/profile_number_children, friendViewModel.MChildren.size()) : String.format(@string/profile_number_no_children, friendViewModel.MChildren.size())}"
                     android:gravity="center"
                     android:layout_gravity="center"
                     style="@style/ButtonProfile"/>
@@ -111,7 +111,7 @@
                 app:tabIconTint="@color/colorGrayShadow"
                 app:tabIconTintMode="src_in"
                 android:background="@drawable/drawable_border_tab"
-                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
             <com.google.android.material.tabs.TabItem
                     android:id="@+id/profile_my_gift"
@@ -136,7 +136,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="2dp"
-                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
         </RelativeLayout>
 

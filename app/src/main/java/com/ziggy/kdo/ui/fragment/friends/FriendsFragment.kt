@@ -33,8 +33,6 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
     private lateinit var mProfileViewModel: ProfileViewModel
 
-    private lateinit var mFriendViewModel: FriendViewModel
-
     private lateinit var mRecyclerView: RecyclerView
 
     private lateinit var mViewAdapter: RecyclerView.Adapter<*>
@@ -68,9 +66,7 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
             mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
 
-            mFriendViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(FriendViewModel::class.java)
-
-           mFriendViewModel.mDeleteFriend.observe(activity, Observer { theSuccess ->
+            mProfileViewModel.mDeleteFriend.observe(activity, Observer { theSuccess ->
                 mDialog?.cancel()
                 when (theSuccess) {
                     Error.NO_ERROR -> {
@@ -128,9 +124,9 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
             }
             activity?.also { activity ->
 
-                mFriendViewModel.getFriends(UserSession.getUid(context!!)!!)
+                mProfileViewModel.getFriends(UserSession.getUid(context!!)!!)
 
-                mFriendViewModel.mFriends.observe(activity, Observer { theFriends ->
+                mProfileViewModel.mFriends.observe(activity, Observer { theFriends ->
                     mFriendsList = theFriends
                     if (!mIsOnDeleting) {
                         if (!mRefreshLayout.isRefreshing) {

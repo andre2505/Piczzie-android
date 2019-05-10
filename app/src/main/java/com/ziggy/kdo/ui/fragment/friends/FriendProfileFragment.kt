@@ -3,13 +3,13 @@ package com.ziggy.kdo.ui.fragment.friends
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
@@ -17,12 +17,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.tabs.TabLayout
 import com.ziggy.kdo.BuildConfig
-
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentProfileBinding
-import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.base.BaseFragment
-import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 import com.ziggy.kdo.ui.fragment.profile.base.MyGiftFragment
 import com.ziggy.kdo.ui.fragment.profile.base.MyReservationFragment
 
@@ -31,8 +28,7 @@ import com.ziggy.kdo.ui.fragment.profile.base.MyReservationFragment
  *
  */
 
-//(R.layout.fragment_friend_profile
-class FriendProfileFragment :  BaseFragment(), TabLayout.OnTabSelectedListener, View.OnClickListener {
+class FriendProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.OnClickListener {
 
     private val TAG_MY_GIFT = MyGiftFragment::class.java.simpleName
 
@@ -66,7 +62,7 @@ class FriendProfileFragment :  BaseFragment(), TabLayout.OnTabSelectedListener, 
         mFriendViewModel =
             ViewModelProviders.of(activity!!, mViewModeFactory).get(FriendViewModel::class.java)
 
-       // mFriendViewModel.getGiftsUser(0, UserSession.getUid(context!!)!!)
+       //mFriendViewModel.getGiftsUser(0, UserSession.getUid(context!!)!!)
     }
 
     override fun onCreateView(
@@ -94,10 +90,10 @@ class FriendProfileFragment :  BaseFragment(), TabLayout.OnTabSelectedListener, 
             mButtonFriends.setOnClickListener(this@FriendProfileFragment)
             mButtonChild.setOnClickListener(this@FriendProfileFragment)
 
-            mFriendProfileBinding.profileViewModel = mFriendViewModel
+           // mFriendProfileBinding.fri = mFriendViewModel
             mFriendProfileBinding.lifecycleOwner = this@FriendProfileFragment
 
-            mProfileViewModel.mUser.observe(this@FriendProfileFragment, Observer { theUser ->
+            mFriendViewModel.mUser.observe(this@FriendProfileFragment, Observer { theUser ->
 
                 val thumbnailGender: Int = if (theUser.gender == 1) {
                     R.drawable.ic_profile_man
