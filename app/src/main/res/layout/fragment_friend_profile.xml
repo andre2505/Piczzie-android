@@ -5,8 +5,8 @@
     <data>
         <import type="android.view.View"/>
         <import type="com.ziggy.kdo.utils.ConverterDate"/>
-        <variable name="profileViewModel"
-                  type="com.ziggy.kdo.ui.fragment.profile.ProfileViewModel"/>
+        <variable name="friendViewModel"
+                  type="com.ziggy.kdo.ui.fragment.friends.FriendViewModel"/>
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentStart="true"
-                android:visibility="@{(profileViewModel.MLoading == true) ? View.VISIBLE : View.INVISIBLE}"
+                android:visibility="@{(friendViewModel.MLoading == true) ? View.VISIBLE : View.INVISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +35,7 @@
                 android:gravity="center"
                 android:id="@+id/linearLayout2"
                 android:background="@color/colorGrey10"
-                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
             <ImageView
                     android:id="@+id/profile_image"
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@{profileViewModel.MUser.lastname + ` ` +profileViewModel.MUser.firstname}"
+                    android:text="@{friendViewModel.MUser.lastname + ` ` +friendViewModel.MUser.firstname}"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
                     android:textSize="16sp"/>
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:gravity="center"
-                    android:text="@{ConverterDate.DateToString(profileViewModel.MUser.birthday)}"
+                    android:text="@{ConverterDate.DateToString(friendViewModel.MUser.birthday)}"
                     android:drawableStart="@drawable/ic_cake"
                     android:drawablePadding="10dp"/>
 
@@ -74,7 +74,7 @@
                 android:orientation="horizontal"
                 android:background="@color/colorWhite"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(friendViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
 
             <Button
                     android:id="@+id/profile_number_friends"
