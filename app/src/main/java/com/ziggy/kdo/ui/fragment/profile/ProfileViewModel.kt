@@ -82,7 +82,7 @@ class ProfileViewModel @Inject constructor(
                 }
             }
 
-            childRepository.getChildren().apply {
+            childRepository.getChildren(userId).apply {
                 when (this) {
                     is Result.Success -> {
                         mChildren.postValue(this.data as MutableList<Child>)
@@ -173,9 +173,9 @@ class ProfileViewModel @Inject constructor(
     }
 
 
-    fun getFriends() {
+    fun getFriends(userId: String) {
         GlobalScope.launch(Dispatchers.IO) {
-            userRepository.getFriends().apply {
+            userRepository.getFriends(userId).apply {
                 when (this) {
                     is Result.Success -> {
                         mFriends.postValue(this.data as MutableList<User>)

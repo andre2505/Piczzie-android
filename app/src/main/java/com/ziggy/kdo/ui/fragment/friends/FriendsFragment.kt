@@ -19,6 +19,7 @@ import com.ziggy.kdo.R
 import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.listener.CustomOnItemClickListener
 import com.ziggy.kdo.model.User
+import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.adapter.FriendsAdapter
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
@@ -127,7 +128,7 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
             }
             activity?.also { activity ->
 
-                mFriendViewModel.getFriends()
+                mFriendViewModel.getFriends(UserSession.getUid(context!!)!!)
 
                 mFriendViewModel.mFriends.observe(activity, Observer { theFriends ->
                     mFriendsList = theFriends
@@ -179,7 +180,7 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
     override fun onRefresh() {
         mRefreshLayout.isRefreshing = true
-        mProfileViewModel.getFriends()
+        mProfileViewModel.getFriends(UserSession.getUid(context!!)!!)
     }
 
     private fun getDialogDeleteFriend(): Dialog? {

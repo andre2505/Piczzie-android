@@ -17,8 +17,8 @@ class ChildRepository @Inject constructor(retrofit: Retrofit) : BaseRepository()
 
     private var childApi: ChildApi = retrofit.create(ChildApi::class.java)
 
-    suspend fun getChildren(): Result<List<Child>> {
-        val request = childApi.getChildren()
+    suspend fun getChildren(id:String): Result<List<Child>> {
+        val request = childApi.getChildren(id)
         return getResponse(request)
     }
 

@@ -17,9 +17,9 @@ class FriendViewModel @Inject constructor(var userRepository: UserRepository) : 
 
     val mDeleteFriend = MutableLiveData<Error>()
 
-    fun getFriends() {
+    fun getFriends(id:String) {
         GlobalScope.launch(Dispatchers.IO) {
-            userRepository.getFriends().apply {
+            userRepository.getFriends(id).apply {
                 when (this) {
                     is Result.Success -> {
                         mFriends.postValue(this.data as MutableList<User>)

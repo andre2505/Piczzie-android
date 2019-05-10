@@ -15,8 +15,8 @@ import retrofit2.http.*
  */
 interface ChildApi {
 
-    @GET("api/child/children")
-    fun getChildren(): Deferred<Response<List<Child>?>>
+    @GET("api/child/children/{id}")
+    fun getChildren(@Path("id") id: String): Deferred<Response<List<Child>?>>
 
     @POST("api/child")
     fun createChild(@Body child: Child): Deferred<Response<Child?>>
