@@ -60,6 +60,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     private var mUser: User? = null
 
+    private lateinit var mUserId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -70,11 +72,13 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         mUser?.let {
             mProfileViewModel =
                 ViewModelProviders.of(this@ProfileFragment, mViewModeFactory).get(ProfileViewModel::class.java)
-        }?:kotlin.run {
+            mUserId = mUser?.id!!
+        } ?: kotlin.run {
             mProfileViewModel =
                 ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
+            mUserId = UserSession.getUid(context!!)!!
         }
-        mProfileViewModel.getGiftsUser(0, UserSession.getUid(context!!)!!)
+        mProfileViewModel.getGiftsUser(0, mUserId)
     }
 
     override fun onCreateView(
@@ -82,8 +86,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         savedInstanceState: Bundle?
     ): View? {
         mView?.let {
-           return mView
-        }?:kotlin.run {
+            return mView
+        } ?: kotlin.run {
             mProfileBinding =
                 DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
@@ -178,12 +182,12 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
         exitTransition = null
 
-        when(v?.id){
+        when (v?.id) {
             R.id.profile_number_friends -> {
                 Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_friendsFragment)
             }
             R.id.profile_number_children -> {
-                Navigation.findNavController(mView!!).navigate(R.id. action_profile_to_childrenFragment)
+                Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment)
             }
         }
     }
