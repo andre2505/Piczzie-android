@@ -3,12 +3,11 @@ package com.ziggy.kdo.ui.fragment.profile.base
 
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,11 +21,9 @@ import com.ziggy.kdo.databinding.FragmentProfileBinding
 import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.UserSession
+import com.ziggy.kdo.ui.activity.main.MainActivity
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
-
-
-
 
 
 /**
@@ -71,6 +68,9 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         mUser = arguments?.getSerializable(ARGS_USER) as? User
         val args = Bundle()
         mUser?.let {
+            setHasOptionsMenu(true)
+            val act = (activity as MainActivity)
+            act.mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
             args.putSerializable(ARGS_USER, mUser)
             mProfileViewModel =
@@ -153,6 +153,14 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
             isInit = true
         }
         return mView
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        mUser?.let {
+            menu?.getItem(0)?.isVisible = false
+        }
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {

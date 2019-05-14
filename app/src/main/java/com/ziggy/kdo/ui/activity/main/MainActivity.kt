@@ -99,7 +99,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
     private lateinit var mSearchView: androidx.appcompat.widget.SearchView
 
-    private lateinit var mDrawerLayout: DrawerLayout
+    lateinit var mDrawerLayout: DrawerLayout
 
     private lateinit var mNavigationView: NavigationView
 
