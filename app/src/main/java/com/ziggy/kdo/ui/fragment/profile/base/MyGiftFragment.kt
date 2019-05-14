@@ -18,6 +18,7 @@ import com.ziggy.kdo.R
 import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.listener.CustomOnItemClickListener
 import com.ziggy.kdo.model.Gift
+import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.adapter.GridImageMyGift
 import com.ziggy.kdo.ui.base.BaseFragment
@@ -33,6 +34,8 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
 
     private val NUM_GRID_COLUMNS = 3
 
+    private val ARGS_USER = "user"
+
     private lateinit var mGridView: RecyclerView
 
     private lateinit var mViewManager: RecyclerView.LayoutManager
@@ -44,6 +47,8 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
     private lateinit var mAdapter: GridImageMyGift
 
     private lateinit var mProfileViewModel: ProfileViewModel
+
+    private lateinit var mUserId: String
 
     private var mVisibleItemCount: Int = 0
 
@@ -59,6 +64,28 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
 
     private var mView: View? = null
 
+    private var mUser: User? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mUser = arguments?.getSerializable(ARGS_USER) as? User
+
+        mUser?.let {
+            mProfileViewModel =
+                ViewModelProviders.of(this@MyGiftFragment, mViewModeFactory).get(ProfileViewModel::class.java)
+            mUserId = UserSession.getUid(context!!)!!
+        } ?: kotlin.run {
+
+            mProfileViewModel =
+                ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
+            mUser?.id?.let { theId ->
+                mUserId = theId
+            }
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,8 +95,6 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
         } ?: kotlin.run {
             mView = inflater.inflate(R.layout.fragment_my_gift, container, false)
             mGridView = mView!!.findViewById(R.id.profile_my_gift_recyclerview)
-            mProfileViewModel =
-                ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
             setupGridView()
         }
         return mView
@@ -195,7 +220,7 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
                     if (!mNoMoreLoad && isScrolling && mTotalItemCount <= (mFirstVisibleItem + mVisibleItemCount)) {
                         isScrolling = false
                         mAdapter.addLoading()
-                        mProfileViewModel.getGiftsUser(mTotalItemCount, UserSession.getUid(context)!!)
+                        mProfileViewModel.getGiftsUser(mTotalItemCount, mUserId)
                     }
                 }
 

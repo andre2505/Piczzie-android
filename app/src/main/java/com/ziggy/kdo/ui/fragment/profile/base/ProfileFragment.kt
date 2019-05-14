@@ -26,6 +26,9 @@ import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 
 
+
+
+
 /**
  * A simple [Fragment] subclass.
  *
@@ -65,19 +68,24 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mFragmentMyGiftFragment = MyGiftFragment()
-
         mUser = arguments?.getSerializable(ARGS_USER) as? User
-
+        val args = Bundle()
         mUser?.let {
+
+            args.putSerializable(ARGS_USER, mUser)
             mProfileViewModel =
                 ViewModelProviders.of(this@ProfileFragment, mViewModeFactory).get(ProfileViewModel::class.java)
             mUserId = mUser?.id!!
         } ?: kotlin.run {
+
+            args.putSerializable(ARGS_USER, null)
             mProfileViewModel =
                 ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
             mUserId = UserSession.getUid(context!!)!!
         }
+
+        mFragmentMyGiftFragment = MyGiftFragment()
+        mFragmentMyGiftFragment.arguments = args
         mProfileViewModel.getGiftsUser(0, mUserId)
     }
 
