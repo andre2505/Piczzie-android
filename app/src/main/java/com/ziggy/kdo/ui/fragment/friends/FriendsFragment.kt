@@ -25,6 +25,7 @@ import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.adapter.FriendsAdapter
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
+import com.ziggy.kdo.ui.fragment.profile.base.ProfileFragment
 import com.ziggy.kdo.ui.fragment.profile.base.ProfileFragmentDirections
 
 /**
@@ -62,12 +63,18 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
     private var mFriendsList: MutableList<User> = mutableListOf()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.also { activity ->
+            val profileUser: User? = arguments?.getSerializable(ProfileFragment.ARGS_USER) as? User
 
-            mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
+            profileUser?.let {
+                mProfileViewModel = ViewModelProviders.of(this@FriendsFragment, mViewModeFactory).get(ProfileViewModel::class.java)
+                mProfileViewModel.getFriends(profileUser.id!!)
+            }?:kotlin.run {
+                mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
+                mProfileViewModel.getFriends(UserSession.getUid(context!!)!!)
+            }
 
             mProfileViewModel.mDeleteFriend.observe(activity, Observer { theSuccess ->
                 mDialog?.cancel()
@@ -128,8 +135,6 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
             }
             activity?.also { activity ->
-
-                mProfileViewModel.getFriends(UserSession.getUid(context!!)!!)
 
                 mProfileViewModel.mFriends.observe(activity, Observer { theFriends ->
                     mFriendsList = theFriends

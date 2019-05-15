@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -200,11 +201,19 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
         when (v?.id) {
             R.id.profile_number_friends -> {
-                Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_friendsFragment)
+                mUser?.let {
+                    Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_friendsFragment , bundleOf(ARGS_USER to mUser))
+                } ?: kotlin.run {
+                    Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_friendsFragment)
+                }
             }
             R.id.profile_number_children -> {
                 Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment)
             }
         }
+    }
+
+    companion object {
+        val ARGS_USER = "user"
     }
 }
