@@ -14,6 +14,7 @@ import com.ziggy.kdo.network.configuration.Result
 import com.ziggy.kdo.repository.GiftRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.launch
 
 
@@ -46,6 +47,7 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
         mChild.value = Child()
         mIsLoading.value = true
         mIsUpdateChild.value = false
+        mChildrenList.value = mutableListOf()
     }
 
     fun isChildValid() {
@@ -132,6 +134,24 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
                 }
             }
 
+        }
+    }
+
+    fun getChildren(id:String){
+        GlobalScope.launch(Dispatchers.IO) {
+            childRepository.getChildren(id).apply {
+                when (this) {
+                    is Result.Success -> {
+                        mChildrenList.postValue(this.data as MutableList<Child>)
+                    }
+                    is Result.Error -> {
+                        //mError.postValue(true)
+                    }
+                    is Result.ErrorNetwork -> {
+                        //mError.postValue(true)
+                    }
+                }
+            }
         }
     }
 

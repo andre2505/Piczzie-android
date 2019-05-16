@@ -66,6 +66,7 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.also { activity ->
+
             val profileUser: User? = arguments?.getSerializable(ProfileFragment.ARGS_USER) as? User
 
             profileUser?.let {

@@ -31,6 +31,7 @@ import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
+import com.ziggy.kdo.ui.fragment.profile.base.ProfileFragment
 
 
 /**
@@ -73,16 +74,31 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
         super.onCreate(savedInstanceState)
         activity?.also { activity ->
 
-            mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
+            mUser = arguments?.getSerializable(ProfileFragment.ARGS_USER) as User?
 
-            mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
+            mUser?.let {
+
+                mProfileViewModel =
+                    ViewModelProviders.of(this@ChildrenFragment, mViewModeFactory).get(ProfileViewModel::class.java)
+
+                mChildViewModel =
+                    ViewModelProviders.of(this@ChildrenFragment, mViewModeFactory).get(ChildViewModel::class.java)
+
+                mChildViewModel.getChildren(mUser?.id!!)
+
+            } ?: kotlin.run {
+
+                mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
+
+                mChildViewModel = ViewModelProviders.of(activity, mViewModeFactory).get(ChildViewModel::class.java)
+            }
 
             mChildViewModel.mChildrenList.observe(this@ChildrenFragment, Observer { theChildren ->
 
                 if (!::mChildrenAdapter.isInitialized) {
                     mProgressBar.visibility = View.GONE
                     mChildrenAdapter =
-                        ChildrenAdapter(theChildren as MutableList<Child>, activity, this@ChildrenFragment)
+                        ChildrenAdapter(theChildren, activity, this@ChildrenFragment)
                     mViewAdapter = mChildrenAdapter
                     mRecyclerView.adapter = mViewAdapter
 

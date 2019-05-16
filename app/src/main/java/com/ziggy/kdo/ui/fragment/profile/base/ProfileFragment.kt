@@ -19,7 +19,6 @@ import com.google.android.material.tabs.TabLayout
 import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentProfileBinding
-import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.activity.main.MainActivity
@@ -160,7 +159,7 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         mUser?.let {
-            menu?.getItem(0)?.isVisible = false
+//            menu?.getItem(0)?.isVisible = false
         }
     }
 
@@ -208,7 +207,12 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
                 }
             }
             R.id.profile_number_children -> {
-                Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment)
+
+                mUser?.let { theUser ->
+                    Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment, bundleOf(ARGS_USER to theUser))
+                } ?: kotlin.run {
+                    Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment)
+                }
             }
         }
     }
