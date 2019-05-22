@@ -14,4 +14,6 @@
     <color name="colorGrey10">#F0F0F0</color>
     <color name="whiteOpacity">#80FFFFFF</color>
     <color name="colorBlue">#2c75ff</color>
+    <color name="blueTwitter">#1dcaff</color>
+    <color name="greenTwitter">#25d366</color>
 </resources>

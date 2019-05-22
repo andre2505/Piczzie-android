@@ -65,6 +65,14 @@
                     android:drawableStart="@drawable/ic_cake"
                     android:drawablePadding="10dp"/>
 
+            <Button
+                    android:id="@+id/button_add_friend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/blueTwitter"
+                    android:background="@drawable/style_add_friend"/>
+
         </LinearLayout>
 
         <LinearLayout

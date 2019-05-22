@@ -103,6 +103,9 @@
     <string name="profile_number_my_gifts">%d\ncadeaux</string>
     <string name="profile_number_no_children">%d\nenfant</string>
     <string name="profile_number_children">%d\nenfants</string>
+    <string name="profile_add_friend_adding">+ Ajouter</string>
+    <string name="profile_add_friend_waiting">En Attente…</string>
+    <string name="profile_add_friend_is_friend">Ami</string>
 
     <!-- edit gift -->
     <string name="edit_gift_add_child">Ajouter enfant</string>
