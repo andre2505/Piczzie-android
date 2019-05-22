@@ -155,6 +155,12 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         return mView
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mUser?.let {
+            (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -201,7 +207,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         when (v?.id) {
             R.id.profile_number_friends -> {
                 mUser?.let {
-                    Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_friendsFragment , bundleOf(ARGS_USER to mUser))
+                    Navigation.findNavController(mView!!)
+                        .navigate(R.id.action_profile_to_friendsFragment, bundleOf(ARGS_USER to mUser))
                 } ?: kotlin.run {
                     Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_friendsFragment)
                 }
@@ -209,7 +216,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
             R.id.profile_number_children -> {
 
                 mUser?.let { theUser ->
-                    Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment, bundleOf(ARGS_USER to theUser))
+                    Navigation.findNavController(mView!!)
+                        .navigate(R.id.action_profile_to_childrenFragment, bundleOf(ARGS_USER to theUser))
                 } ?: kotlin.run {
                     Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment)
                 }

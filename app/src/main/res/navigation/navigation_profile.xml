@@ -64,7 +64,9 @@
               android:name="com.ziggy.kdo.ui.fragment.friends.FriendsFragment"
               android:label="FriendsFragment"
               tools:layout="@layout/fragment_friends">
-        <action android:id="@+id/action_friendsFragment_to_profile2" app:destination="@id/profile"/>
+        <action
+                android:id="@+id/action_friendsFragment_to_profile2"
+                app:destination="@id/profile"/>
     </fragment>
 
     <fragment android:id="@+id/childrenFragment"
@@ -85,7 +87,8 @@
                 app:popExitAnim="@anim/slide_down"/>
     </fragment>
 
-    <fragment android:id="@+id/addChildFragment" android:name="com.ziggy.kdo.ui.fragment.children.AddChildFragment"
+    <fragment android:id="@+id/addChildFragment"
+              android:name="com.ziggy.kdo.ui.fragment.children.AddChildFragment"
               android:label="AddChildFragment"
               tools:layout="@layout/fragment_add_child">
     </fragment>
