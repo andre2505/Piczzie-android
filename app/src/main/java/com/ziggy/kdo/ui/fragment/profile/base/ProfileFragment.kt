@@ -159,7 +159,7 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         mUser?.let {
-//            menu?.getItem(0)?.isVisible = false
+            menu?.getItem(0)?.isVisible = false
         }
     }
 

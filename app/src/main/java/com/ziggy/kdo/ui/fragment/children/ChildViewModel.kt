@@ -10,6 +10,7 @@ import android.text.method.TextKeyListener.clear
 import android.util.Log
 import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.model.Gift
+import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.Result
 import com.ziggy.kdo.repository.GiftRepository
 import kotlinx.coroutines.Dispatchers
@@ -47,7 +48,6 @@ class ChildViewModel @Inject constructor(var childRepository: ChildRepository, v
         mChild.value = Child()
         mIsLoading.value = true
         mIsUpdateChild.value = false
-        mChildrenList.value = mutableListOf()
     }
 
     fun isChildValid() {

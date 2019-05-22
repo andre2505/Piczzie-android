@@ -171,8 +171,11 @@ class ChildrenFragment : BaseFragment(), CustomOnItemClickListener, View.OnClick
                 mRecyclerView.addItemDecoration(dividerItemDecoration)
 
             }
-            this.mChildrenList = mProfileViewModel.mChildren.value
-            mChildViewModel.mChildrenList.value = mChildrenList
+
+            if(mUser == null){
+                this.mChildrenList = mProfileViewModel.mChildren.value
+                mChildViewModel.mChildrenList.value = mChildrenList
+            }
         }
 
         return mView
