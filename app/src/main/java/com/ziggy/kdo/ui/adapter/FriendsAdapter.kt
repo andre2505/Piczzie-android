@@ -17,6 +17,7 @@ import com.ziggy.kdo.listener.CustomOnItemClickListener
 import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
+import kotlinx.android.synthetic.main.list_item_friends.view.*
 
 /**
  * The class description here.
@@ -27,7 +28,8 @@ import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 class FriendsAdapter(
     private var users: MutableList<User>? = null,
     private val context: Context? = null,
-    private val customOnItemClick: CustomOnItemClickListener? = null
+    private val customOnItemClick: CustomOnItemClickListener? = null,
+    private val isUserProfil: Boolean? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class FriendsViewHolder constructor(listItemFriendsBinding: ListItemFriendsBinding) :
@@ -78,6 +80,12 @@ class FriendsAdapter(
             }
 
             holder.searchRecyclerViewBinding.userModel = user
+
+            isUserProfil?.let { theUserProfil ->
+                if (!theUserProfil) {
+                   holder.itemView.list_item_friends_suppress.visibility = View.GONE
+                }
+            }
         }
     }
 

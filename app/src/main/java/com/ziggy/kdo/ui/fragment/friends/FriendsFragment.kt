@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -63,16 +64,19 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
 
     private var mFriendsList: MutableList<User> = mutableListOf()
 
+    private var profileUser: User? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.also { activity ->
 
-            val profileUser: User? = arguments?.getSerializable(ProfileFragment.ARGS_USER) as? User
+            profileUser = arguments?.getSerializable(ProfileFragment.ARGS_USER) as? User
 
             profileUser?.let {
-                mProfileViewModel = ViewModelProviders.of(this@FriendsFragment, mViewModeFactory).get(ProfileViewModel::class.java)
-                mProfileViewModel.getFriends(profileUser.id!!)
-            }?:kotlin.run {
+                mProfileViewModel =
+                    ViewModelProviders.of(this@FriendsFragment, mViewModeFactory).get(ProfileViewModel::class.java)
+                mProfileViewModel.getFriends(profileUser?.id!!)
+            } ?: kotlin.run {
                 mProfileViewModel = ViewModelProviders.of(activity).get(ProfileViewModel::class.java)
                 mProfileViewModel.getFriends(UserSession.getUid(context!!)!!)
             }
@@ -111,10 +115,16 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
         } ?: kotlin.run {
             mView = inflater.inflate(R.layout.fragment_friends, container, false)
 
+            var deleteFriend = true
+
             mRecyclerView = mView!!.findViewById(R.id.friends_recycler)
             mProgressBar = mView!!.findViewById(R.id.friends_progressbar)
             mContentNoFriends = mView!!.findViewById(R.id.content_no_friends)
             mRefreshLayout = mView!!.findViewById(R.id.friends_swipe_refresh_layout)
+
+            profileUser?.let {
+                deleteFriend = false
+            }
 
             mRefreshLayout.setColorSchemeColors(context?.resources!!.getColor(R.color.colorAccent))
             mRefreshLayout.setOnRefreshListener(this@FriendsFragment)
@@ -143,7 +153,12 @@ class FriendsFragment : BaseFragment(), CustomOnItemClickListener, View.OnClickL
                         if (!mRefreshLayout.isRefreshing) {
                             mProgressBar.visibility = View.GONE
                             mSearchFriendsAdapter =
-                                FriendsAdapter(theFriends as MutableList<User>, activity, this@FriendsFragment)
+                                FriendsAdapter(
+                                    theFriends as MutableList<User>,
+                                    activity,
+                                    this@FriendsFragment,
+                                    deleteFriend
+                                )
                             mViewAdapter = mSearchFriendsAdapter
                             mRecyclerView.adapter = mViewAdapter
                         } else {

@@ -166,6 +166,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         super.onCreateOptionsMenu(menu, inflater)
         mUser?.let {
             menu?.getItem(0)?.isVisible = false
+        }?:kotlin.run {
+            menu?.getItem(0)?.isVisible = true
         }
     }
 
