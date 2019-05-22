@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import androidx.core.os.bundleOf
+import androidx.core.view.iterator
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
@@ -164,11 +165,13 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        mUser?.let {
-            menu?.getItem(0)?.isVisible = false
-        }?:kotlin.run {
-            menu?.getItem(0)?.isVisible = true
-        }
+       if( menu?.size()!! > 0) {
+           mUser?.let {
+               menu.getItem(0)?.isVisible = false
+           } ?: kotlin.run {
+               menu.getItem(0)?.isVisible = true
+           }
+       }
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {
