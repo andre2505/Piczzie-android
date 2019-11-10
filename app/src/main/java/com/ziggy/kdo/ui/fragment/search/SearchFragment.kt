@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -109,7 +110,7 @@ class SearchFragment : BaseFragment(), CustomOnItemClickListener {
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
         val user = varObject as User
 
-        Navigation.findNavController(mView).navigate(R.id.action_search_to_graph_profile)
+        NavHostFragment.findNavController(this).navigate(R.id.action_search_to_graph_profile, bundleOf(ARGS_USER to user))
 
     }
 }
