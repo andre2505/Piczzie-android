@@ -106,7 +106,6 @@
     <string name="profile_add_friend_adding">+ Add</string>
     <string name="profile_add_friend_waiting">Waiting…</string>
     <string name="profile_add_friend_is_friend">Friend</string>
-
     <!-- edit gift -->
     <string name="edit_gift_add_child">Add child</string>
     <string name="edit_gift_add_event">Add event</string>
@@ -135,6 +134,7 @@
     <string name="add_child_gender_girl">Girl</string>
     <string name="add_child_empty_fields">Fields are not filled</string>
     <string name="add_child_title">Add child</string>
+
     <!-- Update Child -->
     <string name="update_child_button">Update</string>
     <string name="update_child_menu_edit">Edit</string>

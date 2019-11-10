@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.ListItemSearchUserBinding
+import com.ziggy.kdo.listener.CustomOnItemClickListener
 import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 
@@ -23,7 +24,8 @@ import com.ziggy.kdo.model.User
  */
 class SearchFriendsAdapter(
     private var users: MutableList<User>? = null,
-    private val context: Context? = null
+    private val context: Context? = null,
+    private val customOnItemClick: CustomOnItemClickListener? = null
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var SearchHolder = 1
@@ -91,6 +93,10 @@ class SearchFriendsAdapter(
                     .into(holder.searchRecyclerViewBinding.listItemSearchImageProfil)
             }
             holder.searchRecyclerViewBinding.userModel = user
+
+            holder.itemView.setOnClickListener {
+                customOnItemClick?.onItemClick(view = it, varObject = user)
+            }
         }
     }
 

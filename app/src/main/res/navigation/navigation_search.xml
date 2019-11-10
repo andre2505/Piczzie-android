@@ -8,6 +8,10 @@
     <fragment android:id="@+id/search"
               android:name="com.ziggy.kdo.ui.fragment.search.SearchFragment"
               android:label="fragment_search"
-              tools:layout="@layout/fragment_search"/>
+              tools:layout="@layout/fragment_search">
+        <action android:id="@+id/action_search_to_graph_profile"
+                app:destination="@id/action_profile"/>
+    </fragment>
+    <include app:graph="@navigation/navigation_profile"/>
 
 </navigation>

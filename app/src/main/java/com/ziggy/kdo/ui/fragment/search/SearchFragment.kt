@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ziggy.kdo.R
+import com.ziggy.kdo.listener.CustomOnItemClickListener
+import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.ui.adapter.SearchFriendsAdapter
 import com.ziggy.kdo.ui.base.BaseFragment
@@ -24,7 +28,9 @@ import com.ziggy.kdo.ui.base.BaseFragment
  * A simple [Fragment] subclass.
  *
  */
-class SearchFragment : BaseFragment() {
+class SearchFragment : BaseFragment(), CustomOnItemClickListener {
+
+    private val ARGS_USER = "user"
 
     private lateinit var mSearchViewModel: SearchViewModel
 
@@ -38,14 +44,16 @@ class SearchFragment : BaseFragment() {
 
     private lateinit var mSearchFriendsAdapter: SearchFriendsAdapter
 
+    private lateinit var mView: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_search, container, false)
+        mView = inflater.inflate(R.layout.fragment_search, container, false)
 
-        mRecyclerView = view.findViewById(R.id.search_recycler)
+        mRecyclerView = mView.findViewById(R.id.search_recycler)
 
         mLinearLayoutManager = LinearLayoutManager(activity)
 
@@ -67,7 +75,7 @@ class SearchFragment : BaseFragment() {
                 mSearchViewModel.mListUser.observe(activity, Observer { theListUsers ->
                     theListUsers?.let {
                         if (!::mSearchFriendsAdapter.isInitialized) {
-                            mSearchFriendsAdapter = SearchFriendsAdapter(theListUsers, activity)
+                            mSearchFriendsAdapter = SearchFriendsAdapter(theListUsers, activity, this@SearchFragment)
                             mViewAdapter = mSearchFriendsAdapter
                             mRecyclerView.adapter = mViewAdapter
                         } else {
@@ -87,7 +95,7 @@ class SearchFragment : BaseFragment() {
                         } else {
                             val users = mutableListOf<User>()
                             users.add(User())
-                            mSearchFriendsAdapter = SearchFriendsAdapter(users)
+                            mSearchFriendsAdapter = SearchFriendsAdapter(users, activity, this@SearchFragment)
                             mViewAdapter = mSearchFriendsAdapter
                             mRecyclerView.adapter = mViewAdapter
                         }
@@ -95,8 +103,13 @@ class SearchFragment : BaseFragment() {
                 })
             }
         }
-        return view
+        return mView
     }
 
+    override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
+        val user = varObject as User
 
+        Navigation.findNavController(mView).navigate(R.id.action_search_to_graph_profile)
+
+    }
 }
