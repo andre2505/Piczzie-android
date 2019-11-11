@@ -92,11 +92,12 @@ class SearchFriendsAdapter(
                     )
                     .into(holder.searchRecyclerViewBinding.listItemSearchImageProfil)
             }
-            holder.searchRecyclerViewBinding.userModel = user
 
             holder.itemView.setOnClickListener {
                 customOnItemClick?.onItemClick(view = it, varObject = user)
             }
+
+            holder.searchRecyclerViewBinding.userModel = user
         }
     }
 

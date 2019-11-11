@@ -22,7 +22,6 @@
         <action android:id="@+id/action_profile_to_friendsFragment"
                 app:destination="@id/friendsFragment"
                 app:popUpTo="@id/profile"
-                app:popUpToInclusive="false"
                 app:enterAnim="@anim/enter_from_right"
                 app:exitAnim="@anim/exit_to_left"
                 app:popEnterAnim="@anim/enter_from_left"

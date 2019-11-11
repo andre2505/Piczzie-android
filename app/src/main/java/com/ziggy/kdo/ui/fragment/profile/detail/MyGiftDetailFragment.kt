@@ -122,7 +122,7 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         if (mProfilViewModel.mUpdateGift.value == false) {
             inflater?.inflate(R.menu.menu_gift_detail, menu)
@@ -131,7 +131,7 @@ class MyGiftDetailFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item?.itemId) {
             R.id.action_edit -> {

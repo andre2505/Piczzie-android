@@ -37,16 +37,6 @@ class CustomNavigator(
         }
     }
 
-    override fun onBackPressAdded() {
-        super.onBackPressAdded()
-        manager.addOnBackStackChangedListener(onBackStackChangedListener)
-    }
-
-    override fun onBackPressRemoved() {
-        super.onBackPressRemoved()
-        manager.removeOnBackStackChangedListener(onBackStackChangedListener)
-    }
-
     override fun navigate(
         destination: Destination,
         args: Bundle?,

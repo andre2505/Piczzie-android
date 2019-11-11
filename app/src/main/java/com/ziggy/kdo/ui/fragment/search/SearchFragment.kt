@@ -45,63 +45,67 @@ class SearchFragment : BaseFragment(), CustomOnItemClickListener {
 
     private lateinit var mSearchFriendsAdapter: SearchFriendsAdapter
 
-    private lateinit var mView: View
+    private var mView: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mView?.let {
+            return mView
+        } ?: kotlin.run {
+            mView = inflater.inflate(R.layout.fragment_search, container, false)
 
-        mView = inflater.inflate(R.layout.fragment_search, container, false)
+            mRecyclerView = mView!!.findViewById(R.id.search_recycler)
 
-        mRecyclerView = mView.findViewById(R.id.search_recycler)
+            mLinearLayoutManager = LinearLayoutManager(activity)
 
-        mLinearLayoutManager = LinearLayoutManager(activity)
+            mViewManager = mLinearLayoutManager
 
-        mViewManager = mLinearLayoutManager
+            mRecyclerView.apply {
+                setHasFixedSize(true)
+                layoutManager = mViewManager
 
-        mRecyclerView.apply {
-            setHasFixedSize(true)
-            layoutManager = mViewManager
+                val dividerItemDecoration = DividerItemDecoration(
+                    context,
+                    mLinearLayoutManager.orientation
+                )
+                mRecyclerView.addItemDecoration(dividerItemDecoration)
 
-            val dividerItemDecoration = DividerItemDecoration(
-                context,
-                mLinearLayoutManager.orientation
-            )
-            mRecyclerView.addItemDecoration(dividerItemDecoration)
+                activity?.also { activity ->
 
-            activity?.also { activity ->
-
-                mSearchViewModel = ViewModelProviders.of(activity).get(SearchViewModel::class.java)
-                mSearchViewModel.mListUser.observe(activity, Observer { theListUsers ->
-                    theListUsers?.let {
-                        if (!::mSearchFriendsAdapter.isInitialized) {
-                            mSearchFriendsAdapter = SearchFriendsAdapter(theListUsers, activity, this@SearchFragment)
-                            mViewAdapter = mSearchFriendsAdapter
-                            mRecyclerView.adapter = mViewAdapter
-                        } else {
-                            mSearchFriendsAdapter.updateUsers(theListUsers)
-                        }
-                    }
-                })
-
-                mSearchViewModel.mIsLoading.observe(activity, Observer { theLoading ->
-                    if (theLoading) {
-                        if (::mSearchFriendsAdapter.isInitialized) {
-                            if (mSearchFriendsAdapter.getLastItem() != null && mSearchFriendsAdapter.getLastItem()?.id != null) {
-                                mSearchFriendsAdapter.addLoading()
+                    mSearchViewModel = ViewModelProviders.of(activity).get(SearchViewModel::class.java)
+                    mSearchViewModel.mListUser.observe(activity, Observer { theListUsers ->
+                        theListUsers?.let {
+                            if (!::mSearchFriendsAdapter.isInitialized) {
+                                mSearchFriendsAdapter =
+                                    SearchFriendsAdapter(theListUsers, activity, this@SearchFragment)
+                                mViewAdapter = mSearchFriendsAdapter
+                                mRecyclerView.adapter = mViewAdapter
                             } else {
-                                mSearchFriendsAdapter.addLoadingBeginning()
+                                mSearchFriendsAdapter.updateUsers(theListUsers)
                             }
-                        } else {
-                            val users = mutableListOf<User>()
-                            users.add(User())
-                            mSearchFriendsAdapter = SearchFriendsAdapter(users, activity, this@SearchFragment)
-                            mViewAdapter = mSearchFriendsAdapter
-                            mRecyclerView.adapter = mViewAdapter
                         }
-                    }
-                })
+                    })
+
+                    mSearchViewModel.mIsLoading.observe(activity, Observer { theLoading ->
+                        if (theLoading) {
+                            if (::mSearchFriendsAdapter.isInitialized) {
+                                if (mSearchFriendsAdapter.getLastItem() != null && mSearchFriendsAdapter.getLastItem()?.id != null) {
+                                    mSearchFriendsAdapter.addLoading()
+                                } else {
+                                    mSearchFriendsAdapter.addLoadingBeginning()
+                                }
+                            } else {
+                                val users = mutableListOf<User>()
+                                users.add(User())
+                                mSearchFriendsAdapter = SearchFriendsAdapter(users, activity, this@SearchFragment)
+                                mViewAdapter = mSearchFriendsAdapter
+                                mRecyclerView.adapter = mViewAdapter
+                            }
+                        }
+                    })
+                }
             }
         }
         return mView
@@ -110,7 +114,8 @@ class SearchFragment : BaseFragment(), CustomOnItemClickListener {
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
         val user = varObject as User
 
-        NavHostFragment.findNavController(this).navigate(R.id.action_search_to_graph_profile, bundleOf(ARGS_USER to user))
+        Navigation.findNavController(view!!).navigate(R.id.action_searchFragment_to_action_profile, bundleOf(ARGS_USER to user))
 
     }
+
 }

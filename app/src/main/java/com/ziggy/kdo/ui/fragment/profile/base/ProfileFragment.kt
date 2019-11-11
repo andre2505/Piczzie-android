@@ -163,7 +163,7 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
        if( menu?.size()!! > 0) {
            mUser?.let {
