@@ -52,6 +52,8 @@ class ProfileViewModel @Inject constructor(
 
     var mFriends = MutableLiveData<MutableList<User>>()
 
+    var mStatutFriends = MutableLiveData<Int>()
+
     lateinit var mCoroutine: Job
 
     init {

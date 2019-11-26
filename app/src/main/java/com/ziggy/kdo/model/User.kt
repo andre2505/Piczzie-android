@@ -36,4 +36,7 @@ class User: Serializable {
 
     @SerializedName("state")
     var state: Int? = null
+
+    @SerializedName("friends_id")
+    var friendID: String? = null
 }

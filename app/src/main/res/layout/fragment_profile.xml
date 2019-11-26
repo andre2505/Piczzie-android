@@ -74,7 +74,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/blueTwitter"
-                    android:text=""
+                    android:text="@{(profileViewModel.MStatutFriends == 1) ? @string/profile_add_friend_waiting : (profileViewModel.MStatutFriends == 2) ? @string/profile_add_friend_is_friend : @string/profile_add_friend_adding }"
                     android:background="@drawable/style_add_friend"/>
 
         </LinearLayout>

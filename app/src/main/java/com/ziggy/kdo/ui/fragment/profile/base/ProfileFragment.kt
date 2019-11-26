@@ -3,6 +3,7 @@ package com.ziggy.kdo.ui.fragment.profile.base
 
 import android.graphics.PorterDuff
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -136,8 +137,19 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
                         )
                         .thumbnail(Glide.with(mPhotoProfil).load(thumbnailGender))
                         .into(mPhotoProfil)
+
+                    //uid in list friend
+                    run loop@{
+                        theUser.friends?.forEach { theFriends ->
+                            if (theFriends.friendID == UserSession.getUid(context!!)) {
+                                mProfileViewModel.mStatutFriends.value = theFriends.state
+                                return@loop
+                            }
+                        }
+                    }
                 }
             })
+
 
             //configure first child
             mTab.addOnTabSelectedListener(this@ProfileFragment)
@@ -165,13 +177,13 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-       if( menu?.size()!! > 0) {
-           mUser?.let {
-               menu.getItem(0)?.isVisible = false
-           } ?: kotlin.run {
-               menu.getItem(0)?.isVisible = true
-           }
-       }
+        if (menu?.size()!! > 0) {
+            mUser?.let {
+                menu.getItem(0)?.isVisible = false
+            } ?: kotlin.run {
+                menu.getItem(0)?.isVisible = true
+            }
+        }
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {

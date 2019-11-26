@@ -104,7 +104,7 @@
     <string name="profile_number_no_children">%d\nchild</string>
     <string name="profile_number_children">%d\nchidlren</string>
     <string name="profile_add_friend_adding">+ Add</string>
-    <string name="profile_add_friend_waiting">Waiting…</string>
+    <string name="profile_add_friend_waiting">Waiting</string>
     <string name="profile_add_friend_is_friend">Friend</string>
     <!-- edit gift -->
     <string name="edit_gift_add_child">Add child</string>
