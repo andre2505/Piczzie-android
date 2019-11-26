@@ -35,7 +35,10 @@
                 android:gravity="center"
                 android:id="@+id/linearLayout2"
                 android:background="@color/colorGrey10"
-                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}">
+                android:visibility="@{(profileViewModel.MLoading == false) ? View.VISIBLE : View.INVISIBLE}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
                     android:id="@+id/profile_image"

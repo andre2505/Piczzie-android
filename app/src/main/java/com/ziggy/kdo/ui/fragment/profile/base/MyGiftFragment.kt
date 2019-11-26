@@ -91,7 +91,7 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         mView?.let {
-            return mView
+            (mView?.parent as ViewGroup).removeView(mView)
         } ?: kotlin.run {
             mView = inflater.inflate(R.layout.fragment_my_gift, container, false)
             mGridView = mView!!.findViewById(R.id.profile_my_gift_recyclerview)

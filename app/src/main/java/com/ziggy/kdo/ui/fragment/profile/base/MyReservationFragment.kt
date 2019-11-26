@@ -67,7 +67,7 @@ class MyReservationFragment : BaseFragment(), CustomOnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         mView?.let { theView ->
-            return mView
+            (mView?.parent as ViewGroup).removeView(mView)
         } ?: kotlin.run {
             mView = inflater.inflate(R.layout.fragment_my_reservation, container, false)
             mGridView = mView!!.findViewById(R.id.profile_my_reservation_recyclerview)
