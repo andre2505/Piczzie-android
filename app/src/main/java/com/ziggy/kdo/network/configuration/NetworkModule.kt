@@ -39,6 +39,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient.Builder, application: Application): Retrofit {
 
         val retrofitBuilder = Retrofit.Builder()
