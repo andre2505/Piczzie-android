@@ -177,11 +177,11 @@ class GalleryFragment : Fragment(), CustomOnItemClickListener {
             )
 
 
-            columnIndexData = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
-            cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
+            columnIndexData = cursor?.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
+            cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME)
 
-            while (cursor.moveToNext()) {
-                absolutePathOfImage = cursor.getString(columnIndexData)
+            while (cursor!!.moveToNext()) {
+                absolutePathOfImage = cursor.getString(columnIndexData!!)
 
                 listOfAllImages.add(absolutePathOfImage)
             }

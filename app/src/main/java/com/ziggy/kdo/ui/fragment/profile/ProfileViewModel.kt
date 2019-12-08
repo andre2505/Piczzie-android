@@ -210,4 +210,23 @@ class ProfileViewModel @Inject constructor(
             }
         }
     }
+
+    fun updateFriend(userId: String?, friendId: String?, state: Int?) {
+        GlobalScope.launch(Dispatchers.IO) {
+            userRepository.updatefriends(userId, friendId, state).apply {
+                when (this) {
+                    is Result.Success -> {
+                        mStatutFriends.postValue(state)
+                        mDeleteFriend.postValue(Error.NO_ERROR)
+                    }
+                    is Result.Error -> {
+                        mDeleteFriend.postValue(Error.ERROR_REQUEST)
+                    }
+                    is Result.ErrorNetwork -> {
+                        mDeleteFriend.postValue(Error.ERROR_NETWORK)
+                    }
+                }
+            }
+        }
+    }
 }

@@ -106,6 +106,9 @@
     <string name="profile_add_friend_adding">+ Ajouter</string>
     <string name="profile_add_friend_waiting">En Attente…</string>
     <string name="profile_add_friend_is_friend">Ami</string>
+    <string name="profile_add_friend_accepted_friend">Accepter</string>
+    <string name="profile_add_friend_refused_friend">Refuser</string>
+    <string name="profile_remove_friend">Retirer</string>
 
     <!-- edit gift -->
     <string name="edit_gift_add_child">Ajouter enfant</string>

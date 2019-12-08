@@ -40,6 +40,14 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     private val ARGS_USER = "user"
 
+    private val FRIEND_ADD: Int = 0
+
+    private val FRIEND_WAIT: Int = 1
+
+    private val FRIEND_ACCEPT: Int = 2
+
+    private val FRIEND_REFUSE: Int = 4
+
     private lateinit var mProfileViewModel: ProfileViewModel
 
     private lateinit var mTab: TabLayout
@@ -53,6 +61,8 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
     private lateinit var mButtonFriends: Button
 
     private lateinit var mButtonChild: Button
+
+    private lateinit var buttonAddFriend: Button
 
     private var mFragmentMyReservationFragment: MyReservationFragment? = null
 
@@ -111,10 +121,12 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
             //Button
             mButtonFriends = mView!!.findViewById(R.id.profile_number_friends)
             mButtonChild = mView!!.findViewById(R.id.profile_number_children)
+            buttonAddFriend = mView!!.findViewById(R.id.button_add_friend)
 
             //Clicklistener
             mButtonFriends.setOnClickListener(this@ProfileFragment)
             mButtonChild.setOnClickListener(this@ProfileFragment)
+            buttonAddFriend.setOnClickListener(this@ProfileFragment)
 
             mProfileBinding.profileViewModel = mProfileViewModel
             mProfileBinding.lifecycleOwner = this@ProfileFragment
@@ -239,6 +251,35 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
                     Navigation.findNavController(mView!!).navigate(R.id.action_profile_to_childrenFragment)
                 }
             }
+            R.id.button_add_friend -> {
+                when (mProfileViewModel.mStatutFriends.value) {
+                    FRIEND_ADD -> {
+                        updateStateFriends(FRIEND_REFUSE)
+                    }
+                    FRIEND_WAIT -> {
+                        updateStateFriends(FRIEND_ACCEPT)
+                    }
+                    FRIEND_ACCEPT -> {
+                        updateStateFriends(FRIEND_REFUSE)
+                    }
+                    else -> {
+                        updateStateFriends(FRIEND_ADD)
+                    }
+                }
+            }
+            R.id.button_refuse_friend -> {
+                updateStateFriends(FRIEND_REFUSE)
+            }
+        }
+    }
+
+    private fun updateStateFriends(state: Int?) {
+        mUser?.let {
+            mProfileViewModel.updateFriend(
+                mUser?.id!!,
+                UserSession.getUid(context!!)!!,
+                state
+            )
         }
     }
 

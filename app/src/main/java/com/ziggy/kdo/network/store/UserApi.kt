@@ -34,4 +34,8 @@ interface UserApi {
 
     @DELETE("api/user/friends/{id}")
     fun deleteFriend(@Path("id") userId: String): Deferred<Response<ResponseBody?>>
+
+    @PUT("api/user/friends")
+    @FormUrlEncoded
+    fun updateFriend(@Field("user_id") userId: String?, @Field("friends_id") friendId: String?, @Field("state") state: Int?): Deferred<Response<List<User>?>>
 }

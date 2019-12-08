@@ -106,6 +106,10 @@
     <string name="profile_add_friend_adding">+ Add</string>
     <string name="profile_add_friend_waiting">Waiting</string>
     <string name="profile_add_friend_is_friend">Friend</string>
+    <string name="profile_add_friend_accepted_friend">Accept</string>
+    <string name="profile_add_friend_refused_friend">Refuse</string>
+    <string name="profile_remove_friend">Remove</string>
+
     <!-- edit gift -->
     <string name="edit_gift_add_child">Add child</string>
     <string name="edit_gift_add_event">Add event</string>

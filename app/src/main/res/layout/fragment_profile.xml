@@ -68,15 +68,35 @@
                     android:drawableStart="@drawable/ic_cake"
                     android:drawablePadding="10dp"/>
 
-            <Button
-                    android:id="@+id/button_add_friend"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/blueTwitter"
-                    android:text="@{(profileViewModel.MStatutFriends == 1) ? @string/profile_add_friend_waiting : (profileViewModel.MStatutFriends == 2) ? @string/profile_add_friend_is_friend : @string/profile_add_friend_adding }"
-                    android:background="@drawable/style_add_friend"/>
+            <LinearLayout android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:orientation="horizontal"
+                          android:layout_gravity="center_horizontal">
 
+
+                <Button
+                        android:id="@+id/button_add_friend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/blueTwitter"
+                        android:text="@{(profileViewModel.MStatutFriends == 0) ? @string/profile_remove_friend: (profileViewModel.MStatutFriends == 1)  ? @string/profile_add_friend_accepted_friend : (profileViewModel.MStatutFriends == 2) ? @string/profile_add_friend_is_friend : @string/profile_add_friend_adding }"
+                        android:background="@drawable/style_add_friend"/>
+                <View
+                        android:layout_width="10dp"
+                        android:layout_height="30dp"
+                        android:visibility="@{(profileViewModel.MStatutFriends == 1) ? View.VISIBLE:View.GONE }"/>
+
+                <Button
+                        android:id="@+id/button_refuse_friend"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorWhite"
+                        android:text="@string/profile_add_friend_refused_friend"
+                        android:background="@drawable/style_refuse_firend"
+                        android:visibility="@{(profileViewModel.MStatutFriends == 1) ? View.VISIBLE:View.GONE }"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
