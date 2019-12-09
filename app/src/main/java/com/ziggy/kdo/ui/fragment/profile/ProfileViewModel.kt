@@ -104,7 +104,10 @@ class ProfileViewModel @Inject constructor(
                 when (this) {
                     is Result.Success -> {
                         mUser.postValue(this.data)
-                        mFriends.postValue(this.data?.friends as MutableList<User>)
+                        val frienList = this.data?.friends?.filter { month ->
+                            month.state == 3
+                        }
+                        mFriends.postValue(frienList as MutableList<User>)
                         mLoading.postValue(false)
                     }
                     is Result.Error -> {

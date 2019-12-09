@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.core.os.bundleOf
 import androidx.core.view.iterator
 import androidx.databinding.DataBindingUtil
@@ -40,11 +41,11 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     private val ARGS_USER = "user"
 
-    private val FRIEND_ADD: Int = 0
+    private val FRIEND_ADD: Int = 1
 
-    private val FRIEND_WAIT: Int = 1
+    private val FRIEND_WAIT: Int = 2
 
-    private val FRIEND_ACCEPT: Int = 2
+    private val FRIEND_ACCEPT: Int = 3
 
     private val FRIEND_REFUSE: Int = 4
 
@@ -123,6 +124,7 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
             mButtonChild = mView!!.findViewById(R.id.profile_number_children)
             buttonAddFriend = mView!!.findViewById(R.id.button_add_friend)
 
+
             //Clicklistener
             mButtonFriends.setOnClickListener(this@ProfileFragment)
             mButtonChild.setOnClickListener(this@ProfileFragment)
@@ -130,6 +132,12 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
             mProfileBinding.profileViewModel = mProfileViewModel
             mProfileBinding.lifecycleOwner = this@ProfileFragment
+
+            //Button is gone on profile user
+            if (mUserId == UserSession.getUid(context!!)) {
+                val content: LinearLayout = mView!!.findViewById(R.id.content_button_add_friend)
+                content.visibility = View.GONE
+            }
 
             mProfileViewModel.mUser.observe(this@ProfileFragment, Observer { theUser ->
 
