@@ -103,6 +103,9 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        if(mUser == null) {
+            mUserId = UserSession.getUid(context!!)!!
+        }
 
         //Observe update Gift()
         mProfileViewModel.mUpdateMyGiftSuccess.observe(activity!!, Observer { theSuccess ->

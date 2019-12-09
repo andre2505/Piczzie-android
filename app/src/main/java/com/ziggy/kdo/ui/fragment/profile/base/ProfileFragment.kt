@@ -29,6 +29,9 @@ import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 
 
+
+
+
 /**
  * A simple [Fragment] subclass.
  *
@@ -177,10 +180,6 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
             if (!isInit) {
                 val ft = childFragmentManager.beginTransaction()
                 ft.add(R.id.profile_container_recycler, mFragmentMyGiftFragment, TAG_MY_GIFT)
-                ft.commit()
-            } else {
-                val ft = childFragmentManager.beginTransaction()
-                ft.show(childFragmentManager.findFragmentByTag(TAG_MY_GIFT)!!)
                 ft.commit()
             }
             isInit = true
