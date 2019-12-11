@@ -1,21 +1,15 @@
 package com.ziggy.kdo.ui.activity.login
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.ActivityManager
-import android.app.Application
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.ActivityLoginBinding
@@ -23,16 +17,17 @@ import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.activity.main.MainActivity
 import com.ziggy.kdo.ui.activity.register.RegisterActivity
 import com.ziggy.kdo.ui.base.BaseActivity
-import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_login.*
-import javax.inject.Inject
+import java.util.concurrent.Executor
 
-@Suppress("DEPRECATION")
 class LoginActivity : BaseActivity() {
 
     lateinit var mLoginBinding: ActivityLoginBinding
 
     lateinit var mLoginViewModel: LoginViewModel
+
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +38,7 @@ class LoginActivity : BaseActivity() {
 
         //LiveData with Binding
         mLoginBinding.loginViewModel = mLoginViewModel
-        mLoginBinding.setLifecycleOwner(this@LoginActivity)
+        mLoginBinding.lifecycleOwner = this@LoginActivity
 
         //Observe identification
         mLoginViewModel.mSucessAuthenticated.observe(this, Observer {
@@ -57,9 +52,45 @@ class LoginActivity : BaseActivity() {
                 finish()
             }
             if (it == false) {
-                RegisterActivity.newInstance(this@LoginActivity)
+               Toast.makeText(this, R.string.network_error_return, Toast.LENGTH_LONG).show()
             }
         })
+
+        executor = ContextCompat.getMainExecutor(this)
+        biometricPrompt = BiometricPrompt(this, executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int,
+                                                   errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+                    Toast.makeText(applicationContext,
+                        "Authentication error: $errString", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onAuthenticationSucceeded(
+                    result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    Toast.makeText(applicationContext,
+                        "Authentication succeeded!", Toast.LENGTH_SHORT)
+                        .show()
+                }
+
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(applicationContext, "Authentication failed",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Biometric login for my app")
+            .setSubtitle("Log in using your biometric credential")
+            .setNegativeButtonText("Use account password")
+            .build()
+
+
+
     }
 
     fun toRegister(view: View) {

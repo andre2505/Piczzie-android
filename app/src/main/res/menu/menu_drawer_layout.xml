@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group>
-        <item android:id="@+id/nav_item_one"
-              android:title="Item 1"/>
-        <item android:id="@+id/nav_item_two"
-              android:title="Item 2"/>
-        <item android:id="@+id/nav_item_three"
-              android:title="Item 3"/>
+        <item android:id="@+id/nav_edit_profile"
+              android:title="@string/drawer_edit_profile"
+              android:icon="@drawable/ic_profile"/>
+        <item android:id="@+id/nav_edit_password"
+              android:title="@string/drawer_edit_password"
+              android:icon="@drawable/ic_login_password_unselected"/>
+        <item android:id="@+id/nav_notification"
+              android:title="@string/drawer_setting_notification"
+              android:icon="@drawable/ic_notification"/>
     </group>
-
-    <group android:id="@+id/group_menu">
-        <item android:id="@+id/nav_item_four"
-              android:title="Item 4"/>
-        <item android:id="@+id/nav_item_five"
-              android:title="Item 5"/>
+    <group>
+        <item android:id="@+id/nav_about"
+              android:title="@string/drawer_about"/>
+        <item android:id="@+id/nav_disconect"
+              android:title="@string/drawer"/>
     </group>
-
-    <item android:title="Title 1">
-        <menu>
-            <item android:id="@+id/nav_item_six"
-                  android:title="Item 6"/>
-            <item android:id="@+id/nav_item_seven"
-                  android:title="Item 7"/>
-        </menu>
-    </item>
 </menu>

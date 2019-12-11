@@ -24,7 +24,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.ziggy.kdo.R
@@ -86,6 +89,8 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     private lateinit var mLabelFragment: String
 
     private lateinit var mSearchView: androidx.appcompat.widget.SearchView
+
+    private lateinit var appBarConfig: AppBarConfiguration
 
     lateinit var mDrawerLayout: DrawerLayout
 
@@ -184,7 +189,10 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
-            NavigationUI.setupActionBarWithNavController(this, navController)
+            NavigationUI.setupActionBarWithNavController(
+                this,
+                navController
+            )
             navController.addOnDestinationChangedListener(this)
         })
         currentNavController = controller
@@ -294,7 +302,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-
+        currentNavController?.value!!.navigate(R.id.friendsFragment)
         return true
     }
 
@@ -326,7 +334,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.value?.navigateUp() ?: false
+        return currentNavController?.value?.navigateUp() ?: currentNavController?.value!!.navigateUp(appBarConfig)
     }
 
 

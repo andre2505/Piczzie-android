@@ -146,4 +146,11 @@
     <string name="update_child_progress">Update in progress…</string>
     <string name="delete_child_progress">deltion in progress…</string>
 
+   <!-- Drawer Layout -->
+    <string name="drawer_edit_profile">Edit profile</string>
+    <string name="drawer_edit_password">Edit password</string>
+    <string name="drawer_setting_notification">Notification</string>
+    <string name="drawer_about">About us</string>
+    <string name="drawer">Log out</string>
+
 </resources>

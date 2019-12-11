@@ -137,7 +137,6 @@ fun BottomNavigationView.setupWithNavController(
         if (!isOnFirstFragment && !fragmentManager.isOnBackStack(firstFragmentTag)) {
             this.selectedItemId = firstFragmentGraphId
         }
-        Log.e("SELECTEDBACKSTACK", "ISOK")
         // Reset the graph if the currentDestination is not valid (happens when the back
         // stack is popped after using the back button).
         selectedNavController.value?.let { controller ->
