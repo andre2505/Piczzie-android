@@ -94,4 +94,11 @@
         <item name="android:backgroundTint">@color/colorWhite</item>
         <item name="android:colorControlActivated">@color/colorWhite</item>
     </style>
+
+
+    <style name="NavigationDrawerStyle">
+
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>

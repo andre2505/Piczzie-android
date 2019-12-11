@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group>
+    <group android:id="@+id/group_menu">
         <item android:id="@+id/nav_edit_profile"
               android:title="@string/drawer_edit_profile"
               android:icon="@drawable/ic_profile"/>
@@ -13,8 +13,11 @@
     </group>
     <group>
         <item android:id="@+id/nav_about"
-              android:title="@string/drawer_about"/>
+              android:title="@string/drawer_about"
+              android:icon="@drawable/ic_info_outline_black"/>
         <item android:id="@+id/nav_disconect"
-              android:title="@string/drawer"/>
+              android:title="@string/drawer"
+              android:icon="@drawable/ic_exit_to_app_black"
+              android:textSize="25sp"/>
     </group>
 </menu>
