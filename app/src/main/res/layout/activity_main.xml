@@ -79,5 +79,7 @@
             android:fitsSystemWindows="true"
             app:menu="@menu/menu_drawer_layout"
             app:theme="@style/NavigationDrawerStyle"
+            android:background="@color/colorWhite"
+            app:itemBackground="@drawable/ripple_navigation_effect"
             app:headerLayout="@layout/view_header_drawer_layout"/>
 </androidx.drawerlayout.widget.DrawerLayout>

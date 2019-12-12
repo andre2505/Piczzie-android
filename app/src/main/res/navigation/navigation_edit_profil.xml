@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_edit_profile"
+            app:startDestination="@id/editProfilFragment">
+
+
+    <fragment android:id="@+id/editProfilFragment"
+              android:name="com.ziggy.kdo.ui.fragment.settings.EditProfilFragment"
+              android:label="fragment_edit_profil"
+              tools:layout="@layout/fragment_edit_profil"/>
+
+</navigation>

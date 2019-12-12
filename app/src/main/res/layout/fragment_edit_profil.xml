@@ -5,6 +5,11 @@
              android:layout_height="match_parent"
              tools:context=".ui.fragment.settings.EditProfilFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/edit_profile_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

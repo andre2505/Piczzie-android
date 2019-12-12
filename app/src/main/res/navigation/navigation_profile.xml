@@ -39,7 +39,9 @@
                 app:argType="com.ziggy.kdo.model.User"
                 android:defaultValue="@null"
                 app:nullable="true"/>
-        
+        <action android:id="@+id/action_profile_to_navigation_setting"
+                app:destination="@id/navigation_edit_profile"/>
+
 
     </fragment>
 
@@ -108,5 +110,5 @@
               android:name="com.ziggy.kdo.ui.fragment.children.UpdateChildFragment"
               android:label="UpdateChildFragment"
               tools:layout="@layout/fragment_update_child"/>
-    <include app:graph="@navigation/navigation_settings"/>
+    <include app:graph="@navigation/navigation_edit_profil"/>
 </navigation>
