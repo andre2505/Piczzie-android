@@ -25,10 +25,6 @@ class LoginActivity : BaseActivity() {
 
     lateinit var mLoginViewModel: LoginViewModel
 
-    private lateinit var executor: Executor
-    private lateinit var biometricPrompt: BiometricPrompt
-    private lateinit var promptInfo: BiometricPrompt.PromptInfo
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,53 +40,32 @@ class LoginActivity : BaseActivity() {
         mLoginViewModel.mSucessAuthenticated.observe(this, Observer {
             if (it == true) {
 
-                val token = mLoginViewModel.mToken?.token
-                val refreshToken = mLoginViewModel.mToken?.tokenRefresh
+                val token = mLoginViewModel.mUserLogin.value?.token
+                val refreshToken = mLoginViewModel.mUserLogin.value?.tokenRefresh
+                val id = mLoginViewModel.mUserLogin.value?.id
+                val mail = mLoginViewModel.mUserLogin.value?.email
+                val firstname = mLoginViewModel.mUserLogin.value?.firstname
+                val lastname = mLoginViewModel.mUserLogin.value?.lastname
+                val photo = mLoginViewModel.mUserLogin.value?.photo
 
-                UserSession.createUserToken(this@LoginActivity, token, refreshToken, mLoginViewModel.mToken?.uid)
+                UserSession.createUserToken(
+                    this@LoginActivity,
+                    token,
+                    refreshToken,
+                    id,
+                    mail,
+                    firstname,
+                    lastname,
+                    photo
+                )
+
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             }
             if (it == false) {
-               Toast.makeText(this, R.string.network_error_return, Toast.LENGTH_LONG).show()
+                Toast.makeText(this, R.string.network_error_return, Toast.LENGTH_LONG).show()
             }
         })
-
-        executor = ContextCompat.getMainExecutor(this)
-        biometricPrompt = BiometricPrompt(this, executor,
-            object : BiometricPrompt.AuthenticationCallback() {
-                override fun onAuthenticationError(errorCode: Int,
-                                                   errString: CharSequence) {
-                    super.onAuthenticationError(errorCode, errString)
-                    Toast.makeText(applicationContext,
-                        "Authentication error: $errString", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                override fun onAuthenticationSucceeded(
-                    result: BiometricPrompt.AuthenticationResult) {
-                    super.onAuthenticationSucceeded(result)
-                    Toast.makeText(applicationContext,
-                        "Authentication succeeded!", Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                override fun onAuthenticationFailed() {
-                    super.onAuthenticationFailed()
-                    Toast.makeText(applicationContext, "Authentication failed",
-                        Toast.LENGTH_SHORT)
-                        .show()
-                }
-            })
-
-        promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric login for my app")
-            .setSubtitle("Log in using your biometric credential")
-            .setNegativeButtonText("Use account password")
-            .build()
-
-
-
     }
 
     fun toRegister(view: View) {

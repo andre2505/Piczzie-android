@@ -24,7 +24,7 @@ class UserRepository @Inject constructor(retrofit: Retrofit) : BaseRepository() 
         return getResponse(request)
     }
 
-    suspend fun Authenticated(user: User): Result<Token> {
+    suspend fun Authenticated(user: User): Result<User> {
         return getResponse(userApi.Authenticaded(user))
     }
 

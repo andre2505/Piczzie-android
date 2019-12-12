@@ -13,12 +13,9 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(var userRepository: UserRepository) : BaseViewModel() {
 
-
     var mUserLogin = MutableLiveData<User>()
 
     var mSucessAuthenticated = MutableLiveData<Boolean>()
-
-    var mToken: Token? = null
 
     init {
         mUserLogin.value = User()
@@ -31,7 +28,8 @@ class LoginViewModel @Inject constructor(var userRepository: UserRepository) : B
             userRepository.Authenticated(user!!).apply {
                 when (this) {
                     is Result.Success -> {
-                        mToken = this.data
+                        mUserLogin.postValue(this.data)
+
                         mSucessAuthenticated.postValue(true)
                     }
                     is Result.Error -> {

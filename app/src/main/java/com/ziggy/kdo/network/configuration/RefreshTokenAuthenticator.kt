@@ -37,7 +37,7 @@ class RefreshTokenAuthenticator(
 
         accessToken?.let { authToken ->
 
-            UserSession.createUserToken(context, authToken.token!!, authToken.tokenRefresh!!, authToken.uid)
+            UserSession.setToken(context, authToken.token!!, authToken.tokenRefresh!!)
 
             httpBuilder.addInterceptor(AuthenticationInterceptor("bearer ${authToken.token}"))
 

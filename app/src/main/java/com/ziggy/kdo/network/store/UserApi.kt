@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface UserApi {
 
     @POST("login")
-    fun Authenticaded(@Body user: User): Deferred<Response<Token?>>
+    fun Authenticaded(@Body user: User): Deferred<Response<User?>>
 
     @GET("users")
     fun getUsers(): Deferred<Response<User?>>

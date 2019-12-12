@@ -11,10 +11,7 @@ import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -28,11 +25,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.ziggy.kdo.R
 import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.model.Gift
+import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.activity.camera.CameraActivity
 import com.ziggy.kdo.ui.activity.gallery.GalleryActivity
 import com.ziggy.kdo.ui.base.BaseActivity
@@ -342,6 +342,15 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
         if (currentNavController?.value?.popBackStack() != true) {
             super.onBackPressed()
         }
+    }
+
+
+    private fun initDrawerLayout(){
+        val drawerImage = mDrawerLayout.findViewById<ImageView>(R.id.drawer_header)
+        Glide
+            .with(this)
+            .load(UserSession.getPhoto(this))
+            .into(drawerImage)
     }
 
     private fun showAlertDialogError() {
