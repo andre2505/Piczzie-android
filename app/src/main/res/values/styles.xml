@@ -98,7 +98,10 @@
 
     <style name="NavigationDrawerStyle">
 
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16sp</item><!-- text size in menu-->
+        <!-- item padding right in menu-->
+        <item name="android:listPreferredItemPaddingRight">20dp</item>
+        <item name="listPreferredItemPaddingRight">20dp</item>
     </style>
 
 </resources>

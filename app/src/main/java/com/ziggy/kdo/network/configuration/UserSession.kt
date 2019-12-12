@@ -48,6 +48,17 @@ object UserSession {
         return editor.getString(KEY_MAIL, "")!!
     }
 
+    fun getFirstname(context: Context): String? {
+        val editor = getSharedPreference(context)
+        return editor.getString(KEY_FIRSTNAME, "")!!
+    }
+
+    fun getLastname(context: Context): String? {
+        val editor = getSharedPreference(context)
+        return editor.getString(KEY_LASTNAME, "")!!
+    }
+
+
     fun getPhoto(context: Context): String? {
         val editor = getSharedPreference(context)
         return editor.getString(KEY_IMG_PROFIL, "")!!

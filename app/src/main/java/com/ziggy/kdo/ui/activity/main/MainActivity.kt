@@ -1,5 +1,6 @@
 package com.ziggy.kdo.ui.activity.main
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.app.SearchManager
 import android.content.BroadcastReceiver
@@ -29,6 +30,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.model.Gift
@@ -141,6 +143,9 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
         //Add custom bar
         setSupportActionBar(mToolbar)
+
+        //Drawer layout
+        initDrawerLayout()
 
         //SearchManager
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -344,13 +349,31 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
         }
     }
 
+    private fun initDrawerLayout() {
 
-    private fun initDrawerLayout(){
-        val drawerImage = mDrawerLayout.findViewById<ImageView>(R.id.drawer_header)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        val header = navigationView.getHeaderView(0)
+        val drawerImage = header.findViewById<ImageView>(R.id.drawer_header)
+        val drawerName = header.findViewById<TextView>(R.id.drawer_name)
+        val drawerMail = header.findViewById<TextView>(R.id.drawer_mail)
+
         Glide
             .with(this)
-            .load(UserSession.getPhoto(this))
+            .load(BuildConfig.ENDPOINT + UserSession.getPhoto(this))
+            .apply(
+                RequestOptions
+                    .circleCropTransform()
+            )
             .into(drawerImage)
+
+        if(UserSession.getFirstname(this) != null  && UserSession.getLastname(this)  !=null) {
+            val firstname: String = UserSession.getFirstname(this)!!
+            val lastname: String = UserSession.getLastname(this)!!
+
+            drawerName.text = "$firstname $lastname"
+        }
+
+        drawerMail.text = UserSession.getMail(this)
     }
 
     private fun showAlertDialogError() {

@@ -2,11 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navigation_setting"
-            app:startDestination="@id/searchFragment2">
+           >
 
 
-    <fragment android:id="@+id/searchFragment2"
-              android:name="com.ziggy.kdo.ui.fragment.search.SearchFragment"
-              android:label="fragment_search"
-              tools:layout="@layout/fragment_search"/>
 </navigation>
