@@ -307,7 +307,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-        currentNavController?.value!!.navigate(R.id.friendsFragment)
+        currentNavController?.value!!.navigate(R.id.action_profile_to_navigation_setting)
         return true
     }
 

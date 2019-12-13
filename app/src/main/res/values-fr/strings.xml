@@ -153,4 +153,10 @@
     <string name="drawer_about">A propos de nous</string>
     <string name="drawer">Déconnexion</string>
 
+    <!-- Edit Profil -->
+    <string name="edit_profile_photo">Photo</string>
+    <string name="edit_profile_information">Information</string>
+    <string name="edit_profile_password">Email</string>
+
+
 </resources>

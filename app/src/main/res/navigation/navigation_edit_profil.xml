@@ -6,8 +6,8 @@
 
 
     <fragment android:id="@+id/editProfilFragment"
-              android:name="com.ziggy.kdo.ui.fragment.settings.EditProfilFragment"
-              android:label="fragment_edit_profil"
+              android:name="com.ziggy.kdo.ui.fragment.settings.edit_profile.EditProfilFragment"
+              android:label="edit_profile"
               tools:layout="@layout/fragment_edit_profil"/>
 
 </navigation>
