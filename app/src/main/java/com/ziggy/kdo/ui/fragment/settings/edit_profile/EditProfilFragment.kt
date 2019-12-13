@@ -1,23 +1,28 @@
 package com.ziggy.kdo.ui.fragment.settings.edit_profile
 
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ziggy.kdo.R
+import com.ziggy.kdo.listener.CustomOnItemClickListener
 import com.ziggy.kdo.ui.adapter.EditProfileAdapter
 import com.ziggy.kdo.ui.adapter.HomeGiftAdapter
+import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class EditProfilFragment : Fragment() {
+class EditProfilFragment : Fragment(), CustomOnItemClickListener {
 
     private lateinit var recyclerView: RecyclerView
 
@@ -53,6 +58,11 @@ class EditProfilFragment : Fragment() {
             getString(EDIT_EMAIL)
         )
 
+        val arrayImage = listOf(
+            context?.getDrawable(R.drawable.ic_photo_profile)!!,
+            context?.getDrawable(R.drawable.ic_edit_information)!!,
+            context?.getDrawable(R.drawable.ic_mail_edit_profile)!!)
+
         recyclerView = viewEdit.findViewById(R.id.edit_profile_recyclerview)
 
         linearLayoutManager = LinearLayoutManager(activity)
@@ -64,7 +74,7 @@ class EditProfilFragment : Fragment() {
 
             layoutManager = viewManager
 
-            editProfileAdapter = EditProfileAdapter(arrayEdit)
+            editProfileAdapter = EditProfileAdapter(arrayEdit, arrayImage, this@EditProfilFragment)
             viewAdapter = editProfileAdapter
             recyclerView.adapter = viewAdapter
         }
@@ -74,4 +84,7 @@ class EditProfilFragment : Fragment() {
     }
 
 
+    override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
+
+    }
 }

@@ -9,7 +9,7 @@
     <string name="navigation_add_children">New child</string>
     <string name="navigation_children_profile">Profile</string>
     <string name="navigation_children_update">Edit</string>
-
+    <string name="navigation_edit_profile">Edit</string>
     <!-- title dialog loading -->
     <string name="dialog_add">Addition in progress…</string>
     <string name="dialog_update">Update…</string>
