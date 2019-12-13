@@ -33,6 +33,10 @@ class EditProfileAdapter(
         Glide.with(holder.itemView)
             .load(listImage[position])
             .into(holder.editImage)
+
+        holder.itemView.setOnClickListener {
+            customOnItemClickListener.onItemClick<Nothing>(position = position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

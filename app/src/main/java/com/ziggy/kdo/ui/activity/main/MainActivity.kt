@@ -74,7 +74,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
     private val NAVIGATION_CHILD_UPDATE: String = "UpdateChildFragment"
 
-    private val NAVIGATION_EDIT_PROFILE :String= "edit_profile"
+    private val NAVIGATION_EDIT_PROFILE: String = "edit_profile"
 
     private lateinit var mBottomNavigationView: BottomNavigationView
 
@@ -314,7 +314,11 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-        currentNavController?.value!!.navigate(R.id.action_profile_to_navigation_setting)
+        when (p0.itemId) {
+            R.id.nav_edit_profile -> {
+                currentNavController?.value!!.navigate(R.id.action_profile_to_navigation_setting)
+            }
+        }
         return true
     }
 
@@ -373,7 +377,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
             )
             .into(drawerImage)
 
-        if(UserSession.getFirstname(this) != null  && UserSession.getLastname(this)  !=null) {
+        if (UserSession.getFirstname(this) != null && UserSession.getLastname(this) != null) {
             val firstname: String = UserSession.getFirstname(this)!!
             val lastname: String = UserSession.getLastname(this)!!
 

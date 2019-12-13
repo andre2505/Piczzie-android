@@ -158,6 +158,8 @@
     <string name="edit_profile_photo">Photo</string>
     <string name="edit_profile_information">Information</string>
     <string name="edit_profile_password">Email</string>
+    <string name="edit_profile_gallery_photo">Choisir dans gallerie</string>
+    <string name="edit_profile_take_photo">Prendre une photo</string>
 
 
 </resources>

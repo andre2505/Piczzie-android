@@ -1,12 +1,15 @@
 package com.ziggy.kdo.ui.fragment.settings.edit_profile
 
 
+import android.app.Dialog
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,7 +64,8 @@ class EditProfilFragment : Fragment(), CustomOnItemClickListener {
         val arrayImage = listOf(
             context?.getDrawable(R.drawable.ic_photo_profile)!!,
             context?.getDrawable(R.drawable.ic_edit_information)!!,
-            context?.getDrawable(R.drawable.ic_mail_edit_profile)!!)
+            context?.getDrawable(R.drawable.ic_mail_edit_profile)!!
+        )
 
         recyclerView = viewEdit.findViewById(R.id.edit_profile_recyclerview)
 
@@ -85,6 +89,41 @@ class EditProfilFragment : Fragment(), CustomOnItemClickListener {
 
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
+        when (position) {
+            0 -> {
+                showAlertDialog()
+            }
+            1 -> {
 
+            }
+            2 -> {
+
+            }
+        }
+    }
+
+
+    private fun showAlertDialog() {
+
+        val dialog = Dialog(activity!!)
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.view_dialog_photo_profil)
+
+        val dialogGallery = dialog.findViewById<Button>(R.id.dialog_choice_gallery)
+        val dialogTakePhoto = dialog.findViewById<Button>(R.id.dialog_choice_take_photo)
+
+        dialogGallery.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogTakePhoto.setOnClickListener {
+            dialog.dismiss()
+        }
+
+
+
+        dialog.show()
     }
 }
