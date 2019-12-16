@@ -1,6 +1,7 @@
 package com.ziggy.kdo.ui.fragment.gallery
 
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,11 +15,13 @@ import com.isseiaoki.simplecropview.callback.CropCallback
 import com.isseiaoki.simplecropview.callback.LoadCallback
 import com.ziggy.kdo.R
 import android.graphics.Bitmap
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.Navigation
 import com.isseiaoki.simplecropview.callback.SaveCallback
 import com.ziggy.kdo.model.User
@@ -30,6 +33,8 @@ import com.ziggy.kdo.ui.activity.main.MainActivity
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.camera.ARG_FILE_PATH
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
+import com.ziggy.kdo.ui.fragment.profile.base.ACTION_PHOTO_USER
+import com.ziggy.kdo.ui.fragment.profile.base.EXTRA_USER
 import com.ziggy.kdo.utils.FileUtils
 import java.io.File
 
@@ -62,6 +67,11 @@ class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener {
                     ViewModelProviders.of(theActivity, mViewModeFactory).get(ProfileViewModel::class.java)
 
                 profileViewModel.mUser.observe(this@CropFragment, Observer { theUser ->
+
+                    val intent = Intent(ACTION_PHOTO_USER)
+                    intent.putExtra(EXTRA_USER, theUser as Parcelable)
+
+                    LocalBroadcastManager.getInstance(activity!!).sendBroadcast(intent)
                     UserSession.setPhoto(theActivity, theUser.photo)
                     theActivity.finish()
                 })
@@ -113,12 +123,10 @@ class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener {
 
                                         } else {
 
-                                            val user = profileViewModel.mUser.value
                                             val file = File(path)
-                                            user?.photo = file.name
-                                                profileViewModel.updateUser(
+                                            profileViewModel.updatePhoto(
                                                 UserSession.getUid(activity!!),
-                                                user
+                                                file.name
                                             )
 
                                         }

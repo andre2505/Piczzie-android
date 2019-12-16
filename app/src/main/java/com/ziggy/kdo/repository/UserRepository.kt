@@ -48,8 +48,8 @@ class UserRepository @Inject constructor(retrofit: Retrofit) : BaseRepository() 
         return getResponse(userApi.updateFriend(userId, friendsId, state))
     }
 
-    suspend fun updateUser(userId: String?, user: User?): Result<User> {
-        return getResponse(userApi.updateUser(userId, user))
+    suspend fun updatePhoto(userId: String?, path: String?): Result<User> {
+        return getResponse(userApi.updatePhoto(userId, path))
     }
 }
 

@@ -235,9 +235,9 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun updateUser(userId: String?, user: User?){
+    fun updatePhoto(userId: String?, path: String?){
         GlobalScope.launch(Dispatchers.IO) {
-            userRepository.updateUser(userId, user).apply {
+            userRepository.updatePhoto(userId, path).apply {
                 when (this) {
                     is Result.Success -> {
                         mUser.postValue(this.data)

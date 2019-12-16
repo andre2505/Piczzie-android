@@ -1,6 +1,10 @@
 package com.ziggy.kdo.ui.fragment.profile.base
 
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -22,15 +27,18 @@ import com.google.android.material.tabs.TabLayout
 import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentProfileBinding
+import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.activity.main.MainActivity
 import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
+import com.ziggy.kdo.utils.ProgressRequestBody
+import okhttp3.MultipartBody
+import java.io.File
 
-
-
-
+const val ACTION_PHOTO_USER = "action_photo_user"
+const val EXTRA_USER = "user"
 
 /**
  * A simple [Fragment] subclass.
@@ -78,6 +86,17 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
 
     private lateinit var mUserId: String
 
+    private val mReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            when (intent?.action) {
+                ACTION_PHOTO_USER -> {
+                    val user = intent.getParcelableExtra<User>(EXTRA_USER)
+                    mProfileViewModel.mUser.value = user
+                }
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -98,6 +117,10 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
             mProfileViewModel =
                 ViewModelProviders.of(activity!!, mViewModeFactory).get(ProfileViewModel::class.java)
             mUserId = UserSession.getUid(context!!)!!
+        }
+        context?.let {
+            val filter = IntentFilter(ACTION_PHOTO_USER)
+            LocalBroadcastManager.getInstance(it).registerReceiver(mReceiver, filter)
         }
 
         mFragmentMyGiftFragment = MyGiftFragment()
@@ -192,6 +215,13 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         super.onActivityCreated(savedInstanceState)
         mUser?.let {
             (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        context?.let {
+            LocalBroadcastManager.getInstance(it).unregisterReceiver(mReceiver)
         }
     }
 

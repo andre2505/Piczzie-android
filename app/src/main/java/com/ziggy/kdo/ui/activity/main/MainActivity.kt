@@ -34,11 +34,14 @@ import com.ziggy.kdo.BuildConfig
 import com.ziggy.kdo.R
 import com.ziggy.kdo.enums.Error
 import com.ziggy.kdo.model.Gift
+import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.activity.camera.CameraActivity
 import com.ziggy.kdo.ui.activity.gallery.GalleryActivity
 import com.ziggy.kdo.ui.base.BaseActivity
 import com.ziggy.kdo.ui.fragment.home.HomeViewModel
+import com.ziggy.kdo.ui.fragment.profile.base.ACTION_PHOTO_USER
+import com.ziggy.kdo.ui.fragment.profile.base.EXTRA_USER
 import com.ziggy.kdo.ui.fragment.search.SearchViewModel
 import com.ziggy.kdo.utils.ProgressRequestBody
 import com.ziggy.kdo.utils.setupWithNavController
@@ -104,6 +107,8 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
     private lateinit var mToolbarTitle: TextView
 
+    private lateinit var drawerImage: ImageView
+
     private var currentNavController: LiveData<NavController>? = null
 
     private val mReceiver = object : BroadcastReceiver() {
@@ -120,6 +125,17 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
                         MultipartBody.Part.createFormData("image", file.name, requestFile)
 
                     mMainViewModel.uploadGift()
+                }
+                ACTION_PHOTO_USER -> {
+                    val user = intent.getParcelableExtra<User>(EXTRA_USER)
+                    Glide
+                        .with(this@MainActivity)
+                        .load(BuildConfig.ENDPOINT + UserSession.getPhoto(context!!))
+                        .apply(
+                            RequestOptions
+                                .circleCropTransform()
+                        )
+                        .into(drawerImage)
                 }
             }
         }
@@ -364,7 +380,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
 
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         val header = navigationView.getHeaderView(0)
-        val drawerImage = header.findViewById<ImageView>(R.id.drawer_header)
+        drawerImage = header.findViewById<ImageView>(R.id.drawer_header)
         val drawerName = header.findViewById<TextView>(R.id.drawer_name)
         val drawerMail = header.findViewById<TextView>(R.id.drawer_mail)
 
