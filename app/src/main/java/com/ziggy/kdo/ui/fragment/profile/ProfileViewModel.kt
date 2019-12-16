@@ -54,6 +54,8 @@ class ProfileViewModel @Inject constructor(
 
     var mStatutFriends = MutableLiveData<Int>()
 
+    val profilePhoto = MutableLiveData<String>()
+
     lateinit var mCoroutine: Job
 
     init {
@@ -227,6 +229,24 @@ class ProfileViewModel @Inject constructor(
                     }
                     is Result.ErrorNetwork -> {
                         mDeleteFriend.postValue(Error.ERROR_NETWORK)
+                    }
+                }
+            }
+        }
+    }
+
+    fun updateUser(userId: String?, user: User?){
+        GlobalScope.launch(Dispatchers.IO) {
+            userRepository.updateUser(userId, user).apply {
+                when (this) {
+                    is Result.Success -> {
+                        mUser.postValue(this.data)
+                    }
+                    is Result.Error -> {
+                        mError.postValue(true)
+                    }
+                    is Result.ErrorNetwork -> {
+                        mError.postValue(true)
                     }
                 }
             }

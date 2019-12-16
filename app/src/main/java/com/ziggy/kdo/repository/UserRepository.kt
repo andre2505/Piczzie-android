@@ -44,8 +44,12 @@ class UserRepository @Inject constructor(retrofit: Retrofit) : BaseRepository() 
         return getResponse(userApi.deleteFriend(userId))
     }
 
-    suspend fun updatefriends(userId: String?, friendsId: String?, state:Int?): Result<List<User>> {
+    suspend fun updatefriends(userId: String?, friendsId: String?, state: Int?): Result<List<User>> {
         return getResponse(userApi.updateFriend(userId, friendsId, state))
+    }
+
+    suspend fun updateUser(userId: String?, user: User?): Result<User> {
+        return getResponse(userApi.updateUser(userId, user))
     }
 }
 

@@ -103,6 +103,7 @@ class ProfileFragment : BaseFragment(), TabLayout.OnTabSelectedListener, View.On
         mFragmentMyGiftFragment = MyGiftFragment()
         mFragmentMyGiftFragment.arguments = args
         mProfileViewModel.getGiftsUser(0, mUserId)
+
     }
 
     override fun onCreateView(

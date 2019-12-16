@@ -12,6 +12,7 @@ import com.ziggy.kdo.ui.fragment.profile.base.ProfileFragment
 import com.ziggy.kdo.ui.fragment.profile.detail.MyGiftDetailFragment
 import com.ziggy.kdo.ui.fragment.profile.detail.MyReservationDetailFragment
 import com.ziggy.kdo.ui.fragment.friends.FriendsFragment
+import com.ziggy.kdo.ui.fragment.gallery.CropFragment
 import com.ziggy.kdo.ui.fragment.search.SearchFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -60,4 +61,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector(modules = [ViewModelModule::class])
     abstract fun bindUpdateChildFragment(): UpdateChildFragment
+
+    @ContributesAndroidInjector(modules = [ViewModelModule::class])
+    abstract fun bindCropFragment(): CropFragment
 }

@@ -64,6 +64,12 @@ object UserSession {
         return editor.getString(KEY_IMG_PROFIL, "")!!
     }
 
+    fun setPhoto(context: Context, url: String?) {
+        val editor = getSharedPreference(context).edit()
+        editor.putString(KEY_IMG_PROFIL, url)!!
+        editor.apply()
+    }
+
     @SuppressLint("ApplySharedPref")
     fun createUserToken(
         context: Context,

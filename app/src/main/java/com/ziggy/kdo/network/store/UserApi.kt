@@ -38,4 +38,9 @@ interface UserApi {
     @PUT("api/user/friends")
     @FormUrlEncoded
     fun updateFriend(@Field("user_id") userId: String?, @Field("friends_id") friendId: String?, @Field("state") state: Int?): Deferred<Response<List<User>?>>
+
+    @PUT("api/user/{id}")
+    @FormUrlEncoded
+    fun updateUser(@Path("id") userId: String?, @Field("user") user: User?): Deferred<Response<User?>>
+
 }

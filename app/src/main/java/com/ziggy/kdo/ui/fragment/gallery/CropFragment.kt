@@ -17,17 +17,28 @@ import android.graphics.Bitmap
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.isseiaoki.simplecropview.callback.SaveCallback
+import com.ziggy.kdo.model.User
+import com.ziggy.kdo.network.configuration.UserSession
+import com.ziggy.kdo.ui.activity.camera.CONFIGURATION_PROFILE
+import com.ziggy.kdo.ui.activity.camera.CameraActivity
+import com.ziggy.kdo.ui.activity.gallery.GalleryActivity
+import com.ziggy.kdo.ui.activity.main.MainActivity
+import com.ziggy.kdo.ui.base.BaseFragment
 import com.ziggy.kdo.ui.fragment.camera.ARG_FILE_PATH
+import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 import com.ziggy.kdo.utils.FileUtils
+import java.io.File
 
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class CropFragment : Fragment(), LoadCallback, View.OnClickListener {
+class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener {
 
     companion object {
         val EXTRA_IMG_CROP = "extra_img_crop"
@@ -40,6 +51,23 @@ class CropFragment : Fragment(), LoadCallback, View.OnClickListener {
     private lateinit var mButtonValidate: Button
 
     private lateinit var mPathImage: String
+
+    private lateinit var profileViewModel: ProfileViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (GalleryActivity.PROFILE_CONFIG) {
+            activity?.let { theActivity ->
+                profileViewModel =
+                    ViewModelProviders.of(theActivity, mViewModeFactory).get(ProfileViewModel::class.java)
+
+                profileViewModel.mUser.observe(this@CropFragment, Observer { theUser ->
+                    UserSession.setPhoto(theActivity, theUser.photo)
+                    theActivity.finish()
+                })
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,13 +103,26 @@ class CropFragment : Fragment(), LoadCallback, View.OnClickListener {
                                 ), object : SaveCallback {
                                     override fun onSuccess(uri: Uri?) {
 
-                                        val path  = uri.toString().replace("file://", "")
-                                        val args = Bundle()
+                                        val path = uri.toString().replace("file://", "")
+                                        if (!GalleryActivity.PROFILE_CONFIG) {
 
-                                        args.putString(ARG_FILE_PATH, path)
+                                            val args = Bundle()
+                                            args.putString(ARG_FILE_PATH, path)
+                                            Navigation.findNavController(view!!)
+                                                .navigate(R.id.action_cropFragment_to_addGiftFragment2, args)
 
-                                        Navigation.findNavController(view!!)
-                                            .navigate(R.id.action_cropFragment_to_addGiftFragment2, args)
+                                        } else {
+
+                                            val user = profileViewModel.mUser.value
+                                            val file = File(path)
+                                            user?.photo = file.name
+                                                profileViewModel.updateUser(
+                                                UserSession.getUid(activity!!),
+                                                user
+                                            )
+
+                                        }
+
                                     }
 
                                     override fun onError(e: Throwable?) {
