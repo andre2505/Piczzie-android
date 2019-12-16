@@ -17,6 +17,8 @@ import com.ziggy.kdo.ui.base.BaseActivity
 import com.ziggy.kdo.ui.fragment.camera.CameraFragment
 import com.ziggy.kdo.utils.CameraPreview
 
+const val CONFIGURATION_PROFILE = "configuration_profile"
+
 class CameraActivity : BaseActivity() {
 
     private lateinit var mNavDestination: NavController
@@ -27,6 +29,7 @@ class CameraActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
+        PROFILE_CONFIG = intent.getBooleanExtra(CONFIGURATION_PROFILE, false)
         // config top view
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         setSupportActionBar(findViewById(R.id.toolbar_camera_layout))
@@ -62,6 +65,9 @@ class CameraActivity : BaseActivity() {
     }
 
     companion object {
+
+        var PROFILE_CONFIG = false
+
         @JvmStatic
         fun newInstance(context: Context) {
             val intent = Intent(context, CameraActivity::class.java)

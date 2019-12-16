@@ -1,4 +1,4 @@
-package com.ziggy.kdo.ui.fragment.settings.edit_profile
+package com.ziggy.kdo.ui.fragment.settings.edit_profile.user_information
 
 
 import android.os.Bundle

@@ -2,7 +2,6 @@ package com.ziggy.kdo.ui.fragment.settings.edit_profile
 
 
 import android.app.Dialog
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,15 +10,14 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import androidx.annotation.StringRes
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ziggy.kdo.R
 import com.ziggy.kdo.listener.CustomOnItemClickListener
+import com.ziggy.kdo.ui.activity.camera.CONFIGURATION_PROFILE
 import com.ziggy.kdo.ui.adapter.EditProfileAdapter
-import com.ziggy.kdo.ui.adapter.HomeGiftAdapter
-import java.util.*
-import kotlin.collections.HashMap
+
 
 /**
  * A simple [Fragment] subclass.
@@ -116,13 +114,14 @@ class EditProfilFragment : Fragment(), CustomOnItemClickListener {
 
         dialogGallery.setOnClickListener {
             dialog.dismiss()
+            val args = Bundle()
+            args.putBoolean(CONFIGURATION_PROFILE, true)
+            findNavController().navigate(R.id.action_editProfilFragment_to_galleryActivity, args)
         }
 
         dialogTakePhoto.setOnClickListener {
             dialog.dismiss()
         }
-
-
 
         dialog.show()
     }

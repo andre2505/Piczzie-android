@@ -8,6 +8,17 @@
     <fragment android:id="@+id/editProfilFragment"
               android:name="com.ziggy.kdo.ui.fragment.settings.edit_profile.EditProfilFragment"
               android:label="edit_profile"
-              tools:layout="@layout/fragment_edit_profil"/>
+              tools:layout="@layout/fragment_edit_profil">
+        <action android:id="@+id/action_editProfilFragment_to_galleryActivity"
+                app:destination="@id/galleryActivity"/>
+    </fragment>
+
+    <activity android:id="@+id/galleryActivity"
+              android:name="com.ziggy.kdo.ui.activity.gallery.GalleryActivity"
+              android:label="GalleryActivity">
+        <argument
+                app:argType="boolean"
+                android:name="profil"/>
+    </activity>
 
 </navigation>

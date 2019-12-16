@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraView
-import com.otaliastudios.cameraview.Flash
 import com.otaliastudios.cameraview.PictureResult
+import com.otaliastudios.cameraview.controls.Flash
 import com.ziggy.kdo.R
 import com.ziggy.kdo.utils.FileUtils
 import java.io.FileOutputStream
