@@ -1,8 +1,10 @@
 package com.ziggy.kdo.network.store
 
+import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.Token
 import com.ziggy.kdo.model.User
 import kotlinx.coroutines.Deferred
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -37,10 +39,14 @@ interface UserApi {
 
     @PUT("api/user/friends")
     @FormUrlEncoded
-    fun updateFriend(@Field("user_id") userId: String?, @Field("friends_id") friendId: String?, @Field("state") state: Int?): Deferred<Response<List<User>?>>
+    fun updateFriend(
+        @Field("user_id") userId: String?, @Field("friends_id") friendId: String?, @Field(
+            "state"
+        ) state: Int?
+    ): Deferred<Response<List<User>?>>
 
-    @PUT("api/user/photo/{id}")
-    @FormUrlEncoded
-    fun updatePhoto(@Path("id") userId: String?, @Field("path") path: String?): Deferred<Response<User?>>
+    @Multipart
+    @POST("api/user/photo")
+    fun updatePhoto(@Part("id") userId: String?, @Part file: MultipartBody.Part): Deferred<Response<User?>>
 
 }

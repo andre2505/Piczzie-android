@@ -128,14 +128,7 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
                 }
                 ACTION_PHOTO_USER -> {
                     val user = intent.getParcelableExtra<User>(EXTRA_USER)
-                    Glide
-                        .with(this@MainActivity)
-                        .load(BuildConfig.ENDPOINT + UserSession.getPhoto(context!!))
-                        .apply(
-                            RequestOptions
-                                .circleCropTransform()
-                        )
-                        .into(drawerImage)
+
                 }
             }
         }

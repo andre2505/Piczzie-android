@@ -7,6 +7,7 @@ import javax.inject.Inject
 import com.ziggy.kdo.model.User
 import javax.inject.Singleton
 import com.ziggy.kdo.network.configuration.Result
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 
 @Singleton
@@ -48,8 +49,8 @@ class UserRepository @Inject constructor(retrofit: Retrofit) : BaseRepository() 
         return getResponse(userApi.updateFriend(userId, friendsId, state))
     }
 
-    suspend fun updatePhoto(userId: String?, path: String?): Result<User> {
-        return getResponse(userApi.updatePhoto(userId, path))
+    suspend fun updatePhoto(userId: String?, multi: MultipartBody.Part): Result<User> {
+        return getResponse(userApi.updatePhoto(userId, multi))
     }
 }
 

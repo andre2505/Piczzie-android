@@ -12,6 +12,7 @@ import com.ziggy.kdo.repository.ChildRepository
 import com.ziggy.kdo.repository.GiftRepository
 import com.ziggy.kdo.repository.UserRepository
 import kotlinx.coroutines.*
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 /**
@@ -235,9 +236,9 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
-    fun updatePhoto(userId: String?, path: String?){
+    fun updatePhoto(userId: String?, multi: MultipartBody.Part) {
         GlobalScope.launch(Dispatchers.IO) {
-            userRepository.updatePhoto(userId, path).apply {
+            userRepository.updatePhoto(userId, multi).apply {
                 when (this) {
                     is Result.Success -> {
                         mUser.postValue(this.data)

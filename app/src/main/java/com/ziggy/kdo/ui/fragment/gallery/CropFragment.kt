@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.Navigation
 import com.isseiaoki.simplecropview.callback.SaveCallback
+import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.ui.activity.camera.CONFIGURATION_PROFILE
@@ -36,6 +37,8 @@ import com.ziggy.kdo.ui.fragment.profile.ProfileViewModel
 import com.ziggy.kdo.ui.fragment.profile.base.ACTION_PHOTO_USER
 import com.ziggy.kdo.ui.fragment.profile.base.EXTRA_USER
 import com.ziggy.kdo.utils.FileUtils
+import com.ziggy.kdo.utils.ProgressRequestBody
+import okhttp3.MultipartBody
 import java.io.File
 
 
@@ -43,7 +46,7 @@ import java.io.File
  * A simple [Fragment] subclass.
  *
  */
-class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener {
+class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener, ProgressRequestBody.ProgressListener{
 
     companion object {
         val EXTRA_IMG_CROP = "extra_img_crop"
@@ -68,11 +71,11 @@ class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener {
 
                 profileViewModel.mUser.observe(this@CropFragment, Observer { theUser ->
 
-                    val intent = Intent(ACTION_PHOTO_USER)
-                    intent.putExtra(EXTRA_USER, theUser as Parcelable)
+                    //val intent = Intent(ACTION_PHOTO_USER)
+                    //intent.putExtra(EXTRA_USER, theUser as Parcelable)
 
-                    LocalBroadcastManager.getInstance(activity!!).sendBroadcast(intent)
-                    UserSession.setPhoto(theActivity, theUser.photo)
+                   /* LocalBroadcastManager.getInstance(activity!!).sendBroadcast(intent)
+                    UserSession.setPhoto(theActivity, theUser.photo)*/
                     theActivity.finish()
                 })
             }
@@ -124,10 +127,12 @@ class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener {
                                         } else {
 
                                             val file = File(path)
+                                            val requestFile = ProgressRequestBody(context!!, file, this@CropFragment)
                                             profileViewModel.updatePhoto(
                                                 UserSession.getUid(activity!!),
-                                                file.name
+                                                MultipartBody.Part.createFormData("image", file.name, requestFile)
                                             )
+
 
                                         }
 
@@ -152,5 +157,9 @@ class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener {
     }
 
     override fun onError(e: Throwable?) {
+    }
+
+
+    override fun onUploadProgress(progressInPercent: Int, totalBytes: Long) {
     }
 }
