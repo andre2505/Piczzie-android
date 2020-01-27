@@ -46,7 +46,8 @@ import java.io.File
  * A simple [Fragment] subclass.
  *
  */
-class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener, ProgressRequestBody.ProgressListener{
+class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener,
+    ProgressRequestBody.ProgressListener {
 
     companion object {
         val EXTRA_IMG_CROP = "extra_img_crop"
@@ -67,15 +68,17 @@ class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener, Progres
         if (GalleryActivity.PROFILE_CONFIG) {
             activity?.let { theActivity ->
                 profileViewModel =
-                    ViewModelProviders.of(theActivity, mViewModeFactory).get(ProfileViewModel::class.java)
+                    ViewModelProviders.of(theActivity, mViewModeFactory)
+                        .get(ProfileViewModel::class.java)
 
                 profileViewModel.mUser.observe(this@CropFragment, Observer { theUser ->
 
-                    //val intent = Intent(ACTION_PHOTO_USER)
-                    //intent.putExtra(EXTRA_USER, theUser as Parcelable)
+                    val intent = Intent(ACTION_PHOTO_USER)
+                    intent.putExtra(EXTRA_USER, theUser as Parcelable)
 
-                   /* LocalBroadcastManager.getInstance(activity!!).sendBroadcast(intent)
-                    UserSession.setPhoto(theActivity, theUser.photo)*/
+                    LocalBroadcastManager.getInstance(activity!!).sendBroadcast(intent)
+                    UserSession.setPhoto(theActivity, theUser.photo)
+
                     theActivity.finish()
                 })
             }
@@ -122,15 +125,26 @@ class CropFragment : BaseFragment(), LoadCallback, View.OnClickListener, Progres
                                             val args = Bundle()
                                             args.putString(ARG_FILE_PATH, path)
                                             Navigation.findNavController(view!!)
-                                                .navigate(R.id.action_cropFragment_to_addGiftFragment2, args)
+                                                .navigate(
+                                                    R.id.action_cropFragment_to_addGiftFragment2,
+                                                    args
+                                                )
 
                                         } else {
 
                                             val file = File(path)
-                                            val requestFile = ProgressRequestBody(context!!, file, this@CropFragment)
+                                            val requestFile = ProgressRequestBody(
+                                                context!!,
+                                                file,
+                                                this@CropFragment
+                                            )
                                             profileViewModel.updatePhoto(
                                                 UserSession.getUid(activity!!),
-                                                MultipartBody.Part.createFormData("image", file.name, requestFile)
+                                                MultipartBody.Part.createFormData(
+                                                    "image",
+                                                    file.name,
+                                                    requestFile
+                                                )
                                             )
 
 

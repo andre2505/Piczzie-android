@@ -150,9 +150,9 @@ class MyGiftFragment : BaseFragment(), CustomOnItemClickListener {
 
             val imageWidth = gridWitdh / NUM_GRID_COLUMNS
 
-            val spanCount = 3 // 4 columns
+            val spanCount = 3
 
-            val spacing = 3 // 50px
+            val spacing = 3
 
             val includeEdge = false
 
