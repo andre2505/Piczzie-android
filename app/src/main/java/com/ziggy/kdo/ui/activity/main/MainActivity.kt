@@ -53,7 +53,8 @@ import okhttp3.MultipartBody
 import java.io.File
 
 
-class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener, MenuItem.OnMenuItemClickListener,
+class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
+    MenuItem.OnMenuItemClickListener,
     ProgressRequestBody.ProgressListener, androidx.appcompat.widget.SearchView.OnQueryTextListener,
     NavigationView.OnNavigationItemSelectedListener {
 
@@ -118,7 +119,8 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
                     mLinearLayout.visibility = View.VISIBLE
 
                     val file = File(intent.getStringExtra(EXTRA_FILE))
-                    val requestFile = ProgressRequestBody(this@MainActivity, file, this@MainActivity)
+                    val requestFile =
+                        ProgressRequestBody(this@MainActivity, file, this@MainActivity)
 
                     mMainViewModel.mGift.value = intent.getSerializableExtra(EXTRA_GIFT) as Gift
                     mMainViewModel.mMultipartBody.value =
@@ -127,8 +129,14 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
                     mMainViewModel.uploadGift()
                 }
                 ACTION_PHOTO_USER -> {
-                    val user = intent.getParcelableExtra<User>(EXTRA_USER)
-
+                    Glide
+                        .with(this@MainActivity)
+                        .load(BuildConfig.ENDPOINT + UserSession.getPhoto(this@MainActivity))
+                        .apply(
+                            RequestOptions
+                                .circleCropTransform()
+                        )
+                        .into(drawerImage)
                 }
             }
         }
@@ -166,9 +174,11 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
         }
         mSearchView.setOnQueryTextListener(this@MainActivity)
 
-        mMainViewModel = ViewModelProviders.of(this@MainActivity, mViewModeFactory).get(MainViewModel::class.java)
+        mMainViewModel = ViewModelProviders.of(this@MainActivity, mViewModeFactory)
+            .get(MainViewModel::class.java)
         ViewModelProviders.of(this@MainActivity, mViewModeFactory).get(HomeViewModel::class.java)
-        mSearchViewModel = ViewModelProviders.of(this@MainActivity, mViewModeFactory).get(SearchViewModel::class.java)
+        mSearchViewModel = ViewModelProviders.of(this@MainActivity, mViewModeFactory)
+            .get(SearchViewModel::class.java)
 
         mMainViewModel.mValidationSuccess.observe(this@MainActivity, Observer { error ->
             when (error!!) {
@@ -217,7 +227,9 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
         selectedItem.setOnMenuItemClickListener(this@MainActivity)
 
         //broadcast receiver upload
-        val filter = IntentFilter(RECEIVER_UPLOAD)
+        val filter = IntentFilter()
+        filter.addAction(RECEIVER_UPLOAD)
+        filter.addAction(ACTION_PHOTO_USER)
         LocalBroadcastManager.getInstance(this@MainActivity).registerReceiver(mReceiver, filter)
     }
 
@@ -241,7 +253,11 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onDestinationChanged(controller: NavController, destination: NavDestination, arguments: Bundle?) {
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
 
         mLabelFragment = destination.label.toString()
         supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -359,7 +375,8 @@ class MainActivity : BaseActivity(), NavController.OnDestinationChangedListener,
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.value?.navigateUp() ?: currentNavController?.value!!.navigateUp(appBarConfig)
+        return currentNavController?.value?.navigateUp()
+            ?: currentNavController?.value!!.navigateUp(appBarConfig)
     }
 
 

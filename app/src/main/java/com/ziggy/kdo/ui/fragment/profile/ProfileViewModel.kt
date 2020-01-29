@@ -249,10 +249,10 @@ class ProfileViewModel @Inject constructor(
                         mLoading.postValue(false)
                     }
                     is Result.Error -> {
-                        //mError.postValue(true)
+                        mError.postValue(true)
                     }
                     is Result.ErrorNetwork -> {
-                        //mError.postValue(true)
+                        mError.postValue(true)
                     }
                 }
             }
