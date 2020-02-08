@@ -263,11 +263,12 @@ class ProfileViewModel @Inject constructor(
 
 
     fun updateInformationUser() {
+        mUser.value = mUser.value
         GlobalScope.launch(Dispatchers.IO) {
             userRepository.updateUserInformations(mUser.value?.id, mUser.value).apply {
                 when (this) {
                     is Result.Success -> {
-                        mUser.postValue(this.data)
+                        mUser.postValue(mUser.value)
                         val frienList = this.data?.friends?.filter { month ->
                             month.state == 3
                         }
