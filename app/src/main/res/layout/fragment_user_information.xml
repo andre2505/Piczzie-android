@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/register_editext_firstname"
                 android:text="@={profilViewModel.mUser.firstname}"
+                android:onTextChanged="@{profilViewModel.onTextChanged}"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="20dp" />
 
@@ -38,6 +39,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="@string/register_editext_lastname"
                 android:text="@={profilViewModel.mUser.lastname}"
+                android:onTextChanged="@{profilViewModel.onTextChanged}"
                 app:layout_constraintTop_toBottomOf="@+id/register_firstname" />
 
 
@@ -51,6 +53,7 @@
                 android:hint="@string/register_editext_birthday"
                 android:inputType="none"
                 android:text="@{ConverterDate.DateToString(profilViewModel.mUser.birthday)}"
+                android:onTextChanged="@{profilViewModel.onTextChanged}"
                 app:layout_constraintTop_toBottomOf="@+id/register_lastname" />
 
         <Button
@@ -61,7 +64,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="8dp"
-                android:onClick="@{() -> profilViewModel.updateInformationUser(profilViewModel.mUser.id) }"
+                android:onClick="@{() -> profilViewModel.formIsValid() }"
                 android:text="@string/register_button_part_one"
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -7,13 +7,13 @@ import com.ziggy.kdo.model.Child
 import com.ziggy.kdo.model.Gift
 import com.ziggy.kdo.model.User
 import com.ziggy.kdo.network.configuration.Result
-import com.ziggy.kdo.network.configuration.UserSession
 import com.ziggy.kdo.repository.ChildRepository
 import com.ziggy.kdo.repository.GiftRepository
 import com.ziggy.kdo.repository.UserRepository
 import kotlinx.coroutines.*
 import okhttp3.MultipartBody
 import javax.inject.Inject
+
 
 /**
  * The class description here.
@@ -54,6 +54,8 @@ class ProfileViewModel @Inject constructor(
     var mFriends = MutableLiveData<MutableList<User>>()
 
     var mStatutFriends = MutableLiveData<Int>()
+
+    var mEventError = MutableLiveData<Error>()
 
     val profilePhoto = MutableLiveData<String>()
 
@@ -260,9 +262,9 @@ class ProfileViewModel @Inject constructor(
     }
 
 
-    fun updateInformationUser(userId: String) {
+    fun updateInformationUser() {
         GlobalScope.launch(Dispatchers.IO) {
-            userRepository.updateUserInformations(userId, mUser.value).apply {
+            userRepository.updateUserInformations(mUser.value?.id, mUser.value).apply {
                 when (this) {
                     is Result.Success -> {
                         mUser.postValue(this.data)
@@ -281,4 +283,19 @@ class ProfileViewModel @Inject constructor(
             }
         }
     }
+
+
+    fun formIsValid() {
+        if (mUser.value?.firstname!!.isNullOrBlank() || mUser.value?.lastname!!.isNullOrBlank()) {
+            mEventError.value = Error.ERROR_IS_EMPTY
+        } else {
+            updateInformationUser()
+        }
+    }
+
+
+    fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+    }
+
 }
