@@ -10,7 +10,14 @@
               android:label="edit_profile"
               tools:layout="@layout/fragment_edit_profil">
         <action android:id="@+id/action_editProfilFragment_to_galleryActivity"
-                app:destination="@id/galleryActivity"/>
+                app:destination="@id/galleryActivity"
+                app:enterAnim="@anim/enter_from_right"
+                app:exitAnim="@anim/exit_to_left"
+                app:popEnterAnim="@anim/enter_from_left"
+                app:popExitAnim="@anim/exit_to_right"/>
+        <action
+                android:id="@+id/action_editProfilFragment_to_userInformationFragment"
+                app:destination="@id/userInformationFragment" />
     </fragment>
 
     <activity android:id="@+id/galleryActivity"
@@ -20,5 +27,9 @@
                 app:argType="boolean"
                 android:name="profil"/>
     </activity>
+    <fragment
+            android:id="@+id/userInformationFragment"
+            android:name="com.ziggy.kdo.ui.fragment.settings.edit_profile.user_information.UserInformationFragment"
+            android:label="UserInformationFragment" />
 
 </navigation>

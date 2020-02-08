@@ -25,6 +25,12 @@ import com.ziggy.kdo.ui.adapter.EditProfileAdapter
  */
 class EditProfilFragment : Fragment(), CustomOnItemClickListener {
 
+    private val PHOTO_PROFIL: Int = 0
+
+    private val INFORMATION: Int = 1
+
+    private val EMAIL: Int = 2
+
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -88,41 +94,21 @@ class EditProfilFragment : Fragment(), CustomOnItemClickListener {
 
     override fun <T> onItemClick(view: View?, position: Int?, url: String?, varObject: T?) {
         when (position) {
-            0 -> {
-                showAlertDialog()
+            PHOTO_PROFIL -> {
+                val args = Bundle()
+                args.putBoolean(CONFIGURATION_PROFILE, true)
+                findNavController().navigate(
+                    R.id.action_editProfilFragment_to_galleryActivity,
+                    args
+                )
             }
-            1 -> {
-
+            INFORMATION -> {
+                findNavController().navigate(
+                    R.id.action_editProfilFragment_to_userInformationFragment)
             }
-            2 -> {
+            EMAIL -> {
 
             }
         }
-    }
-
-
-    private fun showAlertDialog() {
-
-        val dialog = Dialog(activity!!)
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.view_dialog_photo_profil)
-
-        val dialogGallery = dialog.findViewById<Button>(R.id.dialog_choice_gallery)
-        val dialogTakePhoto = dialog.findViewById<Button>(R.id.dialog_choice_take_photo)
-
-        dialogGallery.setOnClickListener {
-            dialog.dismiss()
-            val args = Bundle()
-            args.putBoolean(CONFIGURATION_PROFILE, true)
-            findNavController().navigate(R.id.action_editProfilFragment_to_galleryActivity, args)
-        }
-
-        dialogTakePhoto.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
     }
 }

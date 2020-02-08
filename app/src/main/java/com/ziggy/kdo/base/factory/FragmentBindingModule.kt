@@ -14,6 +14,7 @@ import com.ziggy.kdo.ui.fragment.profile.detail.MyReservationDetailFragment
 import com.ziggy.kdo.ui.fragment.friends.FriendsFragment
 import com.ziggy.kdo.ui.fragment.gallery.CropFragment
 import com.ziggy.kdo.ui.fragment.search.SearchFragment
+import com.ziggy.kdo.ui.fragment.settings.edit_profile.user_information.UserInformationFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -64,4 +65,7 @@ abstract class FragmentBindingModule {
 
     @ContributesAndroidInjector(modules = [ViewModelModule::class])
     abstract fun bindCropFragment(): CropFragment
+
+    @ContributesAndroidInjector(modules = [ViewModelModule::class])
+    abstract fun bindUserInformationFragement(): UserInformationFragment
 }

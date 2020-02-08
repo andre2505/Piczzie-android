@@ -49,4 +49,7 @@ interface UserApi {
     @POST("api/user/photo")
     fun updatePhoto(@Part("id") userId: String?, @Part file: MultipartBody.Part): Deferred<Response<User?>>
 
+    @PUT("api/user/{id}")
+    fun updateUserInformations(@Path("id") userId: String?, @Body user: User?): Deferred<Response<User?>>
+
 }

@@ -258,4 +258,27 @@ class ProfileViewModel @Inject constructor(
             }
         }
     }
+
+
+    fun updateInformationUser(userId: String) {
+        GlobalScope.launch(Dispatchers.IO) {
+            userRepository.updateUserInformations(userId, mUser.value).apply {
+                when (this) {
+                    is Result.Success -> {
+                        mUser.postValue(this.data)
+                        val frienList = this.data?.friends?.filter { month ->
+                            month.state == 3
+                        }
+                        mFriends.postValue(frienList as MutableList<User>)
+                    }
+                    is Result.Error -> {
+                        mError.postValue(true)
+                    }
+                    is Result.ErrorNetwork -> {
+                        mError.postValue(true)
+                    }
+                }
+            }
+        }
+    }
 }
