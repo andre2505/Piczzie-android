@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 
 import com.ziggy.kdo.R
 import com.ziggy.kdo.databinding.FragmentUserInformationBinding
@@ -52,11 +53,19 @@ class UserInformationFragment : BaseFragment() {
                     Toast.LENGTH_LONG
                 )
                     .show()
+                Error.NO_ERROR -> {
+                    Toast.makeText(
+                        context,
+                        getString(R.string.edit_profile_update_information),
+                        Toast.LENGTH_LONG
+                    ).show()
+                    findNavController().popBackStack()
+                    mProfileViewModel.mEventError.value = null
+                }
                 else -> {
                 }
             }
         })
-
 
     }
 
@@ -69,6 +78,10 @@ class UserInformationFragment : BaseFragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_user_information, container, false)
         mUserInformationBinding.profilViewModel = mProfileViewModel
         mUserInformationBinding.lifecycleOwner = this@UserInformationFragment
+
+        mUserInformationBinding.registerBirthday.setOnClickListener {
+
+        }
 
         return mUserInformationBinding.root
     }

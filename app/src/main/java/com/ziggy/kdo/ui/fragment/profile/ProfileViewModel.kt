@@ -273,6 +273,7 @@ class ProfileViewModel @Inject constructor(
                             month.state == 3
                         }
                         mFriends.postValue(frienList as MutableList<User>)
+                        mEventError.postValue(Error.NO_ERROR)
                     }
                     is Result.Error -> {
                         mError.postValue(true)

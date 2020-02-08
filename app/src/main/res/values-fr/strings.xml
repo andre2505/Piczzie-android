@@ -160,6 +160,7 @@
     <string name="edit_profile_password">Email</string>
     <string name="edit_profile_gallery_photo">Choisir dans gallerie</string>
     <string name="edit_profile_take_photo">Prendre une photo</string>
+    <string name="edit_profile_update_information">Changements bien effectués</string>
 
 
 </resources>

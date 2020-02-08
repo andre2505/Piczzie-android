@@ -159,5 +159,6 @@
     <string name="edit_profile_password">email</string>
     <string name="edit_profile_gallery_photo">Choose in gallery</string>
     <string name="edit_profile_take_photo">Take a picture</string>
+    <string name="edit_profile_update_information">Changes well done</string>
 
 </resources>
